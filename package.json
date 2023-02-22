@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "sgojo-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,6 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0"
   },
-  "_id": "frontend@0.1.0",
+  "_id": "sgojo-frontend@0.1.0",
   "readme": "ERROR: No README data found!"
 }
