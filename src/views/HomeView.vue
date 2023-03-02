@@ -4,7 +4,7 @@
   </div>
 
   <main 
-    class="text-3xl text-accent-400 dark:bg-accent-200"
+    class="text-3xl"
     aria-details="a2qqe">
     bruh
   </main>

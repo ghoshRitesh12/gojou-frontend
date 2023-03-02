@@ -9,19 +9,25 @@ module.exports = {
       colors: {
         accent: {
           400: '#a257ff',
-          200: '#b279f7',
+          300: 'hsl(267, 89%, 72%)',
+          200: 'hsl(267, 89%, 80%)',
+          100: 'hsl(267, 89%, 88%)',
         },
         primary: {
-          400: '#07060e'
-        }
+          900: 'hsl(248, 40%, 15%)',
+          500: '#222',
+          200: '#e7e7e7',
+          100: '#ffffff'
+        },
+        inactive: {
+          900: '#777',
+          100: '#eee'
+        },
       },
+      fontFamily: {
+        srcsansp: ['"Source Sans Pro"', 'sans-serif'],
+      }
     },
   },
   plugins: [],
 }
-
-// #07060e
-
-// #cace6b
-// #c352d0
-// #b346cf
