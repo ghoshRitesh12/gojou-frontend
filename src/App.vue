@@ -1,13 +1,18 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/" active-class="active-nav">Home</router-link> |
+    <router-link to="/about" active-class="active-nav">About</router-link>
   </nav>
   <router-view/>
+
 </template>
 
+<script setup>
+
+</script>
+
 <style>
-#app {
+#__app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,6 +30,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  @apply text-accent-200;
 }
 </style>
