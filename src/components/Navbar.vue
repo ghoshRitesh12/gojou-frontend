@@ -1,8 +1,11 @@
 <template>
+
+  <p class="text-[1rem] px-8 pb-2 text-gray-500">Menu</p>
+  
   <nav id="navbar" 
     class="flex flex-col gap-4"
   >
-
+  
     <NavLink 
       v-for="route in routes" 
       :to="route.to"

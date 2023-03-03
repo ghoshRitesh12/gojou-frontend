@@ -5,11 +5,11 @@
     active-class="active-nav"
     class="
     relative
-    px-8 py-2
+    px-10 py-2
     rounded-xl text-lg
-    text-inactive-900
+    text-gray-500
     transition ease-in delay-100
-    hover:bg-primary-200
+    hover:bg-neutral-200
     overflow-hidden
     before:content-[' '] before:opacity-0
     "
@@ -34,7 +34,7 @@ const props = defineProps({
 <style scoped>
   
   .active-nav {
-    @apply text-primary-900 bg-primary-200
+    @apply text-primary-900 bg-neutral-200
     before:left-0
     before:h-7 before:absolute
     before:bg-accent-400 before:w-2
