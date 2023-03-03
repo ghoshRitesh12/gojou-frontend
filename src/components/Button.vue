@@ -3,7 +3,7 @@
   <button 
     :type="props.type"
   >
-    {{ props.name }}
+    <slot></slot>
   </button>
 
 </template>
@@ -11,10 +11,6 @@
 
 <script setup>
 const props = defineProps({
-  name: {
-    type: String,
-    required: true
-  },
   type: {
     type: String,
     required: true

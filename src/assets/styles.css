@@ -64,6 +64,11 @@ select {
   font: inherit;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 p, h1, h2,
 h3, h4, h5,
 h6, textarea {

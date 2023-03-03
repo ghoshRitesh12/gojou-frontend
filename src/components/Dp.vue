@@ -1,12 +1,13 @@
 <template>
-  <figure 
+  <div 
     class="
     overflow-hidden rounded-[50%]
-    grid place-items-center w-fit
+    grid place-items-center
     "
   >
-    <img :src="props.url" alt="" class="object-center">
-  </figure>
+    <img :src="url" alt="profile-pic" class="object-center">
+
+  </div>
 </template>
 
 
@@ -14,13 +15,10 @@
 const props = defineProps({
   url: {
     type: String,
-    required: true
   },
-  size: {
-    type: Number,
-    required: true
-  }
 })
+
+const url = 'https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo';
 
 </script>
 
