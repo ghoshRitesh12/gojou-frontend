@@ -1,13 +1,20 @@
 <template>
 
   <aside id="sidebar" 
-    class="
-    bg-primary-100 min-w-[14rem] max-w-[18rem]
-    flex-[30%] border-r-2 py-8 px-4 min-h-[100vh] max-h-[100vh]
+  class="
+    sticky top-0 left-0 bottom-0
+    bg-primary-900 min-w-[15rem] max-w-[18rem]
+    flex-[30%] border-r-2 border-neutral-800 
+    py-6 px-4 min-h-[100vh] max-h-[100vh]
+    overflow-y-auto
     "
   >
 
+    <AppLogo/>
+
     <Navbar/>
+
+    <AnimeCategoryNav/>
 
   </aside>
 
@@ -15,11 +22,18 @@
 
 
 <script setup>
+import AppLogo from './AppLogo.vue';
 import Navbar from './Navbar.vue';
+import AnimeCategoryNav from './AnimeCategoryNav.vue';
+
 import { ref } from 'vue';
 
 
 </script>
 
 
-<style></style>
+<style>
+/* #sidebar {
+  color: hsl(240, 40%, 2%);
+} */
+</style>

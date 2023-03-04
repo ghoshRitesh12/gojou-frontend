@@ -6,7 +6,7 @@
   <main 
     class="text-3xl"
     aria-details="a2qqe">
-    bruh
+    bruh this shit is honestly insane lmfao ooooooooooooooooooooooooooooooooooooooooooo
   </main>
 </template>
 

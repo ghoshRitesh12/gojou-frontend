@@ -14,14 +14,9 @@ module.exports = {
           100: 'hsl(267, 89%, 88%)',
         },
         primary: {
-          900: 'hsl(248, 40%, 15%)',
-          500: '#222',
-          200: '#e7e7e7',
-          100: '#ffffff'
-        },
-        inactive: {
-          900: '#777',
-          100: '#eee'
+          900: '#0c0c0c',
+          glass: '#0d0d0d33',
+          // glass: '#00aeff',
         },
       },
       fontFamily: {

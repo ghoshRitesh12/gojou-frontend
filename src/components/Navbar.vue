@@ -3,7 +3,7 @@
   <p class="text-[1rem] px-8 pb-2 text-gray-500">Menu</p>
   
   <nav id="navbar" 
-    class="flex flex-col gap-4"
+    class="flex flex-col gap-1"
   >
   
     <NavLink 
@@ -13,7 +13,7 @@
       :title="route.name"
     >
       <template v-slot>
-        <span class="flex gap-3 items-center">
+        <span class="flex gap-3 items-center pointer-events-none">
           <Icon v-if="route.icon" :icon="route.icon"/>
           {{ route.name }}
         </span>

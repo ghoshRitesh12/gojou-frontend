@@ -3,17 +3,18 @@
   <header id="titlebar"
     class="
     flex items-center gap-2
-    sticky top-0
+    sticky top-0 bg-primary-glass
+    backdrop-blur-[.3rem] py-4 px-6
     "
   >
 
     <Search 
-      class="relative ml-4 max-w-[18rem] w-[100%] min-w-[10rem]"
+      class="relative ml-4 max-w-[20rem] w-[100%] min-w-[10rem]"
       @data-search="searchReq"
       placeholder="anime..."
     />
 
-    <Profile class="ml-auto mr-0">
+    <Profile class="ml-auto mr-6">
       <template v-if="isAuth">
 
         <div 
@@ -54,4 +55,6 @@ const isAuth = true;
 </script>
 
 
-<style></style>
+<style>
+/* * { color: #0d0d0d33 } */
+</style>

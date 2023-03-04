@@ -1,7 +1,7 @@
 <template>
   <p 
     class="
-    text-primary-500
+    text-gray-200
     whitespace-nowrap
     overflow-hidden
     text-ellipsis

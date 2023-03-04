@@ -7,11 +7,12 @@
     relative
     px-10 py-2
     rounded-xl text-lg
-    text-gray-500
+    text-gray-400
     transition ease-in delay-100
-    hover:bg-neutral-200
+    hover:bg-neutral-800
     overflow-hidden
     before:content-[' '] before:opacity-0
+    before:top-[50%] before:translate-y-[-50%]
     "
   >
     <slot></slot>
@@ -34,17 +35,11 @@ const props = defineProps({
 <style scoped>
   
   .active-nav {
-    @apply text-primary-900 bg-neutral-200
-    before:left-0
-    before:h-7 before:absolute
+    @apply text-gray-200 bg-neutral-800
+    before:absolute
+    before:left-0 before:h-7
     before:bg-accent-400 before:w-2
     before:rounded-xl before:opacity-100
   }
-
-  .active-nav svg {
-    @apply text-accent-300
-  }
-
-  a > * { pointer-events: none; }
 
 </style>
