@@ -15,8 +15,7 @@ module.exports = {
         },
         primary: {
           900: '#0c0c0c',
-          glass: '#0d0d0d33',
-          // glass: '#00aeff',
+          glass: 'hsl(0, 0%, 5%, .3)',
         },
       },
       fontFamily: {

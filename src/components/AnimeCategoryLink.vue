@@ -7,7 +7,7 @@
     mb-1
     rounded-xl text-lg
     cursor-pointer
-    transition ease-in delay-50
+    transition ease-in duration-100
     hover:text-accent-200
     "
     @click="goToCategory"

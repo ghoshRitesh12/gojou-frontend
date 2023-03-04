@@ -8,7 +8,7 @@
     px-10 py-2
     rounded-xl text-lg
     text-gray-400
-    transition ease-in delay-100
+    transition ease-in duration-100
     hover:bg-neutral-800
     overflow-hidden
     before:content-[' '] before:opacity-0

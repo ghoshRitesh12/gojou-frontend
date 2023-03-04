@@ -1,13 +1,12 @@
 <template>
   <main class="
     min-h-[200vh]
-    flex-[75%] pb-6
+    flex-[75%] pb-8
     bg-primary-900 text-gray-100
-    backdrop-blur
   ">
     <Titlebar/>
 
-    <div id="main" class="px-6">
+    <div id="main" class="px-6 pt-4">
       <RouterView/>
     </div>
     

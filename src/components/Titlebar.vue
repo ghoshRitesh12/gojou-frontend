@@ -2,9 +2,11 @@
 
   <header id="titlebar"
     class="
+    sticky top-0 z-[100]
     flex items-center gap-2
-    sticky top-0 bg-primary-glass
-    backdrop-blur-[.3rem] py-4 px-6
+    bg-primary-glass isolate
+    backdrop-blur-[1rem] py-4 px-6
+    rounded-bl-lg rounded-br-lg
     "
   >
 
