@@ -1,74 +1,77 @@
 <template>
   
-  <div
-    class="
-    rounded-xl w-full overflow-hidden
-    bg-zinc-900 break-words max-w-[18rem] min-w-[14rem]
+  <div data-card
+    class="shadow-lg max-w-[17rem] min-w-[15rem]
+    relative rounded-xl w-full overflow-hidden
+    bg-zinc-900 break-words
     "
   >
 
-    <div :data-anime-id="info.id">
-
-      <div data-poster
+    <div data-poster
+      class="
+      relative isolate overflow-hidden
+      after:absolute after:content-[' ']
+      after:h-[50%] after:bottom-0 after:top-auto
+      after:w-full after:pointer-events-none
+      after:bg-gradient-to-b from-transparent to-zinc-900
+      pb-[130%]
+      "
+    >
+      <span v-if="info.rating"
         class="
-        relative isolate
-        after:absolute after:content-[' ']
-        after:h-[50%] after:bottom-0 after:top-auto
-        after:w-full after:pointer-events-none
-        after:bg-gradient-to-b from-transparent to-zinc-900
+        absolute left-[.7rem] top-[.7rem]
+        px-2 py-[.15rem] shadow-md z-10
+        bg-accent-400 rounded-lg text-center text-[.9rem]
         "
       >
-        <span v-if="info.rating"
-          class="
-          absolute left-[.7rem] top-[.7rem]
-          px-2 py-[.15rem] shadow-md
-          bg-accent-400 rounded-lg text-center text-[.9rem]
-          "
-        >
-          {{ info.rating }}
-        </span>
-        <span v-if="info.episodes"
-          class="
-          absolute bottom-[1rem] right-[.7rem]
-          bg-neutral-900 py-[.2rem] px-2
-          rounded-lg text-sm shadow-md z-10
-          "
-        >
-          Ep {{ info.episodes }}
-        </span>
+        {{ info.rating }}
+      </span>
+      <span v-if="info.episodes"
+        class="
+        absolute bottom-[1rem] right-[.7rem]
+        bg-[hsla(0,0%,0%,.7)] py-[.2rem] px-2
+        rounded-lg text-sm shadow-md z-10
+        "
+      >
+        Ep {{ info.episodes }}
+      </span>
 
-        <img 
-          class="cursor-pointer w-full"
-          :src="info.poster" 
-          :alt="info.name"
-          @click="goToAnime"
-        />
-      </div>
-
-      <div data-info class="py-3 px-3 w-full">
-        <p 
-          class="
-          text-[1.08rem] leading-5
-          cursor-pointer hover:text-accent-200
-          transition ease-in duration-100
-          "
-          @click="goToAnime"
-        >
-          {{ info.name }}
-        </p>
-
-        <div class="flex items-center mt-3">
-          <span v-if="info.type" class="text-sm text-neutral-400">
-            {{ info.type }}
-          </span>
-          <Icon :icon="'bi:dot'" class="text-neutral-400"/>
-          <span v-if="info.duration" class="text-sm text-neutral-400">
-            {{ info.duration }}
-          </span>
-        </div>
-      </div>
-
+      <img 
+        class="absolute inset-0 cursor-pointer w-full object-top"
+        :src="info.poster" 
+        :alt="info.name"
+        @click="goToAnime"
+      />
     </div>
+
+    <div data-info class="py-3 px-3 w-full mb-auto">
+      <p 
+        class="
+        text-[1.08rem] leading-5 w-fit text-ellipsis
+        cursor-pointer hover:text-accent-200
+        transition ease-in duration-100 h-[20px]
+        "
+        :title="info.name"
+        style="
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        overflow: hidden;"
+        @click="goToAnime"
+      >
+        {{ info.name }}
+      </p>
+
+      <!-- mt-3 -->
+      <div class="flex items-center mt-3">
+        <span v-if="info.type" class="text-sm text-neutral-400">
+          {{ info.type }}
+        </span>
+        <Icon :icon="'bi:dot'" class="text-neutral-400"/>
+        <span v-if="info.duration" class="text-sm text-neutral-400">
+          {{ info.duration }}
+        </span>
+      </div>
+    </div>
+
 
   </div>
 

@@ -1,20 +1,13 @@
 <template>
-  <!-- <div class="home">
-    Home page
-  </div>
-
-  <main class="text-3xl" aria-details="a2qqe">
-    bruh this shit is honestly insane lmfao ooooooooooooooooooooooooooooooooooooooooooo
-  </main>
-
-  <br> <br> -->
   
-  <AnimeDeck :animes="results.value" :name="'Most Popular Anime'"/>
+  <!-- Home Page -->
 
-  <!-- <Suspense>
+  <!-- <AnimeDeck :animes="results.value" :name="'Most Popular Anime'"/> -->
+
+  <Suspense>
     
     <template #default>
-      <AnimeDeck :animes="results.value"/>
+      <AnimeDeck :animes="results" :name="'Most Popular Anime'"/>
     </template>
 
     <template #fallback>
@@ -23,21 +16,20 @@
       </p>
     </template>
 
-  </Suspense> -->
+  </Suspense>
 
 </template>
 
 <script setup>
-import AnimeCard from '@/components/AnimeCard.vue';
 import AnimeDeck from '@/components/AnimeDeck.vue';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 const results = ref([]);
 
-// (async () => {
-//   const resp = await fetch('http://localhost:5000/api/v1/most-popular');
-//   const data = await resp.json();
-//   results.value = data.animes;
-// })()
+(async () => {
+  const resp = await fetch('http://localhost:5000/api/v1/most-popular');
+  const data = await resp.json();
+  results.value = data.animes;
+})()
 
 
 const testObj = {

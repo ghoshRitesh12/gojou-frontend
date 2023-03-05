@@ -9,12 +9,11 @@
     </p>
 
     <div 
-      class="grid gap-4" 
+      class="grid gap-4 transition ease-in duration-100" 
       style="grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));">
-      <!-- v-for="anime in props.animes" -->
       <AnimeCard 
-        v-for="anime in 21"
-        :info="testObj"
+        v-for="anime in animes"
+        :info="anime"
         class="mx-auto"
       />
     </div>
