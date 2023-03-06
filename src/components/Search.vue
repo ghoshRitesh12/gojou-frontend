@@ -8,7 +8,7 @@
       text-slate-200
       max-w-[100%] w-[100%]
       focus:outline-0
-      bg-neutral-900
+      bg-primary-900
       focus:border-accent-200
       transition ease-in duration-100
       " 

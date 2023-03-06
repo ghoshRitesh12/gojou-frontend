@@ -2,20 +2,17 @@
 
   <section data-deck>
 
-    <p v-if="props.name"
-      class="text-3xl mb-8"  
-    >
-      {{ props.name }}
-    </p>
-
     <div 
       class="grid gap-4 transition ease-in duration-100" 
-      style="grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));">
+      style="grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));"
+    >
+
       <AnimeCard 
         v-for="anime in animes"
         :info="anime"
         class="mx-auto"
       />
+
     </div>
 
   </section>
@@ -25,14 +22,11 @@
 
 <script setup>
 import AnimeCard from './AnimeCard.vue';
+
 const props = defineProps({
-  name: {
-    type: String,
-    default: null
-  },
   animes: {
     type: Array,
-    // required: true
+    required: true
   }
 })
 

@@ -26,7 +26,7 @@ import { ref } from 'vue';
 const results = ref([]);
 
 (async () => {
-  const resp = await fetch('http://localhost:5000/api/v1/most-popular');
+  const resp = await fetch('http://localhost:5000/api/v1/top-airing');
   const data = await resp.json();
   results.value = data.animes;
 })()
@@ -38,7 +38,6 @@ const testObj = {
   "poster": "https://img.zorores.com/_r/300x400/100/f5/d1/f5d173f8317f592c6c70d594829b89e4/f5d173f8317f592c6c70d594829b89e4.jpg",
   "duration": "24m",
   "type": "TV",
-  "aboutPage": "https://zoro.to/one-punch-man-63",
   "rating": "18+",
   "episodes": "12/12"
 }

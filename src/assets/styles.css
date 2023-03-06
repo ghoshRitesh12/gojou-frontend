@@ -23,6 +23,7 @@
 html {
   overscroll-behavior: auto;
   scroll-behavior: smooth;
+  color-scheme: dark;
   height: 100%;
 }
 

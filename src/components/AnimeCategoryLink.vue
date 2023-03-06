@@ -3,7 +3,7 @@
   <div 
     class="
     text-gray-400
-    px-10 py-2
+    px-11 py-2
     mb-1
     rounded-xl text-lg
     cursor-pointer

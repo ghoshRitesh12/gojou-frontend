@@ -1,7 +1,7 @@
 <template>
   
   <div data-card
-    class="shadow-lg max-w-[17rem] min-w-[15rem]
+    class="shadow-lg max-w-[17rem]
     relative rounded-xl w-full overflow-hidden
     bg-zinc-900 break-words
     "
@@ -11,10 +11,11 @@
       class="
       relative isolate overflow-hidden
       after:absolute after:content-[' ']
-      after:h-[50%] after:bottom-0 after:top-auto
+      after:h-[45%] after:bottom-0 after:top-auto
       after:w-full after:pointer-events-none
       after:bg-gradient-to-b from-transparent to-zinc-900
-      pb-[130%]
+      hover:backdrop-brightness-50
+      pb-[130%] transition ease-in duration-100
       "
     >
       <span v-if="info.rating"
@@ -37,19 +38,23 @@
       </span>
 
       <img 
-        class="absolute inset-0 cursor-pointer w-full object-top"
+        class="
+        absolute inset-0 cursor-pointer w-full
+        hover:backdrop-brightness-50
+        transition ease-in duration-100
+        "
         :src="info.poster" 
         :alt="info.name"
         @click="goToAnime"
       />
     </div>
 
-    <div data-info class="py-3 px-3 w-full mb-auto">
+    <div data-info class="py-3 px-3 w-full">
       <p 
         class="
         text-[1.08rem] leading-5 w-fit text-ellipsis
         cursor-pointer hover:text-accent-200
-        transition ease-in duration-100 h-[20px]
+        transition ease-in duration-100 h-[37px]
         "
         :title="info.name"
         style="
@@ -60,8 +65,7 @@
         {{ info.name }}
       </p>
 
-      <!-- mt-3 -->
-      <div class="flex items-center mt-3">
+      <div class="flex items-center mt-2 w-fit">
         <span v-if="info.type" class="text-sm text-neutral-400">
           {{ info.type }}
         </span>

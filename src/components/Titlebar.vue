@@ -4,9 +4,10 @@
     class="
     sticky top-0 z-[100]
     flex items-center gap-2
-    bg-primary-glass isolate
-    backdrop-blur-[1rem] py-4 px-6
+    isolate bg-primary-glass
+    backdrop-blur-[2rem] py-4 px-6
     rounded-bl-lg rounded-br-lg
+    
     "
   >
 

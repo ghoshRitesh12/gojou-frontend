@@ -5,7 +5,7 @@
     active-class="active-nav"
     class="
     relative
-    px-10 py-2
+    px-11 py-2
     rounded-xl text-lg
     text-gray-400
     transition ease-in duration-100
