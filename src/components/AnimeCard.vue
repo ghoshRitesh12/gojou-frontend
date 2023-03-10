@@ -1,8 +1,8 @@
 <template>
   
   <div data-card
-    class="shadow-lg max-w-[17rem]
-    relative rounded-xl w-full overflow-hidden
+    class="shadow-lg max-w-[17rem] w-full
+    relative rounded-xl overflow-hidden
     bg-zinc-900 break-words
     "
   >
@@ -14,7 +14,6 @@
       after:h-[45%] after:bottom-0 after:top-auto
       after:w-full after:pointer-events-none
       after:bg-gradient-to-b from-transparent to-zinc-900
-      hover:backdrop-brightness-50
       pb-[130%] transition ease-in duration-100
       "
     >
@@ -40,37 +39,54 @@
       <img 
         class="
         absolute inset-0 cursor-pointer w-full
-        hover:backdrop-brightness-50
+
         transition ease-in duration-100
         "
         :src="info.poster" 
         :alt="info.name"
-        @click="goToAnime"
+        @click="goToAnime(info.id)"
+        :title="info.name"
       />
     </div>
 
     <div data-info class="py-3 px-3 w-full">
       <p 
         class="
-        text-[1.08rem] leading-5 w-fit text-ellipsis
-        cursor-pointer hover:text-accent-200
+        text-[1.07rem] leading-[1.06] w-fit text-ellipsis
+        cursor-pointer hover:text-accent-200 pb-4
         transition ease-in duration-100 h-[37px]
         "
         :title="info.name"
         style="
         display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
         overflow: hidden;"
-        @click="goToAnime"
+        @click="goToAnime(info.id)"
       >
         {{ info.name }}
       </p>
 
-      <div class="flex items-center mt-2 w-fit">
-        <span v-if="info.type" class="text-sm text-neutral-400">
+      <div 
+        class="
+        flex items-center mt-2 w-fit text-[.7rem]
+        "
+      >
+        <span 
+          v-if="info.type" 
+          class="
+          md:text-sm text-neutral-400
+          "
+        >
           {{ info.type }}
         </span>
-        <Icon :icon="'bi:dot'" class="text-neutral-400"/>
-        <span v-if="info.duration" class="text-sm text-neutral-400">
+
+        <Icon :icon="'bi:dot'" class="text-neutral-400 md:text-sm"/>
+
+        <span 
+          v-if="info.duration" 
+          class="
+          md:text-sm text-neutral-400
+          "
+        >
           {{ info.duration }}
         </span>
       </div>
@@ -83,9 +99,10 @@
 
 
 <script setup>
+import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
+
+const { goToAnime } = goToRoute();
 
 const props = defineProps({
   info: {
@@ -94,7 +111,6 @@ const props = defineProps({
   }
 })
 
-const goToAnime = () => router.push(`/anime/info/${props.info.id}`)
 
 </script>
 

@@ -10,7 +10,7 @@
     transition ease-in duration-100
     hover:text-accent-200
     "
-    @click="goToCategory"
+    @click="goToCategory(props.href)"
     :title="props.name"
   >
     {{ props.name }}
@@ -21,8 +21,9 @@
 
 
 <script setup>
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import goToRoute from '@/composables/goToRoute';
+const { goToCategory } = goToRoute()
+
 
 const props = defineProps({
   href: {
@@ -35,7 +36,6 @@ const props = defineProps({
   }
 })
 
-const goToCategory = () => router.push(props.href)
 
 </script>
 

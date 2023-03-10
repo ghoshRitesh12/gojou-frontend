@@ -3,7 +3,7 @@
   <div data-carousel
     class="
     min-h-[19rem] max-h-[20rem]
-    md:min-h-[34rem] md:max-h-[35rem] rounded-3xl
+    md:min-h-[30rem] md:max-h-[30rem] rounded-3xl
     overflow-hidden
     "
     >
@@ -17,10 +17,16 @@
       "
     >
 
-      <div data-navigate-left @click="prevSlide">
+      <div 
+        data-navigate-left
+        @click="prevSlide"
+      >
         <Icon icon="ic:round-keyboard-arrow-left"/>
       </div>
-      <div data-navigate-right @click="nextSlide">
+      <div 
+        data-navigate-right
+        @click="nextSlide"
+      >
         <Icon icon="ic:round-keyboard-arrow-right"/>
       </div>
 

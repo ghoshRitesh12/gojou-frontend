@@ -8,7 +8,7 @@
     @click="toHome"
   >
 
-    <img v-once class="pointer-events-none" src="/img/icons/gojou-logo.png" alt="logo">
+    <img v-once class="pointer-events-none" src="../../public/img/icons/gojou-logo2.png" alt="logo">
 
   </div>
 </template>

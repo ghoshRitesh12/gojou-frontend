@@ -16,6 +16,7 @@
 
 
 <style>
+
   .slide-enter-active,
   .slide-leave-active {
     transition: opacity .7s ease-in-out;

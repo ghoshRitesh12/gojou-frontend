@@ -12,7 +12,7 @@
       after:w-full after:pointer-events-none
       after:bg-gradient-to-b overflow-hidden
       ">
-      <img class="w-full h-full " :src="props.poster" :alt="props.name" />
+      <img class="w-full h-full object-center" :src="props.poster" :alt="props.name" />
     </div>
 
     <div
@@ -25,19 +25,22 @@
         class="text-accent-200" 
         style="font-size: clamp(.9rem, 4vmin, 1.15rem);"
       >
-        #{{ props.rank }} Spotlight
+        #{{ props.rank }} {{ props.category }}
       </div>
 
       <p 
         class=" break-words max-w-[30ch] md:mb-2" 
-        style="font-size: clamp(1.15rem, 4.7vmin, 2.5rem);
+        style="
+        display: -webkit-box; -webkit-line-clamp: 3; 
+        -webkit-box-orient: vertical; overflow: hidden;
+        font-size: clamp(1.15rem, 4vmin, 2.5rem);
         line-height: 1.05;"
       >
         {{ props.name }}
       </p>
 
       <p 
-        class="max-w-[95ch]" 
+        class="max-w-[95ch] leading-4 md:leading-normal" 
         style="
         display: -webkit-box; -webkit-line-clamp: 3; 
         -webkit-box-orient: vertical; overflow: hidden;
@@ -69,7 +72,7 @@
           bg-zinc-700 hover:bg-zinc-600
           transition ease-in duration-100"
           type="button"
-          @click="goToAnime"
+          @click="goToAnime(props.id)"
         >
           Details
         </button>
@@ -83,9 +86,10 @@
 
 
 <script setup>
+import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
+
+const { goToAnime } = goToRoute()
 
 const props = defineProps({
   rank: {
@@ -108,9 +112,13 @@ const props = defineProps({
     type: String,
     required: true
   },
+  category: {
+    type: String,
+    required: true
+  }
+
 })
 
-const goToAnime = () => router.push(`/anime/info/${props.id}`);
 
 </script>
 

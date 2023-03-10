@@ -6,7 +6,7 @@
   ">
     <Titlebar/>
 
-    <div id="main" class="px-6 pt-4">
+    <div id="main" class="px-4 md:px-6 pt-4">
       <RouterView/>
     </div>
     
