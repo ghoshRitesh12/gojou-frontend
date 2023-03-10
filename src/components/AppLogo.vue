@@ -2,13 +2,13 @@
   <div 
     id="app-logo" 
     class="
-    cursor-pointer w-fit
+    cursor-pointer w-fit select-none
     " 
     v-once
     @click="toHome"
   >
 
-    <img v-once class="pointer-events-none" src="../../public/img/icons/gojou-logo2.png" alt="logo">
+    <img v-once class="pointer-events-none" src="../../public/img/icons/gojou-logo2.svg" alt="logo">
 
   </div>
 </template>

@@ -5,7 +5,9 @@
   >
 
     <p
-      class="text-xl text-accent-200 w-fit py-4 pl-4"
+      class="
+      text-xl text-accent-200 w-full py-4 pl-4
+      "
     >
       {{ props.name }}
     </p>
@@ -25,10 +27,10 @@
       flex items-cente justify-center bg-zinc-900
       text-neutral-500 hover:bg-zinc-800
       w-full mx-auto py-3 cursor-pointer text-base 
-      rounded-xl mt-4
-      transition ease-in duration-100 gap-1
+      rounded-xl mt-4 gap-1
+      transition ease-in duration-200 
       "
-      @click="goToCategory(props.footerHref)"
+      @click="goToCategory(props.href)"
     >
       <span class="pointer-events-none">View more</span>
       <span class="pointer-events-none grid place-items-center text-xl">

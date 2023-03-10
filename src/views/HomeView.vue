@@ -37,11 +37,22 @@
       />
 
       <FeatAnimeDeck
-        class="mt-8"
-        :name="'Top Airing'"
+        class="mt-9"
+        :name="'Top Airing Animes'"
         :href="'top-airing'"
         :animes="topAiringAnimes"
       />
+
+      <GenreDeck
+        class="mt-8"
+        :genres="genres"
+      />
+
+      <MostViewedDeck
+        class="mt-8"
+        :all-animes="mostViewed"
+      />
+
     </div>
 
   </section>
@@ -57,6 +68,8 @@ import AnimeSlide from '@/components/home/AnimeSlide.vue';
 import TrendingAnimeDeck from '@/components/home/TrendingAnimeDeck.vue';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
+import GenreDeck from '@/components/home/GenreDeck.vue';
+import MostViewedDeck from '@/components/home/MostViewedDeck.vue';
 
 import { ref } from 'vue';
 const results = ref([]);
@@ -738,5 +751,298 @@ const latestEpisodeAnimes = [
     "episodes": "10"
   }
 ]
+
+const genres = [
+  "Action",
+  "Adventure",
+  "Cars",
+  "Comedy",
+  "Dementia",
+  "Demons",
+  "Drama",
+  "Ecchi",
+  "Fantasy",
+  "Game",
+  "Harem",
+  "Historical",
+  "Horror",
+  "Isekai",
+  "Josei",
+  "Kids",
+  "Magic",
+  "Martial Arts",
+  "Mecha",
+  "Military",
+  "Music",
+  "Mystery",
+  "Parody",
+  "Police",
+  "Psychological",
+  "Romance",
+  "Samurai",
+  "School",
+  "Sci-Fi",
+  "Seinen",
+  "Shoujo",
+  "Shoujo Ai",
+  "Shounen",
+  "Shounen Ai",
+  "Slice of Life",
+  "Space",
+  "Sports",
+  "Super Power",
+  "Supernatural",
+  "Thriller",
+  "Vampire"
+]
+
+const mostViewed = {
+  "today": [
+    {
+      "id": "one-piece-100",
+      "rank": '01',
+      "name": "One Piece",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/90/5490cb32786d4f7fef0f40d7266df532/5490cb32786d4f7fef0f40d7266df532.jpg",
+      "views": "289,738",
+      "hearts": "318,874"
+    },
+    {
+      "id": "naruto-shippuden-355",
+      "rank": '02',
+      "name": "Naruto: Shippuden",
+      "poster": "https://img.zorores.com/_r/300x400/100/9c/bc/9cbcf87f54194742e7686119089478f8/9cbcf87f54194742e7686119089478f8.jpg",
+      "views": "98,699",
+      "hearts": "150,049"
+    },
+    {
+      "id": "my-hero-academia-season-6-18154",
+      "rank": '03',
+      "name": "My Hero Academia Season 6",
+      "poster": "https://img.zorores.com/_r/300x400/100/20/b7/20b7580c1abdf45a6eaf4826fc9fdf33/20b7580c1abdf45a6eaf4826fc9fdf33.jpg",
+      "views": "63,628",
+      "hearts": "130,996"
+    },
+    {
+      "id": "attack-on-titan-the-final-season-part-3-18329",
+      "rank": '04',
+      "name": "Attack on Titan: The Final Season Part 3",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/d3/54d3f59bcc7caf1539c701eb0a064ec9/54d3f59bcc7caf1539c701eb0a064ec9.png",
+      "views": "54,476",
+      "hearts": "44,799"
+    },
+    {
+      "id": "tomochan-is-a-girl-18248",
+      "rank": '05',
+      "name": "Tomo-chan Is a Girl!",
+      "poster": "https://img.zorores.com/_r/300x400/100/72/b9/72b9514fba1c1f336fb744c08db0af4d/72b9514fba1c1f336fb744c08db0af4d.jpg",
+      "views": "54,339",
+      "hearts": "66,306"
+    },
+    {
+      "id": "blue-lock-17889",
+      "rank": '06',
+      "name": "Blue Lock",
+      "poster": "https://img.zorores.com/_r/300x400/100/fc/ed/fced51e392ffd80041b3a1581ba7de2f/fced51e392ffd80041b3a1581ba7de2f.jpg",
+      "views": "47,768",
+      "hearts": "179,465"
+    },
+    {
+      "id": "naruto-677",
+      "rank": '07',
+      "name": "Naruto",
+      "poster": "https://img.zorores.com/_r/300x400/100/5d/b4/5db400c33f7494bc8ae96f9e634958d0/5db400c33f7494bc8ae96f9e634958d0.jpg",
+      "views": "46,622",
+      "hearts": "168,512"
+    },
+    {
+      "id": "the-eminence-in-shadow-17473",
+      "rank": '08',
+      "name": "The Eminence in Shadow",
+      "poster": "https://img.zorores.com/_r/300x400/100/bc/a4/bca4a71e271a30fb1b44d33d56db8f8f/bca4a71e271a30fb1b44d33d56db8f8f.jpg",
+      "views": "39,496",
+      "hearts": "184,530"
+    },
+    {
+      "id": "black-clover-2404",
+      "rank": '09',
+      "name": "Black Clover",
+      "poster": "https://img.zorores.com/_r/300x400/100/f5/8b/f58b0204c20ae3310f65ae7b8cb9987e/f58b0204c20ae3310f65ae7b8cb9987e.jpg",
+      "views": "39,142",
+      "hearts": "157,695"
+    },
+    {
+      "id": "attack-on-titan-112",
+      "rank": '10',
+      "name": "Attack on Titan",
+      "poster": "https://img.zorores.com/_r/300x400/100/de/bf/debf027d032c6d40b91fab16b2ff9bd4/debf027d032c6d40b91fab16b2ff9bd4.jpg",
+      "views": "34,893",
+      "hearts": "195,770"
+    }
+  ],
+  "week": [
+    {
+      "id": "one-piece-100",
+      "rank": '01',
+      "name": "One Piece",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/90/5490cb32786d4f7fef0f40d7266df532/5490cb32786d4f7fef0f40d7266df532.jpg",
+      "views": "3,666,732",
+      "hearts": "318,874"
+    },
+    {
+      "id": "attack-on-titan-the-final-season-part-3-18329",
+      "rank": '02',
+      "name": "Attack on Titan: The Final Season Part 3",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/d3/54d3f59bcc7caf1539c701eb0a064ec9/54d3f59bcc7caf1539c701eb0a064ec9.png",
+      "views": "1,643,689",
+      "hearts": "44,799"
+    },
+    {
+      "id": "my-hero-academia-season-6-18154",
+      "rank": '03',
+      "name": "My Hero Academia Season 6",
+      "poster": "https://img.zorores.com/_r/300x400/100/20/b7/20b7580c1abdf45a6eaf4826fc9fdf33/20b7580c1abdf45a6eaf4826fc9fdf33.jpg",
+      "views": "1,160,638",
+      "hearts": "130,996"
+    },
+    {
+      "id": "naruto-shippuden-355",
+      "rank": '04',
+      "name": "Naruto: Shippuden",
+      "poster": "https://img.zorores.com/_r/300x400/100/9c/bc/9cbcf87f54194742e7686119089478f8/9cbcf87f54194742e7686119089478f8.jpg",
+      "views": "1,102,417",
+      "hearts": "150,049"
+    },
+    {
+      "id": "blue-lock-17889",
+      "rank": '05',
+      "name": "Blue Lock",
+      "poster": "https://img.zorores.com/_r/300x400/100/fc/ed/fced51e392ffd80041b3a1581ba7de2f/fced51e392ffd80041b3a1581ba7de2f.jpg",
+      "views": "1,021,979",
+      "hearts": "179,465"
+    },
+    {
+      "id": "tokyo-revengers-christmas-showdown-18244",
+      "rank": '06',
+      "name": "Tokyo Revengers: Christmas Showdown",
+      "poster": "https://img.zorores.com/_r/300x400/100/fb/66/fb663be9a427cc4c9556a5a124b060e8/fb663be9a427cc4c9556a5a124b060e8.jpg",
+      "views": "542,897",
+      "hearts": "81,962"
+    },
+    {
+      "id": "naruto-677",
+      "rank": '07',
+      "name": "Naruto",
+      "poster": "https://img.zorores.com/_r/300x400/100/5d/b4/5db400c33f7494bc8ae96f9e634958d0/5db400c33f7494bc8ae96f9e634958d0.jpg",
+      "views": "518,021",
+      "hearts": "168,512"
+    },
+    {
+      "id": "the-eminence-in-shadow-17473",
+      "rank": '08',
+      "name": "The Eminence in Shadow",
+      "poster": "https://img.zorores.com/_r/300x400/100/bc/a4/bca4a71e271a30fb1b44d33d56db8f8f/bca4a71e271a30fb1b44d33d56db8f8f.jpg",
+      "views": "501,190",
+      "hearts": "184,530"
+    },
+    {
+      "id": "black-clover-2404",
+      "rank": '09',
+      "name": "Black Clover",
+      "poster": "https://img.zorores.com/_r/300x400/100/f5/8b/f58b0204c20ae3310f65ae7b8cb9987e/f58b0204c20ae3310f65ae7b8cb9987e.jpg",
+      "views": "469,247",
+      "hearts": "157,695"
+    },
+    {
+      "id": "boruto-naruto-next-generations-8143",
+      "rank": '10',
+      "name": "Boruto: Naruto Next Generations",
+      "poster": "https://img.zorores.com/_r/300x400/100/05/4f/054ff70eabaeadc4ad9978054e274080/054ff70eabaeadc4ad9978054e274080.jpg",
+      "views": "463,032",
+      "hearts": "85,752"
+    }
+  ],
+  "month": [
+    {
+      "id": "one-piece-100",
+      "rank": 1,
+      "name": "One Piece",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/90/5490cb32786d4f7fef0f40d7266df532/5490cb32786d4f7fef0f40d7266df532.jpg",
+      "views": "14,378,230",
+      "hearts": "318,874"
+    },
+    {
+      "id": "my-hero-academia-season-6-18154",
+      "rank": 2,
+      "name": "My Hero Academia Season 6",
+      "poster": "https://img.zorores.com/_r/300x400/100/20/b7/20b7580c1abdf45a6eaf4826fc9fdf33/20b7580c1abdf45a6eaf4826fc9fdf33.jpg",
+      "views": "4,103,418",
+      "hearts": "130,996"
+    },
+    {
+      "id": "blue-lock-17889",
+      "rank": 3,
+      "name": "Blue Lock",
+      "poster": "https://img.zorores.com/_r/300x400/100/fc/ed/fced51e392ffd80041b3a1581ba7de2f/fced51e392ffd80041b3a1581ba7de2f.jpg",
+      "views": "4,063,982",
+      "hearts": "179,465"
+    },
+    {
+      "id": "naruto-shippuden-355",
+      "rank": 4,
+      "name": "Naruto: Shippuden",
+      "poster": "https://img.zorores.com/_r/300x400/100/9c/bc/9cbcf87f54194742e7686119089478f8/9cbcf87f54194742e7686119089478f8.jpg",
+      "views": "3,990,025",
+      "hearts": "150,049"
+    },
+    {
+      "id": "the-eminence-in-shadow-17473",
+      "rank": 5,
+      "name": "The Eminence in Shadow",
+      "poster": "https://img.zorores.com/_r/300x400/100/bc/a4/bca4a71e271a30fb1b44d33d56db8f8f/bca4a71e271a30fb1b44d33d56db8f8f.jpg",
+      "views": "2,788,204",
+      "hearts": "184,530"
+    },
+    {
+      "id": "naruto-677",
+      "rank": 6,
+      "name": "Naruto",
+      "poster": "https://img.zorores.com/_r/300x400/100/5d/b4/5db400c33f7494bc8ae96f9e634958d0/5db400c33f7494bc8ae96f9e634958d0.jpg",
+      "views": "1,869,489",
+      "hearts": "168,512"
+    },
+    {
+      "id": "boruto-naruto-next-generations-8143",
+      "rank": 7,
+      "name": "Boruto: Naruto Next Generations",
+      "poster": "https://img.zorores.com/_r/300x400/100/05/4f/054ff70eabaeadc4ad9978054e274080/054ff70eabaeadc4ad9978054e274080.jpg",
+      "views": "1,775,565",
+      "hearts": "85,752"
+    },
+    {
+      "id": "black-clover-2404",
+      "rank": 8,
+      "name": "Black Clover",
+      "poster": "https://img.zorores.com/_r/300x400/100/f5/8b/f58b0204c20ae3310f65ae7b8cb9987e/f58b0204c20ae3310f65ae7b8cb9987e.jpg",
+      "views": "1,739,671",
+      "hearts": "157,695"
+    },
+    {
+      "id": "tokyo-revengers-christmas-showdown-18244",
+      "rank": 9,
+      "name": "Tokyo Revengers: Christmas Showdown",
+      "poster": "https://img.zorores.com/_r/300x400/100/fb/66/fb663be9a427cc4c9556a5a124b060e8/fb663be9a427cc4c9556a5a124b060e8.jpg",
+      "views": "1,677,673",
+      "hearts": "81,962"
+    },
+    {
+      "id": "attack-on-titan-the-final-season-part-3-18329",
+      "rank": 10,
+      "name": "Attack on Titan: The Final Season Part 3",
+      "poster": "https://img.zorores.com/_r/300x400/100/54/d3/54d3f59bcc7caf1539c701eb0a064ec9/54d3f59bcc7caf1539c701eb0a064ec9.png",
+      "views": "1,643,689",
+      "hearts": "44,799"
+    }
+  ]
+}
 
 </script>
