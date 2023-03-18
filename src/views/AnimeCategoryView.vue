@@ -1,39 +1,91 @@
 <template>
   
-  <div class="flex gap-8 mt-4">
+  <Suspense>
 
-    <AnimeDeck
-      :animes="reqAnimes"
-      :name="categoryName()"
-      class="flex-[74%]"
-    />
+    <template #default>
+      <div class="flex gap-8 mt-4">
+
+        <AnimeDeck
+          :animes="ReqAnimes || reqAnimes"
+          :name="categoryName()"
+          class="flex-[74%]"
+        >
+
+          <template #footer>
+            <Pagination
+              :current-page="page"
+              :has-next-page="HasNextPage"
+              :total-pages="TotalPages"
+              :param="`anime/${route.params.animeCategory}`"
+            />
+          </template>
+
+        </AnimeDeck>
 
 
-    <div class="flex-[26%] pt-4">
+        <div class="flex-[26%] pt-4">
 
-      <MostViewedDeck
-        :all-animes="mostViewed"
-      />
+          <MostViewedDeck
+            :all-animes="mostViewed || mostViewed"
+          />
 
-      <GenreDeck
-        :genres="genres"
-        class="mt-8"
-      />
+          <GenreDeck
+            :genres="genres || genres"
+            class="mt-8"
+          />
 
-    </div>
+        </div>
 
-  </div>
+      </div>
+    </template>
+
+    <template #fallback>
+      <p>Loading...</p>
+    </template>
+
+  </Suspense>
 
 </template>
 
 
 <script setup>
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import MostViewedDeck from '@/components/home/MostViewedDeck.vue';
 import GenreDeck from '@/components/home/GenreDeck.vue';
+import Pagination from '@/components/Pagination.vue';
 
 const route = useRoute();
+const page = parseInt(route.query.page) || 1;
+
+
+const ReqAnimes = ref([]);
+const Genres = ref([]);
+const MostViewed = ref({});
+
+const HasNextPage = ref(false);
+const TotalPages = ref(0);
+
+const getData = async () => {
+  try {
+    const resp = await fetch(`http://localhost:5000/api/v1/${route.params.animeCategory}?page=${page}`)
+    const data = await resp.json();
+
+    ReqAnimes.value = data.animes;
+    Genres.value = data.genres;
+    MostViewed.value = data.mostViewedAnime;
+
+    HasNextPage.value = data.hasNextPage;
+    TotalPages.value = data.totalPages;
+
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getData();
 
 const categoryName = () => {
   const name = route.params.animeCategory
@@ -41,10 +93,8 @@ const categoryName = () => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  return (name === 'Tv') ? `${name.toUpperCase()} Series Anime` : `${name} Anime`; 
+  return (name === 'Tv') ? `${name.toUpperCase()} Series Anime` : `${name}`; 
 }
-
-console.log(categoryName())
 
 
 const hasNextPage = true;
