@@ -7,7 +7,7 @@
     <Titlebar/>
 
     <div id="main" class="px-4 md:px-6 pt-4">
-      <RouterView/>
+      <RouterView :key="$route.fullPath"/>
     </div>
     
   </main>

@@ -11,10 +11,10 @@
       :class="`${
         ['01','02','03'].includes(props.rank) 
           ? 
-        'text-accent-200 group-hover:text-accent-200' : 'text-zinc-500'
+        'text-accent-200 group-hover:text-accent-200' : 'text-zinc-500 group-hover:text-zinc-50'
       }`"
       class="
-      group-hover:text-zinc-50 text-2xl pr-6 pl-1
+      text-2xl pr-6 pl-1
       "
     >
       {{ props.rank }}

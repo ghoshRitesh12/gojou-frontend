@@ -5,9 +5,8 @@
     sticky top-0 z-[100]
     flex items-center gap-2
     isolate bg-primary-glass
-    backdrop-blur-[2rem] py-4 px-6
+    backdrop-blur-[5rem] py-4 px-6
     rounded-bl-lg rounded-br-lg
-    
     "
   >
 

@@ -6,10 +6,14 @@
       v-if="props.name"
       class="flex items-center pb-6"
     >
-      <p class="text-accent-200 text-2xl">
+      <p 
+        class="text-accent-200"
+        style="font-size: clamp(1.2rem, 3vmin, 1.7rem);"
+      >
         {{ props.name }}
       </p>
       <div 
+        v-if="props.href"
         class="
         flex items-center
         text-neutral-500 hover:text-accent-200

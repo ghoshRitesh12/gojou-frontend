@@ -1,28 +1,24 @@
 <template>
 
-  <div 
+  <RouterLink 
+    :to="`/anime/${props.href}`" 
     class="
-    text-gray-400
-    px-11 py-2
-    mb-1
+    text-gray-400 inline-block
+    mb-1 px-11 py-2 w-full
     rounded-xl text-lg
-    cursor-pointer
+    cursor-pointer hover:text-accent-200
     transition ease-in duration-100
-    hover:text-accent-200
-    "
-    @click="goToCategory(props.href)"
-    :title="props.name"
+    " 
   >
     {{ props.name }}
-
-  </div>
+  </RouterLink>
 
 </template>
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
-const { goToCategory } = goToRoute()
+// import goToRoute from '@/composables/goToRoute';
+// const { goToCategory } = goToRoute()
 
 
 const props = defineProps({
@@ -40,6 +36,4 @@ const props = defineProps({
 </script>
 
 
-<style>
-
-</style>
+<style></style>

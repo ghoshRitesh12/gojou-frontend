@@ -17,7 +17,6 @@
 
 <script setup>
 import goToRoute from '@/composables/goToRoute';
-import randomClr from '@/composables/randomClr';
 
 const { goToGenre } = goToRoute();
 

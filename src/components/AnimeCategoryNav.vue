@@ -20,7 +20,7 @@ import { ref } from 'vue';
 import AnimeCategoryLink from './AnimeCategoryLink.vue';
 
 const categories = ref([
-  { name: 'Movies', href: 'movies' },
+  { name: 'Movies', href: 'movie' },
   { name: 'TV Series', href: 'tv' },
   { name: 'Most Popular', href: 'most-popular' },
   { name: 'Most Favorite', href: 'most-favorite' },
