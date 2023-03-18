@@ -1,2 +1,2 @@
 
-sgojo frontend app
+gojou frontend app
