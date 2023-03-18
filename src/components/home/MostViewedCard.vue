@@ -48,14 +48,25 @@
           {{ props.name }}
         </p>
 
-        <div class="flex text-zinc-500 text-sm">
-          <span class="flex items-center gap-1">
-            <Icon icon="ic:round-favorite"/>
-            {{ props.hearts }}
+        <div class="text-zinc-500 text-[.9rem] select-none"
+          style="
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          "
+        >
+          <span class="inline-block whitespace-nowrap">
+            <span class="flex items-center gap-[.35rem]">
+              <Icon icon="ic:round-favorite"/>
+              {{ props.hearts }}
+            </span>
           </span>
-          <span class="flex items-center gap-1 ml-3">
-            <Icon icon="ic:baseline-remove-red-eye"/>
-            {{ props.views }}
+          <span class="inline-block whitespace-nowrap ml-4">
+            <span class="flex items-center gap-[.35rem]">
+              <Icon icon="ic:baseline-remove-red-eye"/>
+              {{ props.views }}
+            </span>
           </span>
         </div>
 

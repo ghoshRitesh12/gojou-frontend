@@ -38,8 +38,7 @@
 
       <img 
         class="
-        absolute inset-0 cursor-pointer w-full
-
+        absolute inset-0 cursor-pointer w-full h-full
         transition ease-in duration-100
         "
         :src="info.poster" 
@@ -67,24 +66,32 @@
 
       <div 
         class="
-        flex items-center mt-2 w-fit text-[.7rem]
+        mt-2 w-full text-sm select-none
+        "
+        style="
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         "
       >
         <span 
           v-if="info.type" 
-          class="
-          md:text-sm text-neutral-400
+          class="inline-block
+          text-neutral-400 whitespace-nowrap
           "
         >
           {{ info.type }}
         </span>
 
-        <Icon :icon="'bi:dot'" class="text-neutral-400 md:text-sm"/>
+        <span class="inline-block align-middle">
+          <Icon :icon="'bi:dot'" class="text-neutral-400 text-lg"/>
+        </span>
 
         <span 
           v-if="info.duration" 
-          class="
-          md:text-sm text-neutral-400
+          class="inline-block
+          text-neutral-400 whitespace-nowrap
           "
         >
           {{ info.duration }}

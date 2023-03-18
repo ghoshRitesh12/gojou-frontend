@@ -14,7 +14,7 @@
       Genres
     </div>
 
-    <div class="flex gap-2 items-center flex-wrap p-4 group">
+    <div class="flex gap-2 items-center flex-wrap p-4">
       <GenreCard
         v-for="genre, index in slicedGenres" 
         :key="index"
@@ -28,6 +28,8 @@
       hover:bg-zinc-700 transition ease-in duration-100 mx-4 
       text-zinc-400
       " 
+      role="button"
+      tabindex="-1"
       @click="showGenres"
     >
       {{ showText }}

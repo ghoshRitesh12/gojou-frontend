@@ -39,6 +39,9 @@
         class="mx-auto"
       />
     </div>
+    
+    
+    <slot name="footer"></slot>
 
   </section>
 
