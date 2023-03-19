@@ -13,8 +13,18 @@
     <Search 
       class="relative ml-4 max-w-[20rem] w-[100%] min-w-[10rem]"
       @data-search="searchReq"
+      @input-search="getSearchSuggestions"
       placeholder="anime..."
-    />
+    >
+      <template #results>
+        <QuickSearchDeck 
+          v-if="searchResults.length > 0"
+          :results="searchResults"
+          :href="searchKeyword"
+          class="absolute w-full"
+        />
+      </template>
+    </Search>
 
     <Profile class="ml-auto mr-6">
       <template v-if="isAuth">
@@ -44,15 +54,34 @@ import Search from './Search.vue';
 import Profile from './Profile.vue';
 import Dp from './Dp.vue';
 import UserName from './UserName.vue';
+import QuickSearchDeck from './QuickSearchDeck.vue';
+import { ref } from 'vue';
 
 const router = useRouter();
 
+const searchResults = ref([]);
+const searchKeyword = ref(null);
 
 const searchReq = (data) => {
   if(data) {
     router.push(`/search?q=${data}`)
   }
 }
+
+const getSearchSuggestions = async (inputData) => {
+  try {
+    searchKeyword.value = inputData;
+    const resp = await fetch(`http://localhost:5000/api/v1/quick-search?q=${inputData}`);
+    const data = await resp.json();
+
+    searchResults.value = data.animes;
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// const 
 
 const isAuth = true;
 

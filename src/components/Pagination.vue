@@ -1,7 +1,7 @@
 <template>
 
   <div data-pagination
-    v-if="true"
+    v-if="!(!props.hasNextPage && props.totalPages <= 1)"
     class="
     flex items-center gap-2 flex-wrap
     mt-16 mb-4 mx-auto w-fit
