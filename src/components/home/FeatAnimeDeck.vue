@@ -15,28 +15,29 @@
     <div class="">
       <FeatAnimeCard
         v-for="anime in slicedAnimes"
-        class="even:bg-zinc-800"
+        class="even:bg-zinc-800 px-8"
         :id="anime.id" 
         :name="anime.name" :jname="anime.jname"
         :poster="anime.poster" :other-info="anime.otherInfo"
       />
     </div>
 
-    <div 
+    <RouterLink 
+      v-if="props.href"
+      :to="`/anime/${props.href}`"
       class="
-      flex items-cente justify-center bg-zinc-900
+      flex items-center justify-center bg-zinc-900
       text-neutral-500 hover:bg-zinc-800
       w-full mx-auto py-3 cursor-pointer text-base 
       rounded-xl mt-4 gap-1
       transition ease-in duration-200 
       "
-      @click="goToCategory(props.href)"
     >
       <span class="pointer-events-none">View more</span>
       <span class="pointer-events-none grid place-items-center text-xl">
         <Icon icon="ic:round-keyboard-arrow-right"/>
       </span>
-    </div>
+    </RouterLink>
 
   </section>
 
@@ -44,12 +45,10 @@
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
 import { computed } from 'vue';
 import FeatAnimeCard from './FeatAnimeCard.vue';
 
-const { goToCategory } = goToRoute();
 
 const props = defineProps({
   name: {
@@ -62,7 +61,6 @@ const props = defineProps({
   },
   href: {
     type: String,
-    required: true
   }
 })
 

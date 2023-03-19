@@ -1,0 +1,102 @@
+<template>
+
+  <Suspense>
+
+    <template #default>
+      <section class="flex gap-8">
+        <AnimeDeck
+          :name="genreName"
+          :animes="genreAnimes"
+          class="flex-[75%]"
+        >
+          <template #footer>
+            <Pagination
+              :current-page="currentPage"
+              :has-next-page="hasNextPage"
+              :total-pages="totalPages"
+              :param="`genre/${route.params.genreName}?`"
+            />
+          </template>
+        </AnimeDeck>
+
+        <div class="flex-[25%]">
+          <GenreDeck
+            :genres="allGenres"
+            :length="allGenres.length"
+            class="mt-16"
+          />
+
+          <FeatAnimeDeck
+            :name="'Top Airing'"
+            :animes="topAiringAnimes"
+            :href="'top-airing'"
+            class="mt-8"
+          />
+        </div>
+
+      </section>
+    </template>
+
+    <template #fallback>
+      ...Loading content
+    </template>
+
+  </Suspense>
+
+</template>
+
+
+<script setup>
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import AnimeDeck from '@/components/AnimeDeck.vue';
+import Pagination from '@/components/Pagination.vue';
+import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
+import GenreDeck from '@/components/home/GenreDeck.vue';
+
+const route = useRoute();
+
+const genreAnimes = ref([]);
+const allGenres = ref([]);
+const topAiringAnimes = ref([]);
+
+const currentPage = parseInt(route.query.page) || 1;
+const totalPages = ref(0);
+const hasNextPage = ref(false);
+
+const genreName = computed(() => {
+  const name = route.params.genreName
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  return `${name} Anime`;
+})
+
+
+const getGenres = async () => {
+  try {
+    const resp = await fetch(`http://localhost:5000/api/v1/genre?name=${route.params.genreName}`);
+    const data = await resp.json();
+
+    genreAnimes.value = data.animes;
+    allGenres.value = data.genres;
+    topAiringAnimes.value = data.topAiringAnimes;
+
+    totalPages.value = data.totalPages;
+    hasNextPage.value = data.hasNextPage;
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getGenres();
+
+
+</script>
+
+
+<style>
+
+</style>

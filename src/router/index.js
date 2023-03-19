@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue';
 import FavoritesView from '../views/FavoritesView.vue';
 import RoomsView from '../views/RoomsView.vue';
 import AnimeCategoryView from '../views/AnimeCategoryView.vue';
+import GenreView from '../views/GenreView.vue';
+import SearchView from '../views/SearchView.vue';
 
 const routes = [
   {
@@ -19,6 +21,16 @@ const routes = [
     path: '/anime/:animeCategory',
     name: 'anime-category',
     component: AnimeCategoryView
+  },
+  {
+    path: '/genre/:genreName',
+    name: 'genre',
+    component: GenreView
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchView
   },
   {
     path: '/rooms',

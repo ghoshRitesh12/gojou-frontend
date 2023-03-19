@@ -1,14 +1,17 @@
 <template>
   
-  <div class="w-[31.33%]" data-genre>
-    <RouterLink 
-      :to="`/genre/${genreHref}`"
-      class="text-[.92rem]"
-      :title="props.name"
+  <RouterLink 
+    data-genre 
+    class="max-w-[31.33%] w-full"
+    :title="props.name"
+    :to="`/genre/${genreHref}`"
+  >
+    <span
+      class="text-[.92rem] pointer-events-none"
     >
       {{ props.name }}
-    </RouterLink>
-  </div>
+    </span>
+  </RouterLink>
 
 </template>
 

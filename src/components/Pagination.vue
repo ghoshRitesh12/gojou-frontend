@@ -1,6 +1,7 @@
 <template>
 
   <div data-pagination
+    v-if="true"
     class="
     flex items-center gap-2 flex-wrap
     mt-16 mb-4 mx-auto w-fit
@@ -15,7 +16,7 @@
     </RouterLink>
     <RouterLink 
       v-if="props.currentPage !== 1"
-      :to="`/${props.param}?page=${props.currentPage - 1}`"
+      :to="`/${props.param}page=${props.currentPage - 1}`"
       class="pg sym" title="Previous"
     >
       <Icon icon="ic:round-keyboard-arrow-left" />
@@ -23,7 +24,7 @@
 
     <RouterLink 
       v-if="props.currentPage - 2 > 0" 
-      :to="`/${props.param}?page=${props.currentPage - 2}`" 
+      :to="`/${props.param}page=${props.currentPage - 2}`" 
       class="pg" :title="`Page ${props.currentPage - 2}`"
     >
       {{ props.currentPage - 2 }}
@@ -31,7 +32,7 @@
     
     <RouterLink 
       v-if="props.currentPage - 1 > 0" 
-      :to="`/${props.param}?page=${props.currentPage - 1}`" 
+      :to="`/${props.param}page=${props.currentPage - 1}`" 
       class="pg" :title="`Page ${props.currentPage - 1}`"
     >
       {{ props.currentPage - 1 }}
@@ -45,7 +46,7 @@
 
     <RouterLink
       v-if="(props.currentPage + 1) <= props.totalPages"
-      :to="`/${props.param}?page=${props.currentPage + 1}`"
+      :to="`/${props.param}page=${props.currentPage + 1}`"
       class="pg" :title="`Page ${props.currentPage + 1}`"
     >
       {{ props.currentPage + 1 }}
@@ -53,7 +54,7 @@
     
     <RouterLink
       v-if="(props.currentPage + 2) <= props.totalPages"
-      :to="`/${props.param}?page=${props.currentPage + 2}`"
+      :to="`/${props.param}page=${props.currentPage + 2}`"
       class="pg" :title="`Page ${props.currentPage + 2}`"
     >
       {{ props.currentPage + 2 }}
@@ -61,7 +62,7 @@
 
     <RouterLink
       v-if="props.currentPage !== props.totalPages"
-      :to="`/${props.param}?page=${props.currentPage + 1}`"
+      :to="`/${props.param}page=${props.currentPage + 1}`"
       class="pg sym" title="Next"
     > 
       <Icon icon="ic:round-keyboard-arrow-right" />
@@ -69,7 +70,7 @@
     
     <RouterLink
       v-if="props.currentPage !== props.totalPages"
-      :to="`/${props.param}?page=${props.totalPages}`"
+      :to="`/${props.param}page=${props.totalPages}`"
       class="pg sym" title="Last"
     > 
       <Icon icon="ic:round-keyboard-double-arrow-right" />

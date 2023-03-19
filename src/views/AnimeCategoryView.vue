@@ -16,7 +16,7 @@
               :current-page="page"
               :has-next-page="HasNextPage"
               :total-pages="TotalPages"
-              :param="`anime/${route.params.animeCategory}`"
+              :param="`anime/${route.params.animeCategory}?`"
             />
           </template>
 
@@ -31,6 +31,7 @@
 
           <GenreDeck
             :genres="genres || genres"
+            :length="genres.length"
             class="mt-8"
           />
 

@@ -29,11 +29,10 @@
 
 
 <script setup>
-// import Button from './Button.vue';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
-const query = ref(null);
 
+const query = ref(null);
 const placeholder = `Search ${props.placeholder}`.trim();
 
 const props = defineProps({
@@ -49,6 +48,9 @@ function emitQuery() {
   if(!query) return; 
   emits('data-search', query.value)
 }
+
+
+
 
 </script>
 

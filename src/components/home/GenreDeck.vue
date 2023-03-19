@@ -40,7 +40,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { computed } from 'vue';
 import GenreCard from './GenreCard.vue';
 
@@ -48,24 +48,30 @@ const props = defineProps({
   genres: {
     type: Array,
     required: true
+  },
+  length: {
+    type: Number,
+    required: true
   }
 })
 
 const showText = ref('Show more')
 
+const maxLimit = 21;
 const min = ref(0);
-const max = ref(21);
-const length = props.genres.length;
+const max = ref(maxLimit);
+
 
 const slicedGenres = computed(() => props.genres.slice(min.value, max.value))
 
+
 const showGenres = () => {
   if(showText.value.includes('more')) {
-    max.value = length;
+    max.value = props.length;
     showText.value = 'Show less'
     return;
   }
-  max.value = 21;
+  max.value = maxLimit;
   showText.value = 'Show more'
 }
 

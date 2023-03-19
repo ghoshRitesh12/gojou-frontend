@@ -49,7 +49,9 @@ const router = useRouter();
 
 
 const searchReq = (data) => {
-  if(data) console.log(data);
+  if(data) {
+    router.push(`/search?q=${data}`)
+  }
 }
 
 const isAuth = true;

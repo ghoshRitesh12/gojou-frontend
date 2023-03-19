@@ -44,8 +44,9 @@
       />
 
       <GenreDeck
-        class="mt-8"
         :genres="genres"
+        :lenght="genres.length"
+        class="mt-8"
       />
 
       <MostViewedDeck
