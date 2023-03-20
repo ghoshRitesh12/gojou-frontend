@@ -40,15 +40,19 @@
       </p>
 
       <div
-        class="flex items-center text-sm text-zinc-400"
+        class="overflow-hidden align-middle text-sm text-zinc-400 verti"
+        style="
+          display: -webkit-box; -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+        "
       >
 
         <template v-for="info, index in props.otherInfo">
-          <span class="whitespace-nowrap"> {{ info }} </span>
+          <span class="whitespace-nowrap inline-block"> {{ info }} </span>
           <Icon
             v-if="index !== props.otherInfo.length - 1"
             :icon="'bi:dot'" 
-            class="text-neutral-400 md:text-sm"
+            class="text-neutral-400 text-lg inline-block"
           />
         </template>
 

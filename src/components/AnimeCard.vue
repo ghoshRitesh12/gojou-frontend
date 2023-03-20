@@ -1,7 +1,7 @@
 <template>
   
   <div data-card
-    class="shadow-lg max-w-[17rem] w-full
+    class="shadow-lg max-w-[17rem] min-w-[9rem] w-full
     relative rounded-xl overflow-hidden
     bg-zinc-900 break-words
     "
@@ -51,14 +51,16 @@
     <div data-info class="py-3 px-3 w-full">
       <p 
         class="
-        text-[1.07rem] leading-[1.06] w-fit text-ellipsis
+        leading-[1.1] w-fit text-ellipsis overflow-hidden
         cursor-pointer hover:text-accent-200 pb-4
+        md:text-[1.02rem] lg:text-[1.07rem] lg:leading-[1.06]
         transition ease-in duration-100 h-[37px]
         "
         :title="info.name"
         style="
-        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-        overflow: hidden;"
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+          
+        "
         @click="goToAnime(info.id)"
       >
         {{ info.name }}

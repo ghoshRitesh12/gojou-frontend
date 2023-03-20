@@ -54,8 +54,9 @@ const props = defineProps({
 const emits = defineEmits(['data-search', 'input-search']);
 
 function emitQuery() {
-  if(!query) return; 
-  emits('data-search', query.value)
+  if(!query) return;
+  clearInterval(interval.value);
+  emits('data-search', query.value);
 }
 
 const handleInput = e => {

@@ -11,16 +11,18 @@
   >
 
     <Search 
-      class="relative ml-4 max-w-[20rem] w-[100%] min-w-[10rem]"
+      class="relative ml-4 max-w-[20rem] w-[100%] min-w-[6rem]"
       @data-search="searchReq"
       @input-search="getSearchSuggestions"
       placeholder="anime..."
     >
       <template #results>
         <QuickSearchDeck 
-          v-if="searchResults.length > 0"
+          v-show="searchResults.length > 0"
           :results="searchResults"
           :href="searchKeyword"
+          ref="quickSearchDeck"
+          @open-results="searchResults.length = 0"
           class="absolute w-full"
         />
       </template>
@@ -50,21 +52,26 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { onClickOutside } from '@vueuse/core';
+import { ref } from 'vue';
 import Search from './Search.vue';
 import Profile from './Profile.vue';
 import Dp from './Dp.vue';
 import UserName from './UserName.vue';
 import QuickSearchDeck from './QuickSearchDeck.vue';
-import { ref } from 'vue';
 
 const router = useRouter();
 
+const quickSearchDeck = ref(null);
 const searchResults = ref([]);
 const searchKeyword = ref(null);
+
+onClickOutside(quickSearchDeck, () => searchResults.value.length = 0)
 
 const searchReq = (data) => {
   if(data) {
     router.push(`/search?q=${data}`)
+    searchResults.value.length = 0
   }
 }
 
@@ -75,6 +82,8 @@ const getSearchSuggestions = async (inputData) => {
     const data = await resp.json();
 
     searchResults.value = data.animes;
+    if(searchResults.value[0].id === null)
+      searchKeyword.value = null;
 
   } catch (err) {
     console.log(err);

@@ -3,7 +3,7 @@
   <section 
     data-search-suggestions 
     class="
-    rounded-xl overflow-hidden bg-zinc-900
+    rounded-xl overflow-hidden bg-zinc-800
     shadow-lg shadow-primary-glass/40
     "
   >
@@ -12,10 +12,11 @@
       :key="index"
       :id="anime.id" :more-info="anime.moreInfo"
       :poster="anime.poster" :name="anime.name"
+      @click="resultsClick"
     />
 
     <RouterLink 
-      v-if="props.results.length > 0"
+      v-if="props.href"
       :to="`/search?q=${props.href}`"
       class="
       flex items-center justify-center
@@ -24,6 +25,7 @@
       transition ease-in duration-100
       " 
       type="button"
+      @click="resultsClick"
     >
       View all results
       <Icon icon="material-symbols:chevron-right-rounded"/>
@@ -46,6 +48,12 @@ const props = defineProps({
     type: String
   }
 })
+
+const emits = defineEmits(['open-results']);
+
+const resultsClick = () => emits('open-results');
+
+
 </script>
 
 

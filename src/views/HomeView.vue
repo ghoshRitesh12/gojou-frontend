@@ -13,31 +13,31 @@
     </Slide>
   </Carousel>
 
-  <section class="md:flex md:gap-10 flex-grow pt-12 max-w-full w-full">
-    <div class="w-full">
+  <section class="xl:flex md:gap-10 flex-grow pt-12 max-w-full w-full">
+    <div class="w-full flex-[70%] 2xl:flex-[75%]">
       <AnimeDeck
         class="flex-auto"
-        :animes="upcomingAnimes"
+        :animes="latestEpisodeAnimes"
         :name="'Top Upcoming'"
         :href="'top-upcoming'"
       />
       
       <AnimeDeck
         class="flex-auto mt-12"
-        :animes="latestEpisodeAnimes"
+        :animes="upcomingAnimes"
         :name="'Latest Episode'"
         :href="'recently-updated'"
       />
     </div>
 
-    <div class="max-w-[25rem] w-full flex-shrink flex-grow-0 mb-auto mx-auto mt-3">
+    <div class="flex-[35%] 2xl:flex-[25%] mb-auto mx-auto mt-3">
       <TrendingAnimeDeck
-        class=""
+        class="mt-12 xl:mt-0"
         :animes="trendingAnimes"
       />
 
       <FeatAnimeDeck
-        class="mt-9"
+        class="mt-8 w-full"
         :name="'Top Airing Animes'"
         :href="'top-airing'"
         :animes="topAiringAnimes"
@@ -45,7 +45,7 @@
 
       <GenreDeck
         :genres="genres"
-        :lenght="genres.length"
+        :length="genres.length"
         class="mt-8"
       />
 

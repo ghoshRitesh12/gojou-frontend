@@ -3,12 +3,12 @@
   <Suspense>
 
     <template #default>
-      <div class="flex gap-8 mt-4">
+      <div class="xl:flex gap-8 mt-4">
 
         <AnimeDeck
           :animes="ReqAnimes || reqAnimes"
           :name="categoryName()"
-          class="flex-[74%]"
+          class="flex-[70%] 2xl:flex-[75%]"
         >
 
           <template #footer>
@@ -23,7 +23,7 @@
         </AnimeDeck>
 
 
-        <div class="flex-[26%] pt-4">
+        <div class="flex-[35%] 2xl:flex-[25%] pt-4">
 
           <MostViewedDeck
             :all-animes="mostViewed || mostViewed"

@@ -3,11 +3,11 @@
   <Suspense>
 
     <template #default>
-      <section class="flex gap-8">
+      <section class="xl:flex gap-8">
         <AnimeDeck
           :name="genreName"
           :animes="genreAnimes"
-          class="flex-[75%]"
+          class="flex-[70%] 2xl:flex-[75%]"
         >
           <template #footer>
             <Pagination
@@ -19,7 +19,7 @@
           </template>
         </AnimeDeck>
 
-        <div class="flex-[25%]">
+        <div class="flex-[35%] 2xl:flex-[25%]">
           <GenreDeck
             :genres="allGenres"
             :length="allGenres.length"

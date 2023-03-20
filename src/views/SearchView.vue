@@ -3,11 +3,13 @@
   <Suspense>
 
     <template #default>
-      <section>
+
+      <section class="xl:flex gap-8 pt-4">
 
         <AnimeDeck
           :animes="results"
           :name="`Search results for: ${route.query.q}`"
+          class="flex-[75%]"
         >
           <template #footer>
             <Pagination
@@ -19,7 +21,17 @@
           </template>
         </AnimeDeck>
 
+        <div class="flex-[25%]">
+          <FeatAnimeDeck
+            :name="'Most Popular'"
+            :animes="mostPopularAnimes"
+            :href="'most-popular'"
+            class="w-full"
+          />
+        </div>
+
       </section>
+
     </template>
 
     <template #fallback>
@@ -38,6 +50,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import Pagination from '@/components/Pagination.vue';
+import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
 
 const route = useRoute();
 
@@ -45,6 +58,7 @@ const hasNextPage = ref(false);
 const totalPages = ref(0);
 const results = ref([]);
 const currentPage = parseInt(route.query.page) || 1;
+const mostPopularAnimes = ref([]);
 
 const getSearchResults = async () => {
   try {
@@ -54,6 +68,7 @@ const getSearchResults = async () => {
     results.value = data.animes;
     hasNextPage.value = data.hasNextPage;
     totalPages.value = data.totalPages;
+    mostPopularAnimes.value = data.mostPopularAnimes;
 
   } catch (err) {
     console.log(err);

@@ -29,10 +29,9 @@
 
 
     <div 
-      class="grid gap-3 md:gap-4 transition ease-in duration-100" 
-      style="grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));"
+      class="grid gap-3 md:gap-4 transition ease-in duration-100 card-wrap" 
+      style="grid-template-columns: repeat(auto-fit, minmax(var(--min-size, 9rem), 1fr));"
       >
-      <!-- style="grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));" -->
       <AnimeCard 
         v-for="anime in props.animes"
         :info="anime"
@@ -83,4 +82,18 @@ const testObj = {
 </script>
 
 
-<style></style>
+<style scoped>
+
+  @media (min-width: 768px) {
+    .card-wrap {
+      --min-size: 11rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-wrap {
+      --min-size: 12rem;
+    }
+  }
+
+</style>

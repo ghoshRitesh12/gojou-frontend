@@ -6,7 +6,7 @@
 
     <p
       class="
-      text-xl text-accent-200 w-full py-4 pl-4
+      text-2xl text-accent-200 w-full py-4 pl-4
       "
     >
       {{ props.name }}

@@ -2,12 +2,17 @@
   
   <RouterLink 
     data-genre 
-    class="max-w-[31.33%] w-full"
+    class="
+    md:w-[31.33%] bg-zinc-800 md:bg-transparent
+    flex-grow-0 md:flex-grow
+    "
     :title="props.name"
     :to="`/genre/${genreHref}`"
   >
     <span
-      class="text-[.92rem] pointer-events-none"
+      class="
+      text-[.92rem] pointer-events-none max-w-full
+      "
     >
       {{ props.name }}
     </span>
@@ -34,9 +39,8 @@ const genreHref = props.name.toLowerCase().replace(" ", "-");
   [data-genres-deck] [data-genre] {
     @apply 
     inline-block py-2 px-4 rounded-xl
-    flex-grow-0
-    cursor-pointer hover:bg-zinc-700 
+    cursor-pointer hover:bg-zinc-700
     whitespace-nowrap text-ellipsis overflow-hidden
-    transition ease-in duration-100 
+    transition ease-in duration-100
   }
 </style>
