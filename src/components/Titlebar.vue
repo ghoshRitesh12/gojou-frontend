@@ -2,7 +2,7 @@
 
   <header id="titlebar"
     class="
-    sticky top-0 z-[100]
+    sticky top-0 z-[110]
     flex items-center gap-2
     isolate bg-primary-glass
     backdrop-blur-[5rem] py-4 px-6

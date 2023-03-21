@@ -5,6 +5,7 @@ import RoomsView from '../views/RoomsView.vue';
 import AnimeCategoryView from '../views/AnimeCategoryView.vue';
 import GenreView from '../views/GenreView.vue';
 import SearchView from '../views/SearchView.vue';
+import AnimeInfoView from '../views/AnimeInfoView.vue';
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     path: '/favorites',
     name: 'favorites',
     component: FavoritesView
+  },
+  {
+    path: '/anime/info/:animeId',
+    name: 'anime-info',
+    component: AnimeInfoView
   },
   {
     path: '/anime/:animeCategory',

@@ -30,7 +30,7 @@
       </div>
 
       <div data-text class="pl-4">
-        <p
+        <RouterLink
           class="
           text-[1.05rem] hover:text-accent-200
           cursor-pointer leading-[1.1] mb-1
@@ -43,10 +43,10 @@
             overflow: hidden;
           "
           :title="props.name"
-          @click="goToAnime(props.id)"
+          :to="`/anime/info/${props.id}`"
         >
           {{ props.name }}
-        </p>
+        </RouterLink>
 
         <div class="text-zinc-500 text-[.9rem] select-none"
           style="
@@ -81,7 +81,6 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
-import goToRoute from '@/composables/goToRoute';
 
 const props = defineProps({
   id: {
@@ -110,7 +109,6 @@ const props = defineProps({
   },
 })
 
-const { goToAnime } = goToRoute();
  
 // {
 //   "id": "one-piece-100",

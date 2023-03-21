@@ -20,7 +20,7 @@
       <span v-if="info.rating"
         class="
         absolute left-[.7rem] top-[.7rem]
-        px-2 py-[.15rem] shadow-md z-10
+        px-2 py-[.15rem] shadow-md z-50
         bg-accent-400 rounded-lg text-center text-[.9rem]
         "
       >
@@ -30,26 +30,30 @@
         class="
         absolute bottom-[1rem] right-[.7rem]
         bg-[hsla(0,0%,0%,.7)] py-[.2rem] px-2
-        rounded-lg text-sm shadow-md z-10
+        rounded-lg text-sm shadow-md z-50
         "
       >
         Ep {{ info.episodes }}
       </span>
 
-      <img 
-        class="
-        absolute inset-0 cursor-pointer w-full h-full
-        transition ease-in duration-100
-        "
-        :src="info.poster" 
-        :alt="info.name"
-        @click="goToAnime(info.id)"
+      <RouterLink 
+        :to="`/anime/info/${info.id}`"
+        class="absolute inset-0 w-full h-full"
         :title="info.name"
-      />
+      >
+        <img 
+          class="
+          absolute inset-0 pointer-events-none w-full h-full
+          transition ease-in duration-100
+          "
+          :src="info.poster" 
+          :alt="info.name"
+        />
+      </RouterLink>
     </div>
 
     <div data-info class="py-3 px-3 w-full">
-      <p 
+      <RouterLink 
         class="
         leading-[1.1] w-fit text-ellipsis overflow-hidden
         cursor-pointer hover:text-accent-200 pb-4
@@ -59,16 +63,15 @@
         :title="info.name"
         style="
           display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-          
         "
-        @click="goToAnime(info.id)"
+        :to="`/anime/info/${info.id}`"
       >
         {{ info.name }}
-      </p>
+      </RouterLink>
 
       <div 
         class="
-        mt-2 w-full text-sm select-none
+        mt-2 w-full text-sm select-none text-neutral-400
         "
         style="
           display: -webkit-box;
@@ -79,22 +82,18 @@
       >
         <span 
           v-if="info.type" 
-          class="inline-block
-          text-neutral-400 whitespace-nowrap
-          "
+          class="inline-block whitespace-nowrap"
         >
           {{ info.type }}
         </span>
 
         <span class="inline-block align-middle">
-          <Icon :icon="'bi:dot'" class="text-neutral-400 text-lg"/>
+          <Icon :icon="'bi:dot'" class="text-lg"/>
         </span>
 
         <span 
           v-if="info.duration" 
-          class="inline-block
-          text-neutral-400 whitespace-nowrap
-          "
+          class="inline-block whitespace-nowrap"
         >
           {{ info.duration }}
         </span>

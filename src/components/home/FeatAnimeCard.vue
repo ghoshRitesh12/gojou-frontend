@@ -3,27 +3,27 @@
   <div data-feat-card
     class="
     flex items-center relative w-full 
-    mx-auto px-4 py-2 rounded-md mb-2
+    mx-auto px-4 py-3 rounded-md
     "
   >
 
-    <div
+    <RouterLink
       class="
       max-w-[3rem] rounded-lg overflow-hidden 
       cursor-pointer shadow-lg
       "
       :title="props.name"
-      @click="goToAnime(props.id)"
+      :to="`/anime/info/${props.id}`"
     >
       <img 
         class="pointer-events-none"
         :src="props.poster" 
         :alt="props.name" 
       />
-    </div>
+    </RouterLink>
     
     <div class="pl-4">
-      <p 
+      <RouterLink 
         class="
         leading-[1.2] mb-1 overflow-hidden
         hover:text-accent-200 cursor-pointer
@@ -31,13 +31,13 @@
         "
         style="
           display: -webkit-box; -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
+          -webkit-box-orient: vertical; 
         "
         :title="props.jname"
-        @click="goToAnime(props.id)"
+        :to="`/anime/info/${props.id}`"
       >
         {{ props.name }}  
-      </p>
+      </RouterLink>
 
       <div
         class="overflow-hidden align-middle text-sm text-zinc-400 verti"
@@ -65,10 +65,8 @@
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
 
-const { goToAnime } = goToRoute();
 
 const props = defineProps({
   id: {

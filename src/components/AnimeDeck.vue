@@ -12,19 +12,19 @@
       >
         {{ props.name }}
       </p>
-      <div 
+      <RouterLink 
         v-if="props.href"
         class="
         flex items-center
         text-neutral-500 hover:text-accent-200
-        w-fit ml-auto cursor-pointer text-base
-        transition ease-in duration-100 
+        w-fit ml-auto cursor-pointer text-[.9rem]
+        transition ease-in duration-100 xl:text-base
         "
-        @click="goToCategory(props.href)"
+        :to="`/anime/${props.href}`"
       >
         <span class="pointer-events-none">View more</span>
         <Icon class="pointer-events-none text-xl" icon="ic:round-keyboard-arrow-right"/>
-      </div>
+      </RouterLink>
     </div>
 
 

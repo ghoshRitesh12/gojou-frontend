@@ -1,12 +1,12 @@
 <template>
   <main class="
-    min-h-[200vh]
+    min-h-full
     flex-[75%] pb-8
     bg-primary-900 text-gray-100
   ">
     <Titlebar/>
 
-    <div id="main" class="px-4 w-full lg:px-6 pt-4">
+    <div id="main" class="px-4 w-full lg:px-6 py-4">
       <RouterView :key="$route.fullPath"/>
     </div>
     

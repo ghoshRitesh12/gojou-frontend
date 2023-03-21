@@ -9,6 +9,7 @@
     cursor-pointer hover:text-accent-200
     transition ease-in duration-100
     " 
+    active-class="active"
   >
     {{ props.name }}
   </RouterLink>
@@ -17,8 +18,6 @@
 
 
 <script setup>
-// import goToRoute from '@/composables/goToRoute';
-// const { goToCategory } = goToRoute()
 
 
 const props = defineProps({
@@ -36,4 +35,10 @@ const props = defineProps({
 </script>
 
 
-<style></style>
+<style scoped>
+
+  .active {
+    @apply text-accent-200
+  }
+
+</style>

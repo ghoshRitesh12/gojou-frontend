@@ -6,8 +6,9 @@
 
     <p
       class="
-      text-2xl text-accent-200 w-full py-4 pl-4
+      text-accent-200 w-full py-3 pl-5
       "
+      style="font-size: clamp(1.2rem, 3vmin, 1.6rem);"
     >
       {{ props.name }}
     </p>
