@@ -57,7 +57,7 @@
         class="
         leading-[1.1] w-fit text-ellipsis overflow-hidden
         cursor-pointer hover:text-accent-200 pb-4
-        md:text-[1.02rem] lg:text-[1.07rem] lg:leading-[1.06]
+        md:text-[1.02rem] lg:text-[1.07rem] lg:leading-[1.05]
         transition ease-in duration-100 h-[37px]
         "
         :title="info.name"

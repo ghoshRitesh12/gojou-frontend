@@ -1,16 +1,21 @@
 <template>
 
-  <p class="text-[1rem] mt-8 px-8 pb-2 text-gray-500">Categories</p>
+  <div>
 
-  <nav id="anime-categories">
+    <p class="text-[1rem] pt-6 px-8 pb-2 text-gray-500">Categories</p>
+    
+    <nav id="anime-categories">
+  
+      <AnimeCategoryLink
+        v-for="category in categories"
+        :name="category.name"
+        :href="category.href"
+      />
+  
+    </nav>
 
-    <AnimeCategoryLink
-      v-for="category in categories"
-      :name="category.name"
-      :href="category.href"
-    />
+  </div>
 
-  </nav>
 
 </template>
 

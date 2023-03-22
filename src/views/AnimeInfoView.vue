@@ -6,11 +6,17 @@
 
       <div data-anime>
 
-        <div data-anime-info>
+        <div>
+
+          <AnimeContent
+            :anime-content="animeContent"
+          />
+
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
             :seasons="animeSeasons"
           />
+
         </div>
 
         <section class="xl:flex gap-8 mt-8">
@@ -62,6 +68,7 @@ import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
 import SeasonsDeck from '@/components/animeInfo/SeasonsDeck.vue';
+import AnimeContent from '@/components/animeInfo/AnimeContent.vue';
 
 const route = useRoute();
 
@@ -70,6 +77,7 @@ const mostPopularAnimes = ref([]);
 const recommendedAnimes = ref([]);
 
 const animeSeasons = ref([]);
+const animeContent = ref({});
 
 const getAnimeInfo = async () => {
   try {
@@ -80,7 +88,10 @@ const getAnimeInfo = async () => {
     mostPopularAnimes.value = data.mostPopularAnimes;
     recommendedAnimes.value = data.recommendedAnimes;
 
-    animeSeasons.value = data.anime.seasons;
+    animeSeasons.value = data.seasons;
+    animeContent.value = data.anime;
+
+    // console.log(animeContent.value);
 
   } catch (err) {
     console.log(err);

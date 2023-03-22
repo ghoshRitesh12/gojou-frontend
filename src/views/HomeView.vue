@@ -1,64 +1,67 @@
 <template>
 
-  <Carousel class="relative md:flex-grow" #default="{ currentSlide }">
-    <Slide v-for="anime, index in tA" :key="index">
-      <AnimeSlide
-        v-show="currentSlide === index"
-        class="absolute inset-0 w-full h-full max-h-[100%]"
-        :rank="anime.rank" :id="anime.id"
-        :name="anime.name" :poster="anime.poster"
-        :description="anime.description"
-        :category="'Spotlight'"
-      />
-    </Slide>
-  </Carousel>
+  <div>
 
-  <section class="xl:flex md:gap-10 flex-grow pt-12 max-w-full w-full">
-    <div class="w-full flex-[70%] 2xl:flex-[75%]">
-      <AnimeDeck
-        class="flex-auto"
-        :animes="latestEpisodeAnimes"
-        :name="'Top Upcoming'"
-        :href="'top-upcoming'"
-      />
+    <Carousel class="relative md:flex-grow" #default="{ currentSlide }">
+      <Slide v-for="anime, index in tA" :key="index">
+        <AnimeSlide
+          v-show="currentSlide === index"
+          class="absolute inset-0 w-full h-full max-h-[100%]"
+          :rank="anime.rank" :id="anime.id"
+          :name="anime.name" :poster="anime.poster"
+          :description="anime.description"
+          :category="'Spotlight'"
+        />
+      </Slide>
+    </Carousel>
+
+    <section class="xl:flex md:gap-10 flex-grow pt-12 max-w-full w-full">
       
-      <AnimeDeck
-        class="flex-auto mt-12"
-        :animes="upcomingAnimes"
-        :name="'Latest Episode'"
-        :href="'recently-updated'"
-      />
-    </div>
+      <div class="w-full flex-[70%] 2xl:flex-[75%]">
+        <AnimeDeck
+          class="flex-auto"
+          :animes="latestEpisodeAnimes"
+          :name="'Top Upcoming'"
+          :href="'top-upcoming'"
+        />
+        
+        <AnimeDeck
+          class="flex-auto mt-12"
+          :animes="upcomingAnimes"
+          :name="'Latest Episode'"
+          :href="'recently-updated'"
+        />
+      </div>
 
-    <div class="flex-[35%] 2xl:flex-[25%] mb-auto mx-auto mt-3">
-      <TrendingAnimeDeck
-        class="mt-12 xl:mt-0"
-        :animes="trendingAnimes"
-      />
+      <div class="flex-[35%] 2xl:flex-[25%] mb-auto mx-auto mt-3">
+        <TrendingAnimeDeck
+          class="mt-12 xl:mt-0"
+          :animes="trendingAnimes"
+        />
 
-      <FeatAnimeDeck
-        class="mt-8 w-full"
-        :name="'Top Airing Animes'"
-        :href="'top-airing'"
-        :animes="topAiringAnimes"
-      />
+        <FeatAnimeDeck
+          class="mt-8 w-full"
+          :name="'Top Airing Animes'"
+          :href="'top-airing'"
+          :animes="topAiringAnimes"
+        />
 
-      <GenreDeck
-        :genres="genres"
-        :length="genres.length"
-        class="mt-8"
-      />
+        <GenreDeck
+          :genres="genres"
+          :length="genres.length"
+          class="mt-8"
+        />
 
-      <MostViewedDeck
-        class="mt-8"
-        :all-animes="mostViewed"
-      />
+        <MostViewedDeck
+          class="mt-8"
+          :all-animes="mostViewed"
+        />
 
-    </div>
+      </div>
 
-  </section>
+    </section>
 
-
+  </div>
 
 </template>
 

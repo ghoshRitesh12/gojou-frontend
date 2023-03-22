@@ -31,7 +31,7 @@
       class="
       bg-cover bg-center bg-no-repeat
       pb-[40%] h-full w-full
-      opacity-30
+      opacity-40
       "
       :style="`background-image: url('${props.poster}')`"
       style="filter: blur(12px)"

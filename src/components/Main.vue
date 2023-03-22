@@ -6,7 +6,7 @@
   ">
     <Titlebar/>
 
-    <div id="main" class="px-4 w-full lg:px-6 py-4">
+    <div id="main" class="px-4 w-full lg:px-6 py-4 overflow-hidden">
       <RouterView :key="$route.fullPath"/>
     </div>
     
