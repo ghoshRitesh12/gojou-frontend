@@ -1,12 +1,21 @@
 <template>
 
-  <div class="mb-2 text-[.95rem]">
+  <div class="flex items-start mb-2 text-[.92rem]">
 
-    <span class="inline-block mr-2">
-      {{ props.keyname }} :
+    <span class="inline-block mr-2 flex-shrink-0">
+      {{ props.keyname }}:
     </span>
 
-    <span class="inline-block" style="word-spacing: .2rem;">
+    <span 
+      class="leading-[1.2] overflow-hidden mt-1" 
+      style="word-spacing: .2rem;"
+      :style="`
+        display: -webkit-box; 
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      `"
+      :title="props.value"
+    >
 
       <template v-if="props.value">
         {{ props.value }}

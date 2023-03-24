@@ -8,9 +8,7 @@
 
         <div>
 
-          <AnimeContent
-            :anime-content="animeContent"
-          />
+          <AnimeContent/>
 
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
@@ -63,7 +61,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
@@ -90,15 +88,17 @@ const getAnimeInfo = async () => {
 
     animeSeasons.value = data.seasons;
     animeContent.value = data.anime;
-
+     
+    // return animeContent;
     // console.log(animeContent.value);
-
+    
   } catch (err) {
     console.log(err);
   }
 }
 
-getAnimeInfo();
+provide('anime-content', animeContent);
+getAnimeInfo()
 
 </script>
 

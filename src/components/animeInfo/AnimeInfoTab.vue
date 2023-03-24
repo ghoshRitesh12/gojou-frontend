@@ -13,7 +13,7 @@
       mt-3
       "
     >
-      <img class="w-full rounded-xl" :src="props.poster" :alt="props.name">
+      <img class="w-full rounded-xl" :src="poster" :alt="name">
     </div>
 
 
@@ -25,14 +25,14 @@
           class="text-white"
           style="font-size: clamp(1.7rem, 4vmin, 2.2rem)"
         >
-          {{ props.name }}
+          {{ name }}
         </div>
 
         <div class="text-neutral-200 text-[.88rem] md:text-base mt-2">
-          <template v-for="info, index in props.stats">
+          <template v-for="info, index in stats">
             <span class="whitespace-nowrap inline-block"> {{ info }} </span>
             <Icon
-              v-if="index !== props.stats.length - 1"
+              v-if="index !== stats.length - 1"
               :icon="'bi:dot'" 
               class="text-lg inline-block"
             />
@@ -64,7 +64,7 @@
           bg-zinc-100 hover:bg-zinc-300
           transition ease-in duration-100"
           type="button"
-          @click="goToAnime(props.id)"
+          @click="goToAnime(id)"
         >
           <Icon icon="ic:round-add" class="text-lg"/>
           Add to Favorites
@@ -86,7 +86,7 @@
           -webkit-box-orient: vertical;
         `"
       >
-        {{ props.description }}
+        {{ description }}
       </div>
 
     </div>
@@ -98,28 +98,29 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
+import { inject } from 'vue';
+
+const { 
+  id, description, stats,
+  poster, name 
+} = inject('anime-content').value;
 
 
 const props = defineProps({
   id: {
     type: String,
-    required: true,
   },
   name: {
     type: String,
-    required: true,
   },
   poster: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
   },
   stats: {
     type: Array,
-    required: true
   }
 });
 

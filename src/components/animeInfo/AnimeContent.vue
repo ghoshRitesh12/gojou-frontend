@@ -15,22 +15,16 @@
       "
       style="filter: blur(2rem)"
       :style="`
-        background-image: url('${content.poster}');
+        background-image: url('${poster}');
       `"
     >
     </div>
     
     <AnimeInfoTab
-      :id="content.id"
-      :name="content.name"
-      :poster="content.poster"
-      :description="content.description"
-      :stats="content.stats"
       class="flex-[70%] 2xl:flex-[75%] relative z-50 xl:mb-12"
     />
 
     <AnimeMoreInfoTab
-      :info="content.moreInfo"
       class="flex-[35%] 2xl:flex-[25%] z-50"
     />
 
@@ -40,13 +34,15 @@
 
 
 <script setup>
+import { inject } from 'vue';
 import AnimeInfoTab from './AnimeInfoTab.vue';
 import AnimeMoreInfoTab from './AnimeMoreInfoTab.vue';
+
+const { poster } = inject('anime-content').value;
 
 const props = defineProps({
   animeContent: {
     type: Object,
-    required: true
   }
 })
 

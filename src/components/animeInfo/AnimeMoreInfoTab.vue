@@ -10,16 +10,19 @@
   >
 
     <AnimeMoreInfo
+      v-if="moreInfo.premiered"
       :keyname="'Premiered'"
-      :value="props.info.premiered"
+      :value="moreInfo.premiered"
     />
     <AnimeMoreInfo
+      v-if="moreInfo.status"
       :keyname="'Status'"
-      :value="props.info.status"
+      :value="moreInfo.status"
     />
     <AnimeMoreInfo
+      v-if="moreInfo.aired"
       :keyname="'Aired'"
-      :value="props.info.aired"
+      :value="moreInfo.aired"
     />
 
     <div 
@@ -28,40 +31,50 @@
     >
 
       <AnimeMoreInfo
+        v-if="moreInfo.japanese"
         :keyname="'Japanese'"
-        :value="props.info.japanese"
+        :value="moreInfo.japanese"
       />
       <AnimeMoreInfo
+        v-if="moreInfo.synonyms"
         :keyname="'Synonyms'"
-        :value="props.info.synonyms"
+        :value="moreInfo.synonyms"
       />
       <AnimeMoreInfo
+        v-if="moreInfo.malscore"
         :keyname="'MAL Score'"
-        :value="props.info.malscore"
+        :value="moreInfo.malscore"
       />
       <AnimeMoreInfo
+        v-if="moreInfo.duration"
         :keyname="'Duration'"
-        :value="props.info.duration"
+        :value="moreInfo.duration"
       />
 
     </div>
 
     <AnimeMoreInfo
+      v-if="moreInfo.producers"
       :keyname="'Producers'"
-      :value="props.info.producers"
+      :value="moreInfo.producers"
     />
     <AnimeMoreInfo
+      v-if="moreInfo.studios"
       :keyname="'Studios'"
-      :value="props.info.studios"
+      :value="moreInfo.studios"
     />
     <AnimeMoreInfo :keyname="'Genres'">
       <template #more-info>
 
         <div class="flex flex-wrap gap-1">
-          <template v-for="genre in props.info.genres.split(',')">
+          <template v-for="genre in moreInfo.genres.split(',')">
             <RouterLink 
               :to="`/genre/${genre.trim().replace(' ', '-').toLowerCase()}`"
-              class="border-[1px] border-zinc-300/50 rounded-lg px-2"
+              class="
+              border-[1px] border-zinc-300/50 
+              rounded-lg px-2 hover:text-accent-200
+              transition ease-in duration-200
+              "
             >
               {{ genre }}
             </RouterLink>
@@ -71,6 +84,10 @@
       </template>
     </AnimeMoreInfo>
 
+    <!-- <pre>
+      {{ JSON.stringify(moreInfo, null, ' ') }}
+    </pre> -->
+
 
   </div>
   
@@ -78,12 +95,14 @@
 
 
 <script setup>
+import { inject } from 'vue';
 import AnimeMoreInfo from './AnimeMoreInfo.vue';
+
+const { moreInfo } = inject('anime-content').value;
 
 const props = defineProps({
   info: {
     type: Object,
-    required: true
   }
 })
 
