@@ -21,15 +21,15 @@
         <AnimeDeck
           class="flex-auto"
           :animes="latestEpisodeAnimes"
-          :name="'Top Upcoming'"
-          :href="'top-upcoming'"
+          :name="'Latest Episode'"
+          :href="'recently-updated'"
         />
         
         <AnimeDeck
           class="flex-auto mt-12"
           :animes="upcomingAnimes"
-          :name="'Latest Episode'"
-          :href="'recently-updated'"
+          :name="'Top Upcoming'"
+          :href="'top-upcoming'"
         />
       </div>
 

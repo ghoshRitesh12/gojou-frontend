@@ -16,7 +16,7 @@
     <div class="">
       <FeatAnimeCard
         v-for="anime in slicedAnimes"
-        class="even:bg-zinc-800 px-8"
+        class="even:bg-zinc-800/60 px-8"
         :id="anime.id" 
         :name="anime.name" :jname="anime.jname"
         :poster="anime.poster" :other-info="anime.otherInfo"

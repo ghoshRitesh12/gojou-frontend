@@ -2,9 +2,14 @@
 
   <section 
     data-seasons
-    class="my-8 isolate relative"
-  >
-
+    class="
+    my-8 isolate relative z-[70]
+    after:content-[''] after:absolute after:isolate after:z-[-1]
+    after:top-[-1rem] after:right-[-2rem] after:left-[-2rem] after:bottom-[-2rem]
+    after:bg-gradient-to-b from-primary-900/50 to-transparent
+    transition ease-in duration-100
+    "
+    >
     <div 
       class="mb-6 text-accent-200"
       style="font-size: clamp(1.2rem, 3vmin, 1.58rem);"
@@ -14,7 +19,8 @@
 
 
     <div
-      class="flex gap-4 flex-wrap"
+      class="
+      flex gap-4 flex-wrap relative z-50"
     >
       <SeasonsCard
         v-for="season, index in props.seasons"
@@ -22,7 +28,7 @@
         :id="season.id" :is-current="season.isCurrent"
         :name="season.name" :poster="season.poster"
         :title="season.title"
-        class=""
+        class="z-50"
       />
     </div>
 

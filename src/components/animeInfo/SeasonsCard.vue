@@ -4,38 +4,46 @@
     :to="`/anime/info/${props.id}`"
     :title="props.name"
     class="
-    relative max-w-[12.5rem] min-w-[10rem] w-full
-    rounded-2xl overflow-hidden group inline-block
+    relative rounded-xl overflow-hidden group inline-block 
+    flex-grow py-2 xl:py-0 shadow-2xl border-[1px] 
+    min-w-[5.8rem] max-w-[7rem] sm:max-w-[12rem]
+    min-h-[4rem] max-h-[4rem] xl:min-h-[4.5rem] xl:max-h-[4.5rem]
     "
-    :class="props.isCurrent ? 'border-[1px] border-accent-200' : ''"
-  >
+    :class="props.isCurrent ? 'border-accent-200' : 'border-zinc-100/10'"
+    >
+    <!-- sm:max-w-[7rem] min-w-[5rem] md:max-w-[10rem] max-h-[7rem] -->
 
     <span
       class="
       absolute z-50 top-[50%] left-[50%] pointer-events-none
       translate-y-[-50%] translate-x-[-50%] text-center
-      text-[.95rem] overflow-hidden group-hover:text-accent-200
-      transition ease-in duration-100 leading-[1.2]
+      overflow-hidden group-hover:text-accent-200
+      transition ease-in duration-100 leading-[1.25] w-full
       "
       :class="props.isCurrent ? 'text-accent-200' : ''"
       :style="`
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        padding-inline: .65rem !important;
+        font-size: clamp(.85rem, 2vmin, .95rem);
       `"
     >
-      {{ props.title }}
+      {{ props.title }}      
     </span>
 
     <div
       class="
       bg-cover bg-center bg-no-repeat
-      pb-[40%] h-full w-full
-      opacity-40
+      h-full w-full opacity-40
+      pb-[40%]
       "
-      :style="`background-image: url('${props.poster}')`"
-      style="filter: blur(12px)"
+      :style="`
+        background-image: url('${props.poster}');
+        filter: blur(.5rem);
+        `"
     ></div>
+    <!-- padding-bottom: clamp(2.5rem, 8vmin, 4.2rem); -->
 
   </RouterLink>
 

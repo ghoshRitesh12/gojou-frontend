@@ -5,7 +5,7 @@
     relative min-h-full
     bg-white/10 mt-8 w-full xl:w-fit
     rounded-xl overflow-hidden
-    p-8
+    p-4 sm:p-6
     "
   >
 
@@ -63,17 +63,19 @@
       :keyname="'Studios'"
       :value="moreInfo.studios"
     />
-    <AnimeMoreInfo :keyname="'Genres'">
-      <template #more-info>
+    <AnimeMoreInfo 
+      :keyname="'Genres'"
+    >
+      <template #extra>
 
         <div class="flex flex-wrap gap-1">
-          <template v-for="genre in moreInfo.genres.split(',')">
+          <template v-for="genre in genres">
             <RouterLink 
-              :to="`/genre/${genre.trim().replace(' ', '-').toLowerCase()}`"
+              :to="`/genre/${genre.replace(' ', '-').toLowerCase()}`"
               class="
               border-[1px] border-zinc-300/50 
               rounded-lg px-2 hover:text-accent-200
-              transition ease-in duration-200
+              transition ease-in duration-200 py-[.15rem]
               "
             >
               {{ genre }}
@@ -84,21 +86,22 @@
       </template>
     </AnimeMoreInfo>
 
-    <!-- <pre>
-      {{ JSON.stringify(moreInfo, null, ' ') }}
-    </pre> -->
-
-
   </div>
   
 </template>
 
 
 <script setup>
-import { inject } from 'vue';
+import { inject, computed } from 'vue';
 import AnimeMoreInfo from './AnimeMoreInfo.vue';
 
-const { moreInfo } = inject('anime-content').value;
+
+const moreInfo = inject('animeMoreInfo');
+
+const genres = computed(() => moreInfo.value.genres)
+
+// console.log('Genres: ', genres());
+// console.log(props.info);
 
 const props = defineProps({
   info: {
@@ -106,23 +109,8 @@ const props = defineProps({
   }
 })
 
-// premiered
-// status
-// aired
-// -----------------
-// japanese
-// synonyms
-// mal_score
-// duration
-// ------------------
-// producers
-// studios
-// genres
-
 
 </script>
 
 
-<style>
-
-</style>
+<style></style>

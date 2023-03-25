@@ -6,9 +6,9 @@
 
       <div data-anime>
 
-        <div>
+        <div class="">
 
-          <AnimeContent/>
+          <AnimeContent />
 
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
@@ -17,7 +17,7 @@
 
         </div>
 
-        <section class="xl:flex gap-8 mt-8">
+        <section class="xl:flex gap-8 mt-8 relative isolate z-50">
 
           <AnimeDeck
             :name="'Animes you may like'"
@@ -75,7 +75,8 @@ const mostPopularAnimes = ref([]);
 const recommendedAnimes = ref([]);
 
 const animeSeasons = ref([]);
-const animeContent = ref({});
+const animeInfo = ref({});
+const animeMoreInfo = ref({});
 
 const getAnimeInfo = async () => {
   try {
@@ -86,19 +87,19 @@ const getAnimeInfo = async () => {
     mostPopularAnimes.value = data.mostPopularAnimes;
     recommendedAnimes.value = data.recommendedAnimes;
 
-    animeSeasons.value = data.seasons;
-    animeContent.value = data.anime;
+    animeSeasons.value = data.anime.seasons;
+    animeInfo.value = data.anime.info;
+    animeMoreInfo.value = data.anime.moreInfo;
      
-    // return animeContent;
-    // console.log(animeContent.value);
     
   } catch (err) {
     console.log(err);
   }
 }
 
-provide('anime-content', animeContent);
 getAnimeInfo()
+provide('animeInfo', animeInfo);
+provide('animeMoreInfo', animeMoreInfo);
 
 </script>
 

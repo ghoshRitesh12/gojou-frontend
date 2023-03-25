@@ -1,26 +1,21 @@
 <template>
 
-  <div class="flex items-start mb-2 text-[.92rem]">
+  <div class="mb-2">
 
-    <span class="inline-block mr-2 flex-shrink-0">
+    <span class="inline-block mr-2 float-left text-[.92rem] font-extrabold">
       {{ props.keyname }}:
     </span>
 
     <span 
-      class="leading-[1.2] overflow-hidden mt-1" 
-      style="word-spacing: .2rem;"
-      :style="`
-        display: -webkit-box; 
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-      `"
+      class="inline-block leading-[1.2] break-words text-[.92rem]" 
+      style="word-spacing: .1rem;"
       :title="props.value"
     >
 
       <template v-if="props.value">
         {{ props.value }}
       </template>
-      <slot v-if="!props.value" name="more-info"></slot>
+      <slot v-if="!props.value" name="extra"></slot>
 
     </span>
 

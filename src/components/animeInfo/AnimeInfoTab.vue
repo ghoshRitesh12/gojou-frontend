@@ -10,10 +10,9 @@
       class="
       flex-shrink-0 flex-grow-0 max-w-[12rem] 
       overflow-hidden shadow-xl rounded-xl relative h-fit
-      mt-3
       "
     >
-      <img class="w-full rounded-xl" :src="poster" :alt="name">
+      <img class="w-full rounded-xl" :src="info.poster" :alt="info.name">
     </div>
 
 
@@ -22,17 +21,17 @@
       <div>
 
         <div
-          class="text-white"
+          class="text-white leading-[1.2]"
           style="font-size: clamp(1.7rem, 4vmin, 2.2rem)"
         >
-          {{ name }}
+          {{ info.name }}
         </div>
 
-        <div class="text-neutral-200 text-[.88rem] md:text-base mt-2">
-          <template v-for="info, index in stats">
-            <span class="whitespace-nowrap inline-block"> {{ info }} </span>
+        <div class="text-neutral-300 text-[.88rem] md:text-base mt-2">
+          <template v-for="stat, index in info.stats">
+            <span class="whitespace-nowrap inline-block"> {{ stat }} </span>
             <Icon
-              v-if="index !== stats.length - 1"
+              v-if="index !== info.stats.length - 1"
               :icon="'bi:dot'" 
               class="text-lg inline-block"
             />
@@ -42,9 +41,21 @@
       </div>
 
       <div 
-        class="flex items-center gap-3 md:gap-4 my-8 w-fit mx-auto md:w-full" 
+        class="flex items-center gap-4 my-8 w-fit mx-auto md:w-full" 
         style="font-size: clamp(.85rem, 2.5vmin, 1rem)"
       >
+        <button 
+          class="
+          flex items-center gap-1 text-primary-900
+          py-2 px-3 rounded-2xl shadow-lg
+          bg-zinc-100 hover:bg-zinc-300
+          transition ease-in duration-100"
+          type="button"
+        >
+          <Icon icon="ic:round-add" class="text-lg"/>
+          Add to Favorites
+        </button>
+
         <button 
           class="
           flex items-center gap-1
@@ -57,19 +68,6 @@
           Watch
         </button>
 
-        <button 
-          class="
-          flex items-center gap-1 text-primary-900
-          py-2 px-3 rounded-2xl shadow-lg
-          bg-zinc-100 hover:bg-zinc-300
-          transition ease-in duration-100"
-          type="button"
-          @click="goToAnime(id)"
-        >
-          <Icon icon="ic:round-add" class="text-lg"/>
-          Add to Favorites
-        </button>
-
       </div>
 
       <div 
@@ -78,7 +76,6 @@
         leading-[1.2] xl:leading-[1.4] font-thin
         max-w-[70ch] xl:overflow-hidden
         anime-description pr-2
-
         "
         :style="`
           display: -webkit-box;
@@ -86,7 +83,7 @@
           -webkit-box-orient: vertical;
         `"
       >
-        {{ description }}
+        {{ info.description }}
       </div>
 
     </div>
@@ -98,12 +95,11 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
-import { inject } from 'vue';
+import { inject, computed } from 'vue';
 
-const { 
-  id, description, stats,
-  poster, name 
-} = inject('anime-content').value;
+const animeInfo = inject('animeInfo');
+
+const info = computed(() => animeInfo.value)
 
 
 const props = defineProps({
