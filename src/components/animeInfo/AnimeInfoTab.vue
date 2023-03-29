@@ -18,7 +18,7 @@
 
     <div data-info class="text-center md:text-left">
 
-      <div>
+      <div class="font-semibold">
 
         <div
           class="text-white leading-[1.2]"
@@ -41,7 +41,10 @@
       </div>
 
       <div 
-        class="flex items-center gap-4 my-8 w-fit mx-auto md:w-full" 
+        class="
+        flex items-center gap-4 my-8 w-fit 
+        mx-auto md:w-full font-semibold
+        " 
         style="font-size: clamp(.85rem, 2.5vmin, 1rem)"
       >
         <button 
@@ -71,19 +74,26 @@
       </div>
 
       <div 
-        class="text-[.95rem] text-left 
+        class="
+        text-[.95rem] text-left
         max-h-[7rem] xl:max-h-fit overflow-auto
-        leading-[1.2] xl:leading-[1.4] font-thin
-        max-w-[70ch] xl:overflow-hidden
+        leading-[1.2] xl:leading-[1.4]
+        max-w-[75ch] xl:overflow-hidden
         anime-description pr-2
         "
-        :style="`
-          display: -webkit-box;
-          -webkit-line-clamp: 14; 
-          -webkit-box-orient: vertical;
-        `"
       >
-        {{ info.description }}
+        <span class="xl:inline hidden">{{ description }}</span>
+        <span class="xl:hidden inline">{{ info.description }}</span>
+        <span 
+          class="
+          hidden xl:inline ml-[.1rem]
+          font-semibold cursor-pointer
+          "
+          @click="showMoreDescription"
+          v-if="info.description?.length > 500"
+        >
+          ...<span>{{ showDescText }}</span>
+        </span>
       </div>
 
     </div>
@@ -95,12 +105,7 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
-import { inject, computed } from 'vue';
-
-const animeInfo = inject('animeInfo');
-
-const info = computed(() => animeInfo.value)
-
+import { inject, computed, ref } from 'vue';
 
 const props = defineProps({
   id: {
@@ -120,6 +125,27 @@ const props = defineProps({
   }
 });
 
+
+const animeInfo = inject('animeInfo');
+const info = computed(() => animeInfo.value)
+
+const minCharNum = 500;
+const maxChar = ref(minCharNum);
+
+const description = computed(() => info.value.description?.slice(0, maxChar.value));
+const descriptionLength = computed(() => info.value.description?.length)
+
+const showDescText = ref('More');
+
+const showMoreDescription = () => {
+  if(showDescText.value.includes('More')) {
+    showDescText.value = 'Less'
+    maxChar.value = descriptionLength.value;
+    return;
+  }
+  showDescText.value = 'More'
+  maxChar.value = minCharNum;
+}
 
 
 </script>

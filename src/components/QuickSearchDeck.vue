@@ -22,7 +22,7 @@
       flex items-center justify-center
       bg-accent-300 w-full text-center py-2
       rounded-xl text-primary-900 hover:bg-accent-200
-      transition ease-in duration-100
+      transition ease-in duration-100 font-semibold
       " 
       type="button"
       @click="resultsClick"

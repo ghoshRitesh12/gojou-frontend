@@ -77,6 +77,7 @@
               rounded-lg px-2 hover:text-accent-200
               transition ease-in duration-200 py-[.15rem]
               "
+              :title="genre"
             >
               {{ genre }}
             </RouterLink>

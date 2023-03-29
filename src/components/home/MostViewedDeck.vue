@@ -4,7 +4,7 @@
     class=""
   >
 
-    <div class="text-accent-200 text-2xl mb-4">
+    <div class="text-accent-200 text-2xl mb-4 font-semibold">
       Most Viewed
     </div>
 

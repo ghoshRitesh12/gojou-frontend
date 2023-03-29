@@ -3,7 +3,7 @@
   <div data-feat-card
     class="
     flex items-center relative w-full 
-    mx-auto px-4 py-3 rounded-md
+    mx-auto px-4 py-3 rounded-md font-semibold
     "
   >
 
@@ -40,7 +40,7 @@
       </RouterLink>
 
       <div
-        class="overflow-hidden align-middle text-sm text-zinc-400 verti"
+        class="overflow-hidden font-semibold align-middle text-sm text-zinc-400 verti"
         style="
           display: -webkit-box; -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;

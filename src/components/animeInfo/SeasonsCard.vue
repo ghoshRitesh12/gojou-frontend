@@ -17,7 +17,7 @@
       class="
       absolute z-50 top-[50%] left-[50%] pointer-events-none
       translate-y-[-50%] translate-x-[-50%] text-center
-      overflow-hidden group-hover:text-accent-200
+      overflow-hidden group-hover:text-accent-200 font-semibold
       transition ease-in duration-100 leading-[1.25] w-full
       "
       :class="props.isCurrent ? 'text-accent-200' : ''"

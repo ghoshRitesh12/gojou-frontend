@@ -9,6 +9,7 @@
       class="
       text-2xl text-accent-200 rounded-xl
       pl-4 pb-3 shadow-zinc-800 shadow-sm
+      font-semibold
       "
     >
       Genres

@@ -18,9 +18,9 @@
 
     <Navbar/>
 
-    <AnimeCategoryNav
+    <!-- <AnimeCategoryNav
       class="border-t-[1px] border-zinc-800 mt-8"
-    />
+    /> -->
 
   </aside>
 

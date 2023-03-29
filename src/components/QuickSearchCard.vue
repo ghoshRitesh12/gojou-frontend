@@ -3,18 +3,19 @@
   <div 
     class="
     flex p-4 group hover:bg-zinc-800
-    cursor-pointer rounded-xl relative
-    transition ease-in duration-100 overflow-hidden
+    rounded-xl relative overflow-hidden
+    transition ease-in duration-100
     "
+    :class="props.id ? 'cursor-pointer' : ''"
   >
 
     <div 
       class="
       rounded-lg overflow-hidden max-w-[3rem] max-h-[4.5rem]
       "
+      v-if="props.poster"
     >
       <img 
-        v-if="props.poster"
         :src="props.poster" 
         :alt="props.name"
         class="h-full w-full" 
@@ -24,23 +25,25 @@
     <div class="pl-3">
       <p
         class="
-        overflow-hidden text-base group-hover:text-accent-200
-        transition ease-in duration-100 cursor-pointer leading-[1.1]
+        overflow-hidden text-base leading-[1.17]
+        transition ease-in duration-100
         "
-        style="
-          display: -webkit-box; -webkit-line-clamp: 2;
+        :class="props.id ? 'group-hover:text-accent-200 mb-1' : ''"
+        :style="`
+          display: -webkit-box; 
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
-        "
+        `"
       >
         {{ props.name }}
       </p>
 
-      <div class="flex items-center text-[.8rem] mt-1">
+      <div class="flex items-center text-[.8rem]">
         <template v-for="info, index in props.moreInfo">
 
           <span 
             class="
-            text-neutral-400 whitespace-nowrap
+            text-neutral-400 whitespace-nowrap font-semibold
             "
           > 
             {{ info }} 

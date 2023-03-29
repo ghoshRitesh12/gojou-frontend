@@ -11,7 +11,7 @@
     "
     >
     <div 
-      class="mb-6 text-accent-200"
+      class="mb-6 text-accent-200 font-semibold"
       style="font-size: clamp(1.2rem, 3vmin, 1.58rem);"
     >
       More Seasons

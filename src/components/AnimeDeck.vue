@@ -7,7 +7,7 @@
       class="flex items-center pb-6"
     >
       <p 
-        class="text-accent-200"
+        class="text-accent-200 font-semibold"
         style="font-size: clamp(1.2rem, 3vmin, 1.7rem);"
       >
         {{ props.name }}
@@ -48,11 +48,8 @@
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
 import AnimeCard from './AnimeCard.vue';
-
-const { goToCategory } = goToRoute();
 
 const props = defineProps({
   animes: {
@@ -86,13 +83,13 @@ const testObj = {
 
   @media (min-width: 768px) {
     .card-wrap {
-      --min-size: 11rem;
+      --min-size: 10rem;
     }
   }
 
   @media (min-width: 1024px) {
     .card-wrap {
-      --min-size: 12rem;
+      --min-size: 11.5rem;
     }
   }
 

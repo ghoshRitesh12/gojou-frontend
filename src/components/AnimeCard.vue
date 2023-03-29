@@ -28,7 +28,7 @@
       </span>
       <span v-if="info.episodes"
         class="
-        absolute bottom-[1rem] right-[.7rem]
+        absolute bottom-[.5rem] right-[.7rem]
         bg-[hsla(0,0%,0%,.7)] py-[.2rem] px-2
         rounded-lg text-sm shadow-md z-50
         "
@@ -61,9 +61,11 @@
         transition ease-in duration-100 h-[37px]
         "
         :title="info.name"
-        style="
-          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-        "
+        :style="`
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        `"
         :to="`/anime/info/${info.id}`"
       >
         {{ info.name }}
@@ -71,14 +73,14 @@
 
       <div 
         class="
-        mt-2 w-full text-sm select-none text-neutral-400
+        mt-2 w-full text-sm select-none text-neutral-400 font-semibold
         "
-        style="
+        :style="`
           display: -webkit-box;
           -webkit-line-clamp: 1;
           -webkit-box-orient: vertical;
           overflow: hidden;
-        "
+        `"
       >
         <span 
           v-if="info.type" 

@@ -4,7 +4,7 @@
     v-if="!(!props.hasNextPage && props.totalPages <= 1)"
     class="
     flex items-center gap-2 flex-wrap
-    my-16 mx-auto w-fit
+    my-16 mx-auto w-fit font-semibold
     "
   >
     <RouterLink

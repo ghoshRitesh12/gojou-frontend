@@ -61,7 +61,7 @@
 
 
 <script setup>
-import { ref, provide } from 'vue';
+import { ref, provide, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
@@ -69,6 +69,8 @@ import SeasonsDeck from '@/components/animeInfo/SeasonsDeck.vue';
 import AnimeContent from '@/components/animeInfo/AnimeContent.vue';
 
 const route = useRoute();
+
+const animeId = ref(route.params.animeId)
 
 const relatedAnimes = ref([]);
 const mostPopularAnimes = ref([]);
@@ -78,9 +80,9 @@ const animeSeasons = ref([]);
 const animeInfo = ref({});
 const animeMoreInfo = ref({});
 
-const getAnimeInfo = async () => {
+const getAnimeInfo = async (animeId) => {
   try {
-    const resp = await fetch(`http://localhost:5000/api/v1/info?id=${route.params.animeId}`);
+    const resp = await fetch(`http://localhost:5000/api/v1/info?id=${animeId}`);
     const data = await resp.json();
 
     relatedAnimes.value = data.relatedAnimes;
@@ -97,7 +99,7 @@ const getAnimeInfo = async () => {
   }
 }
 
-getAnimeInfo()
+getAnimeInfo(animeId.value)
 provide('animeInfo', animeInfo);
 provide('animeMoreInfo', animeMoreInfo);
 

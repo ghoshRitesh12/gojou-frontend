@@ -3,7 +3,7 @@
   <div data-most-viewed-card
     class="
     group flex items-center px-4 pb-5
-
+    font-semibold
     "
   >
 

@@ -6,6 +6,7 @@ import AnimeCategoryView from '../views/AnimeCategoryView.vue';
 import GenreView from '../views/GenreView.vue';
 import SearchView from '../views/SearchView.vue';
 import AnimeInfoView from '../views/AnimeInfoView.vue';
+import ExploreView from '../views/ExploreView.vue';
 
 const routes = [
   {
@@ -27,6 +28,12 @@ const routes = [
     path: '/anime/:animeCategory',
     name: 'anime-category',
     component: AnimeCategoryView
+  },
+  {
+    // path: '/explore/:exploreCategory',
+    path: '/explore',
+    name: 'explore',
+    component: ExploreView
   },
   {
     path: '/genre/:genreName',
