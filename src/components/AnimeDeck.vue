@@ -8,7 +8,7 @@
     >
       <p 
         class="text-accent-200 font-semibold"
-        style="font-size: clamp(1.2rem, 3vmin, 1.7rem);"
+        style="font-size: clamp(1.3rem, 3vmin, 1.7rem);"
       >
         {{ props.name }}
       </p>
@@ -31,11 +31,12 @@
     <div 
       class="grid gap-3 md:gap-4 transition ease-in duration-100 card-wrap" 
       style="grid-template-columns: repeat(auto-fit, minmax(var(--min-size, 9rem), 1fr));"
+      :style="'transition: .5s ease-in all'"
       >
       <AnimeCard 
         v-for="anime in props.animes"
         :info="anime"
-        class="mx-auto"
+        :class="props.animes.length >= 4 ? 'max-auto' : ''"
       />
     </div>
     

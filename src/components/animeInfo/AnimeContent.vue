@@ -34,19 +34,28 @@
 
 
 <script setup>
-import { inject, computed } from 'vue';
+import { provide, ref } from 'vue';
 import AnimeInfoTab from './AnimeInfoTab.vue';
 import AnimeMoreInfoTab from './AnimeMoreInfoTab.vue';
-
-const animeInfo = inject('animeInfo');
-
-const poster = computed(() => animeInfo.value.poster);
 
 const props = defineProps({
   content: {
     type: Object,
   }
 })
+
+const animeInfo = ref({});
+const animeMoreInfo = ref({});
+
+const poster = props.content.info.poster;
+
+animeInfo.value = props.content.info;
+animeMoreInfo.value = props.content.moreInfo;
+
+provide('animeInfo', animeInfo)
+provide('animeMoreInfo', animeMoreInfo)
+
+
 
 
 </script>

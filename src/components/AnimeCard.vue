@@ -4,6 +4,7 @@
     class="shadow-lg max-w-[17rem] min-w-[9rem] w-full
     relative rounded-xl overflow-hidden
     bg-zinc-900 break-words
+    transition ease-in duration-100
     "
   >
 

@@ -8,7 +8,10 @@
 
         <div class="">
 
-          <AnimeContent />
+          <AnimeContent
+            v-if="Object.keys(animeContent).length > 0"
+            :content="animeContent"
+          />
 
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
@@ -17,7 +20,7 @@
 
         </div>
 
-        <section class="xl:flex gap-8 mt-8 relative isolate z-50">
+        <section class="xl:flex gap-10 mt-8 relative isolate z-50">
 
           <AnimeDeck
             :name="'Animes you may like'"
@@ -61,47 +64,48 @@
 
 
 <script setup>
-import { ref, provide, computed } from 'vue';
+import { ref, provide } from 'vue';
 import { useRoute } from 'vue-router';
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
 import SeasonsDeck from '@/components/animeInfo/SeasonsDeck.vue';
 import AnimeContent from '@/components/animeInfo/AnimeContent.vue';
+import AnimeAPI from '@/services/animeAPI.js';
 
 const route = useRoute();
-
-const animeId = ref(route.params.animeId)
 
 const relatedAnimes = ref([]);
 const mostPopularAnimes = ref([]);
 const recommendedAnimes = ref([]);
 
 const animeSeasons = ref([]);
-const animeInfo = ref({});
-const animeMoreInfo = ref({});
+const animeContent = ref({});
+// const animeInfo = ref({});
+// const animeMoreInfo = ref({});
 
-const getAnimeInfo = async (animeId) => {
+
+const getData = async () => {
   try {
-    const resp = await fetch(`http://localhost:5000/api/v1/info?id=${animeId}`);
-    const data = await resp.json();
+    const { data } = await AnimeAPI.getAnimeInfo(route.params.animeId);
 
     relatedAnimes.value = data.relatedAnimes;
-    mostPopularAnimes.value = data.mostPopularAnimes;
     recommendedAnimes.value = data.recommendedAnimes;
+    mostPopularAnimes.value = data.mostPopularAnimes;
 
-    animeSeasons.value = data.anime.seasons;
-    animeInfo.value = data.anime.info;
-    animeMoreInfo.value = data.anime.moreInfo;
-     
-    
+    animeSeasons.value = data.seasons;
+    animeContent.value = data.anime;
+
+
+
   } catch (err) {
     console.log(err);
   }
 }
 
-getAnimeInfo(animeId.value)
-provide('animeInfo', animeInfo);
-provide('animeMoreInfo', animeMoreInfo);
+getData()
+// provide('animeInfo', animeInfo)
+// provide('animeMoreInfo', animeMoreInfo)
+
 
 </script>
 

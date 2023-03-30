@@ -1,7 +1,7 @@
 <template>
   <main class="
     min-h-full
-    flex-[75%] pb-8
+    flex-[75%] pb-8 xl:pb-12
     bg-primary-900 text-gray-100
   ">
     <Titlebar/>

@@ -42,7 +42,7 @@ import { Icon } from '@iconify/vue';
 import { ref, onMounted, onBeforeMount } from 'vue';
 
 const currentSlide = ref(0);
-const slideCount = ref(null);
+const slideCount = ref(0);
 const interval = ref(null);
 const intervalTime = ref(3500);
 

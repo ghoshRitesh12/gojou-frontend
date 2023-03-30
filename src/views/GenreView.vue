@@ -53,6 +53,7 @@ import AnimeDeck from '@/components/AnimeDeck.vue';
 import Pagination from '@/components/Pagination.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
 import GenreDeck from '@/components/home/GenreDeck.vue';
+import AnimeAPI from '@/services/animeAPI';
 
 const route = useRoute();
 
@@ -76,8 +77,7 @@ const genreName = computed(() => {
 
 const getGenres = async () => {
   try {
-    const resp = await fetch(`http://localhost:5000/api/v1/genre?name=${route.params.genreName}`);
-    const data = await resp.json();
+    const { data } = await AnimeAPI.getGenreAnime(route.params.genreName);
 
     genreAnimes.value = data.animes;
     allGenres.value = data.genres;

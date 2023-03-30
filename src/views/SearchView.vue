@@ -21,7 +21,7 @@
           </template>
         </AnimeDeck>
 
-        <div class="flex-[25%]">
+        <div class="flex-[25%] mt-8 xl:mt-16">
           <FeatAnimeDeck
             :name="'Most Popular'"
             :animes="mostPopularAnimes"

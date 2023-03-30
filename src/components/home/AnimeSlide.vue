@@ -22,36 +22,38 @@
       pl-5 md:pl-8 pr-32"
     >
       <div 
-        class="text-accent-200" 
+        class="text-accent-200 font-semibold" 
         style="font-size: clamp(.9rem, 4vmin, 1.15rem);"
       >
         #{{ props.rank }} {{ props.category }}
       </div>
 
       <p 
-        class=" break-words max-w-[30ch] md:mb-2" 
-        style="
-        display: -webkit-box; -webkit-line-clamp: 3; 
-        -webkit-box-orient: vertical; overflow: hidden;
-        font-size: clamp(1.15rem, 4vmin, 2.5rem);
-        line-height: 1.05;"
+        class=" break-words max-w-[30ch] md:mb-2 leading-[1.05] font-semibold overflow-hidden" 
+        :style="`
+          display: -webkit-box; -webkit-line-clamp: 3; 
+          -webkit-box-orient: vertical;
+          font-size: clamp(1.15rem, 4vmin, 2.5rem);
+        `"
       >
         {{ props.name }}
       </p>
 
       <p 
-        class="max-w-[95ch] leading-4 md:leading-normal" 
-        style="
-        display: -webkit-box; -webkit-line-clamp: 3; 
-        -webkit-box-orient: vertical; overflow: hidden;
-        font-size: clamp(.8rem, 2.5vmin, 1rem)"
+        class="max-w-[95ch] leading-4 md:leading-normal overflow-hidden" 
+        :style="`
+          display: -webkit-box; 
+          -webkit-line-clamp: 3; 
+          -webkit-box-orient: vertical;
+          font-size: clamp(.8rem, 2.5vmin, 1rem)
+        `"
       >
         {{ props.description }}
       </p>
 
 
       <div 
-        class="flex items-center gap-3 md:gap-4 md:mt-2" 
+        class="flex items-center gap-3 md:gap-4 md:mt-2 font-semibold" 
         style="font-size: clamp(.78rem, 2.5vmin, 1rem)"
       >
         <button 
@@ -62,20 +64,21 @@
           transition ease-in duration-100"
           type="button"
         >
-          <Icon icon="material-symbols:play-arrow-rounded" />
+          <Icon icon="material-symbols:play-arrow-rounded" class="text-lg" />
           Watch
         </button>
-
-        <button 
-          class="shadow-lg
-          py-2 px-3 rounded-2xl
-          bg-zinc-700 hover:bg-zinc-600
-          transition ease-in duration-100"
-          type="button"
-          @click="goToAnime(props.id)"
+        
+        <RouterLink 
+        class="
+        flex items-center gap-1
+        py-2 px-3 rounded-2xl shadow-lg
+        bg-zinc-700 hover:bg-zinc-600
+        transition ease-in duration-100"
+        type="button"
+        :to="`/anime/info/${props.id}`"
         >
           Details
-        </button>
+        </RouterLink>
 
       </div>
     </div>
@@ -86,10 +89,7 @@
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
-
-const { goToAnime } = goToRoute()
 
 const props = defineProps({
   rank: {

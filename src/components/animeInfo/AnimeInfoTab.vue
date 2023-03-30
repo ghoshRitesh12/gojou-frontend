@@ -86,7 +86,7 @@
         <span class="xl:hidden inline">{{ info.description }}</span>
         <span 
           class="
-          hidden xl:inline ml-[.1rem]
+          hidden xl:inline ml-[.1rem] text-zinc-300/90
           font-semibold cursor-pointer
           "
           @click="showMoreDescription"
@@ -135,15 +135,15 @@ const maxChar = ref(minCharNum);
 const description = computed(() => info.value.description?.slice(0, maxChar.value));
 const descriptionLength = computed(() => info.value.description?.length)
 
-const showDescText = ref('More');
+const showDescText = ref('Read more');
 
 const showMoreDescription = () => {
-  if(showDescText.value.includes('More')) {
-    showDescText.value = 'Less'
+  if(showDescText.value.includes('more')) {
+    showDescText.value = 'Show less'
     maxChar.value = descriptionLength.value;
     return;
   }
-  showDescText.value = 'More'
+  showDescText.value = 'Read more'
   maxChar.value = minCharNum;
 }
 

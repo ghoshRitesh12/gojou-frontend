@@ -79,20 +79,16 @@ import { Icon } from '@iconify/vue';
 const props = defineProps({
   id: {
     type: String,
-    required: true,
     default: null
   },
   name: {
     type: String,
-    required: true
   },
   poster: {
     type: String,
-    required: true
   },
   moreInfo: {
     type: Array,
-    required: true
   },
 
 })
