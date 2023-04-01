@@ -13,4 +13,7 @@ export default {
   getGenreAnime(genreName) {
     return API().get(`/api/v1/genre?name=${genreName}`)
   },
+  getEpisodeSource(epId, server, subOrDub) {
+    return API().get(`/api/v1/watch-episode?episodeId=${epId}&server=${server}&subOrDub=${subOrDub}`)
+  },
 }

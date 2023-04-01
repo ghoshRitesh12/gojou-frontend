@@ -21,7 +21,7 @@
       <div class="font-semibold">
 
         <div
-          class="text-white leading-[1.2]"
+          class="text-white leading-[1.2] max-w-[30ch]"
           style="font-size: clamp(1.7rem, 4vmin, 2.2rem)"
         >
           {{ info.name }}
@@ -66,6 +66,7 @@
           hover:bg-accent-200 rounded-2xl text-primary-900
           transition ease-in duration-100"
           type="button"
+          @click="router.push('/room/6234181754377342')"
         >
           <Icon icon="material-symbols:play-arrow-rounded" class="text-lg" />
           Watch
@@ -76,7 +77,7 @@
       <div 
         class="
         text-[.95rem] text-left
-        max-h-[7rem] xl:max-h-fit overflow-auto
+        max-h-[7rem] sm:max-h-[9rem] xl:max-h-fit overflow-auto
         leading-[1.2] xl:leading-[1.4]
         max-w-[75ch] xl:overflow-hidden
         anime-description pr-2
@@ -90,7 +91,7 @@
           font-semibold cursor-pointer
           "
           @click="showMoreDescription"
-          v-if="info.description?.length > 500"
+          v-if="info.description?.length > minCharNum"
         >
           ...<span>{{ showDescText }}</span>
         </span>
@@ -104,8 +105,11 @@
 
 
 <script setup>
+import { useRouter } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import { inject, computed, ref } from 'vue';
+
+const router = useRouter();
 
 const props = defineProps({
   id: {
@@ -129,7 +133,7 @@ const props = defineProps({
 const animeInfo = inject('animeInfo');
 const info = computed(() => animeInfo.value)
 
-const minCharNum = 500;
+const minCharNum = 550;
 const maxChar = ref(minCharNum);
 
 const description = computed(() => info.value.description?.slice(0, maxChar.value));

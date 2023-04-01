@@ -3,7 +3,7 @@
   <div 
     class="
     relative min-h-full
-    bg-white/10 mt-8 w-full xl:w-fit
+    bg-white/10 w-full xl:w-fit
     rounded-xl overflow-hidden
     p-4 sm:p-6
     "
@@ -68,12 +68,12 @@
     >
       <template #extra>
 
-        <div class="flex flex-wrap gap-1">
+        <div class="flex flex-wrap gap-1 items-center align-middle">
           <template v-for="genre in genres">
             <RouterLink 
               :to="`/genre/${genre.replace(' ', '-').toLowerCase()}`"
               class="
-              border-[1px] border-zinc-300/50 
+              border-[1px] border-zinc-300/50 align-middle
               rounded-lg px-2 hover:text-accent-200
               transition ease-in duration-200 py-[.15rem]
               "

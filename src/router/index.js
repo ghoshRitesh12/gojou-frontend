@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue';
 import FavoritesView from '../views/FavoritesView.vue';
 import RoomsView from '../views/RoomsView.vue';
+import RoomView from '../views/RoomView.vue';
 import AnimeCategoryView from '../views/AnimeCategoryView.vue';
 import GenreView from '../views/GenreView.vue';
 import SearchView from '../views/SearchView.vue';
@@ -49,6 +50,11 @@ const routes = [
     path: '/rooms',
     name: 'rooms',
     component: RoomsView
+  },
+  {
+    path: '/room/:roomId',
+    name: 'room',
+    component: RoomView
   },
 ]
 

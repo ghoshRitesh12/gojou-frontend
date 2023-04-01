@@ -36,6 +36,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   isolation: isolate;
+  background-color: #0c0c0c;
 }
 
 a {

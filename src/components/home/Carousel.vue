@@ -41,10 +41,18 @@
 import { Icon } from '@iconify/vue';
 import { ref, onMounted, onBeforeMount } from 'vue';
 
+const props = defineProps({
+  slides: {
+    type: Number
+  }
+})
+
 const currentSlide = ref(0);
 const slideCount = ref(0);
 const interval = ref(null);
 const intervalTime = ref(3500);
+
+slideCount.value = props.slides;
 
 const nextSlide = () => {
   currentSlide.value = (currentSlide.value === slideCount.value - 1) ? 0 : currentSlide.value + 1;
@@ -64,10 +72,7 @@ function autoPlay() {
   }, intervalTime.value)
 }
 
-onMounted(() => {
-  slideCount.value = document.querySelectorAll("[data-slide]").length
-  autoPlay()
-})
+onMounted(() => autoPlay())
 
 onBeforeMount(() => clearInterval(interval));
 

@@ -21,7 +21,7 @@
     </div>
     
     <AnimeInfoTab
-      class="flex-[70%] 2xl:flex-[75%] relative z-50 xl:mb-12"
+      class="flex-[70%] 2xl:flex-[75%] relative z-50 mb-12 xl:mb-0"
     />
 
     <AnimeMoreInfoTab

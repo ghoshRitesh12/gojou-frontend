@@ -9,7 +9,7 @@
 
     <p
       class="
-      text-accent-200 text-xl w-fit
+      text-accent-200 text-xl w-fit font-semibold
       "
     >
       Trending Animes

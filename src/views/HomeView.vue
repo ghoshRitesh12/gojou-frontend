@@ -4,7 +4,12 @@
     <template #default>
 
       <div>
-        <Carousel class="relative md:flex-grow" #default="{ currentSlide }">
+        <Carousel 
+          v-if="spotlightAnimes.length > 0"
+          #default="{ currentSlide }" 
+          :slides="spotlightAnimes.length"
+          class="relative md:flex-grow" 
+        >
           <Slide v-for="anime, index in spotlightAnimes" :key="index">
             <AnimeSlide
               v-show="currentSlide === index"
@@ -56,7 +61,7 @@
 
             <MostViewedDeck
               class="mt-8"
-              :all-animes="mostViewedAnime"
+              :all-animes="mostViewedAnimes"
             />
 
           </div>
@@ -92,8 +97,9 @@ const trendingAnimes = ref([]);
 const topUpcomingAnimes = ref([]);
 const topAiringAnimes = ref([]);
 const latestEpisodeAnimes = ref([]);
-const mostViewedAnime = ref({});
+const mostViewedAnimes = ref({});
 const genres = ref([]);
+
 
 const getData = async () => {
   try {
@@ -104,9 +110,8 @@ const getData = async () => {
     topUpcomingAnimes.value = data.topUpcomingAnimes;
     topAiringAnimes.value = data.topAiringAnimes;
     latestEpisodeAnimes.value = data.latestEpisodeAnimes;
-    mostViewedAnime.value = data.mostViewedAnime;
+    mostViewedAnimes.value = data.mostViewedAnimes;
     genres.value = data.genres;
-
 
   } catch (err) {
     console.log(err);
