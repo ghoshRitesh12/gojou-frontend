@@ -3,7 +3,8 @@
   <Suspense>
     <template #default>
 
-      <div>
+      <div class="px-4 lg:px-6 py-4">
+
         <Carousel 
           v-if="spotlightAnimes.length > 0"
           #default="{ currentSlide }" 

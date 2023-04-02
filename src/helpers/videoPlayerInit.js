@@ -67,12 +67,19 @@ const initVideoPlayer = (initOptions) => {
     const plyrOptions = getPlyrOptions(hls);
 
     const plyr = new Plyr(videoElement, plyrOptions);
+    
+    // console.log(plyr.fullscreen.active);
+
 
     videoWrapper.addEventListener('keydown', e => {
-      if(e.key === " ") {
+      if(e.key === " " && !document.fullscreenElement) {
         e.preventDefault();
         plyr.togglePlay();
       }
+    })
+
+    document.addEventListener('fullscreenchange', e => {
+      console.log(plyr.fullscreen.active);
     })
      
   })

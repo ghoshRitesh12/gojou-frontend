@@ -1,15 +1,28 @@
 <template>
 
   <div 
-    data-video
+    data-video-container
     class="
-    max-w-[60rem] aspect-video
-    rounded-lg overflow-hidden
-    bg-transparent
+    w-full aspect-[16/9] md:aspect-auto
+    rounded-sm overflow-hidden
+    bg-transparent relative
     "
     style="font-family: sans-serif;"
     ref="videoWrapper"
   >
+
+      <div
+        class="
+        absolute top-0 bg-white/50 isolate
+        bg-cover bg-center bg-no-repeat z-[-1]
+        w-full h-full opacity-[.4] scale-[1.15]
+        "
+        style="filter: blur(4rem)"
+        :style="`
+          background-image: url('https://img.zorores.com/_r/300x400/100/5d/b4/5db400c33f7494bc8ae96f9e634958d0/5db400c33f7494bc8ae96f9e634958d0.jpg');
+        `"
+      >
+      </div>
 
     <video 
       v-if="!props.iframe"
@@ -17,9 +30,9 @@
       crossorigin="anonymous"
       :style="videoInlineStyles"
       class="
-      
-      max-w-full w-full aspect-video rounded-lg
-      video-js
+      rounded-sm
+      max-w-full w-full aspect-[16/9] md:aspect-auto
+      video-js 
       "
     >
     </video>
@@ -31,15 +44,13 @@
       allowfullscreen mozallowfullscreen webkitallowfullscreen
       :src="props.iframeSrc || 'https://www.youtube-nocookie.com/embed/uuZE_IRwLNI'"
       class="
-      max-w-full w-full rounded-lg
+      max-w-full w-full rounded-sm
       plyr__video-embed
       "
       >
     </iframe>
 
     
-
-
   </div>
 
 
@@ -70,7 +81,7 @@ const props = defineProps({
 
 
 
-onMounted(async () => {
+onMounted(() => {
   const autoSrc = 'https://tc-1.dayimage.net/_v6/1ee9ea68e2568f86e51d18fdc2318e396c722121ef80d08b888715273c529a29069caec322204eb14889cdf9f55f30f3948c0fd0819ff2fa2b358227d5f7a2acf723f45bf3d83e765c9abec9bddea693becd07c8ff053c0491aef7406c3ebd46ce22422c871992349035e28ff75be894827596c0b1cf616499f2bbb8ead062af/master.m3u8';
   const closedCaptions = [
     {
@@ -126,9 +137,6 @@ onMounted(async () => {
     videoElement, videoWrapper
   });
 
-  if(!playerInit) {
-    
-  }
 
 })
 
@@ -144,6 +152,8 @@ const videoInlineStyles = `
   --plyr-control-radius: .5rem;
   --plyr-menu-radius: .75rem;
   --plyr-video-control-background-hover: #b963ff;
+  --plyr-tooltip-background: hsla(180, 4%, 11%, .9);
+  --plyr-tooltip-color: #fff;
 `;
 
 </script>

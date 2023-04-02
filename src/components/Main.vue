@@ -6,7 +6,7 @@
   ">
     <Titlebar/>
 
-    <div id="main" class="px-4 w-full lg:px-6 py-4 overflow-hidden">
+    <div id="main" class="w-full overflow-hidden">
       <RouterView :key="$route.fullPath"/>
     </div>
     
@@ -21,3 +21,4 @@ import Titlebar from './Titlebar.vue';
 
 
 <style></style>
+<!-- px-4 lg:px-6 py-4 -->
