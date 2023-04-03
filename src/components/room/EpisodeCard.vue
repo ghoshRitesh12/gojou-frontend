@@ -35,7 +35,7 @@
         v-if="props.activeEp"
         class="
         align-middle text-lg 
-        ml-auto pl-6 
+        ml-auto pl-3 flex-shrink-0
         "
       >
         <Icon 

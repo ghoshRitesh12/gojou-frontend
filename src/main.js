@@ -6,10 +6,14 @@ import './registerServiceWorker.js';
 import router from './router';
 import './assets/styles.css';
 
+import VueVideoPlayer from '@videojs-player/vue';
+import 'video.js/dist/video-js.css';
+
 const app = createApp(App);
 const pinia = createPinia();
 
 app.use(router);
+app.use(VueVideoPlayer);
 
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);

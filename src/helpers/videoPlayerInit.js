@@ -12,9 +12,12 @@ const getPlyrOptions = (hlsRef) => {
       'captions', 'settings', 'pip', 'airplay', 'fullscreen',
     ],
     settings: ['captions', 'quality', 'speed'],
+    invertTime: true,
+    toggleInvert: false,
     keyboard: { 
       focused: true, global: true,
     },
+    ratio: '16:9',
     speed: { 
       selected: 1, 
       options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] 

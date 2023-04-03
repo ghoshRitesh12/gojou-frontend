@@ -5,18 +5,18 @@
     class="
     xl:flex justify-center items-start
     relative
-    px-0 pt-1 pb-4 md:px-2 lg:p-6
+    px-0 pb-4 md:px-2 lg:p-6
     "
   >
 
     <div 
       class="
-      flex-[70%] 2xl:flex-[75%]
+      flex-[73%] 2xl:flex-[75%] 2xl:px-2
       relative col-1
       "
     >
 
-      <div video-wrapper class="2xl:mt-3 2xl:px-2 relative isolate">
+      <div video-wrapper class="2xl:mt-3 relative isolate">
         <Video/>
 
         <div data-cover-poster
@@ -34,17 +34,28 @@
       </div>
 
       <Teleport 
-        v-if="portalToMobile" 
+        v-if="portalChatToMobile" 
         v-show="viewInnerWidth < 1280"
-        :to="portalToDesktop" 
+        :to="portalChatToDesktop" 
         :disabled="viewInnerWidth < 1280"
       >
         <div id="chat-wrap-mobile" class="relative my-4 lg:my-6"></div>
       </Teleport>
 
-      <!-- <PlayerServers/> -->
-      <EpisodesWrapper class="relative z-20"/>
-      <!-- <Seasons/> -->
+      <VideoServersWrap
+        :servers-info="serversInfo"
+      />
+
+      <Teleport 
+        v-if="portalEpisodeWrapToMobile" 
+        v-show="viewInnerWidth < 1280"
+        :to="portalEpisodeWrapToDesktop" 
+        :disabled="viewInnerWidth < 1280"
+      >
+        <div id="episodes-wrap-mobile" class="relative my-4 lg:my-6"></div>
+      </Teleport>
+
+      <!-- <Seasons/>-->
       <div data-anime-info></div>
 
     </div>
@@ -53,18 +64,29 @@
     
     <div 
       class="
-      flex-[37%] 2xl:flex-[30%] pl-6
+      flex-[37%] 2xl:flex-[30%] xl:pl-6
       relative z-50 col-2
       "
     >
       <div id="chat-wrap-desktop" class="relative z-50">
         <Teleport 
-          v-if="portalToDesktop"
+          v-if="portalChatToDesktop"
           v-show="viewInnerWidth >= 1280"
-          :to="portalToMobile" 
+          :to="portalChatToMobile" 
           :disabled="viewInnerWidth >= 1280"
         >
           <ChatFrame class="xl:mt-0 2xl:mt-2"/>
+        </Teleport>
+      </div>
+
+      <div id="episodes-wrap-desktop">
+        <Teleport 
+          v-if="portalEpisodeWrapToDesktop"
+          v-show="viewInnerWidth >= 1280"
+          :to="portalEpisodeWrapToMobile" 
+          :disabled="viewInnerWidth >= 1280"
+        >
+          <EpisodesWrapper class="relative z-20"/>
         </Teleport>
       </div>
 
@@ -76,18 +98,22 @@
 
 
 <script setup>
-import { onUnmounted, onMounted, watch, ref } from 'vue';
+import { onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import AnimeAPI from '@/services/animeAPI';
 import Video from '@/components/room/Video.vue';
+import VideoServersWrap from '@/components/room/VideoServersWrap.vue';
 import ChatFrame from '@/components/room/ChatFrame.vue';
 import EpisodesWrapper from '@/components/room/EpisodesWrapper.vue';
+import AnimeAPI from '@/services/animeAPI';
 
 const route = useRoute();
 
 
-const portalToMobile = ref(null);
-const portalToDesktop = ref(null);
+const portalChatToMobile = ref(null);
+const portalChatToDesktop = ref(null);
+
+const portalEpisodeWrapToMobile = ref(null);
+const portalEpisodeWrapToDesktop = ref(null);
 
 const animeInfo = {
   "id": "naruto-677",
@@ -101,12 +127,57 @@ const animeInfo = {
   ]
 }
 
+const serversInfo = {
+  "sub": [
+    {
+      "serverName": "Vidstreaming",
+      "serverId": 4
+    },
+    {
+      "serverName": "Vidcloud",
+      "serverId": 1
+    },
+    {
+      "serverName": "StreamSB",
+      "serverId": 5
+    },
+    {
+      "serverName": "Streamtape",
+      "serverId": 3
+    }
+  ],
+  "dub": [
+    {
+      "serverName": "Vidstreaming",
+      "serverId": 4
+    },
+    {
+      "serverName": "Vidcloud",
+      "serverId": 1
+    },
+    {
+      "serverName": "StreamSB",
+      "serverId": 5
+    },
+    {
+      "serverName": "Streamtape",
+      "serverId": 3
+    }
+  ],
+  "episodeId": "attack-on-titan-final-season-part-1-15548?ep=51474"
+}
+
+
  
 const viewInnerWidth = ref(0);
 
 onMounted(() => {
-  portalToMobile.value = '#chat-wrap-mobile'
-  portalToDesktop.value = '#chat-wrap-desktop'
+  portalChatToMobile.value = '#chat-wrap-mobile'
+  portalChatToDesktop.value = '#chat-wrap-desktop'
+
+  portalEpisodeWrapToMobile.value = '#episodes-wrap-mobile'
+  portalEpisodeWrapToDesktop.value = '#episodes-wrap-desktop'
+
   viewInnerWidth.value = window.innerWidth
 })
 

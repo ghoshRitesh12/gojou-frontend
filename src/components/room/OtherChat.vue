@@ -18,9 +18,9 @@
 
     <div 
       class="
-      border-2 border-zinc-700 w-fit 
+      bg-zinc-800 w-fit 
       px-3 py-2 rounded-2xl mr-auto leading-5
-      max-w-[26ch] sm:max-w-[40ch]
+      max-w-[26ch] sm:max-w-[40ch] text-white
       "
     >
       {{ props.content }}
