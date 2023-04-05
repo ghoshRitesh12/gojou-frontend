@@ -19,16 +19,18 @@
       />
 
       <div class="ml-2 text-zinc-300">
-        {{ serverType?.toUpperCase() }}:
+        {{ serverType?.toUpperCase() }}
       </div>
     </div>
 
     <div class="flex gap-x-3 gap-y-3 flex-wrap md:gap-4">
       <VideoServerCard
-        v-for="server, index in servers" 
-        :key="server.serverName"
+        v-for="server in servers" 
+        :key="serverType + server.serverName"
+        :server-id="serverType + server.serverName"
         :name="server.serverName" 
-        :is-active="index === 0 ? true : false"
+        :server-type="serverType"
+        :is-active="(serverType + server.serverName) === activeServerId"
       />
     </div>
 
@@ -38,8 +40,13 @@
 
 
 <script setup>
+import { ref, computed } from 'vue';
 import { Icon } from '@iconify/vue';
 import VideoServerCard from './VideoServerCard.vue';
+
+import { useRoomStore } from '@/stores/roomStore';
+
+const roomStore = useRoomStore();
 
 defineProps({
   servers: {
@@ -52,6 +59,9 @@ defineProps({
     type: String,
   }
 })
+
+const activeServerId = computed(() => roomStore.animeEpCategory + roomStore.animeEpServer)
+
 
 </script>
 

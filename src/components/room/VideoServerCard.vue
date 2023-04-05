@@ -2,15 +2,16 @@
 
   <div 
     class="
-    py-2 px-3 rounded-xl text-zinc-300 
-    bg-zinc-800 hover:bg-zinc-700
-    transition ease-in duration-100
+    py-2 px-3 rounded-xl
+    transition ease-in duration-100 font-semibold
     cursor-pointer md:px-4 select-none server
     "
-    :class="'bg-accent-200 text-primary-900' "
+    :class="props.isActive ? 'bg-accent-200 text-black' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'"
+    @click="changeServer"
+    style="text-transform: capitalize;"
   >
 
-    {{ name }}
+    {{ props.name }}
 
   </div>
 
@@ -18,14 +19,20 @@
 
 
 <script setup>
+import { useRoomStore } from '@/stores/roomStore';
 
-defineProps({
-  name: {
-    type: String,
-  },
-  isActive: {
-    type: Boolean,
-  }
+const roomStore = useRoomStore();
+
+const props = defineProps({
+  name: String,  
+  isActive: Boolean,
+  serverId: String,
+  serverType: String
 })
+
+
+const changeServer = () => {
+  roomStore.changeEpisodeServer(props.name, props.serverType);
+}
 
 </script>

@@ -12,8 +12,8 @@
     <div
       class="
       flex items-center
-      text-xl bg-zinc-900 font-semibold
-      px-6 md:px-7 py-2 rounded-none align-middle
+      text-[1.15rem] bg-zinc-900 align-middle
+      px-6 2xl:px-7 py-2 rounded-none
       border-zinc-600 border-b-[1px]
       "
       :style="`
@@ -30,7 +30,7 @@
           @click="toggleChat"
           class="
           flex items-center font-normal text-[1rem]
-          bg-zinc-700 py-1 px-4 rounded-xl cursor-pointer
+          bg-zinc-700 py-2 px-4 rounded-xl cursor-pointer
           "
           type="button"
         >

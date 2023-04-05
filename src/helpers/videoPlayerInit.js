@@ -62,6 +62,7 @@ const initVideoPlayer = (initOptions) => {
   }
 
   const hls = new Hls();
+  let plyr;
 
   hls.attachMedia(videoElement);
   hls.loadSource(autoSrc);
@@ -69,17 +70,17 @@ const initVideoPlayer = (initOptions) => {
   hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
     const plyrOptions = getPlyrOptions(hls);
 
-    const plyr = new Plyr(videoElement, plyrOptions);
+    plyr = new Plyr(videoElement, plyrOptions);
     
     // console.log(plyr.fullscreen.active);
 
 
-    videoWrapper.addEventListener('keydown', e => {
-      if(e.key === " " && !document.fullscreenElement) {
-        e.preventDefault();
-        plyr.togglePlay();
-      }
-    })
+    // videoWrapper.addEventListener('keydown', e => {
+    //   if(e.key === " " && !document.fullscreenElement) {
+    //     e.preventDefault();
+    //     plyr.togglePlay();
+    //   }
+    // })
 
     document.addEventListener('fullscreenchange', e => {
       console.log(plyr.fullscreen.active);
@@ -105,7 +106,7 @@ const initVideoPlayer = (initOptions) => {
     videoElement.append(track);
   }
 
-  return true;
+  return plyr;
 }
 
 export { initVideoPlayer }

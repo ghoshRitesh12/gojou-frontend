@@ -5,14 +5,15 @@
     :title="props.name"
     class="
     relative isolate bg-zinc-900 text-zinc-100
-    cursor-pointer align-middle w-full
-    px-4 py-3 overflow-hidden rounded-lg
+    cursor-pointer align-middle w-full max-w-full
+    px-4 py-3 overflow-hidden rounded-xl
     after:absolute after:left-0 after:top-0
     after:h-full after:w-[75%] xl:after:w-[100%] after:z-[-1]
     after:bg-gradient-to-r from-accent-400/40 to-transparent
     transition ease-in duration-100
     "
     :class="props.activeEp ? `group after:content-[' ']` : `after:content-[] hover:bg-zinc-800`"
+    @click="changeEpisode"
   >
 
     <div class="flex items-center w-full">
@@ -24,7 +25,7 @@
 
       <span
         class="
-        ml-3 w-fit
+        ml-3 xl:max-w-[12rem] w-full 2xl:max-w-[16rem]
         whitespace-nowrap text-ellipsis overflow-hidden
         "
       >
@@ -52,6 +53,9 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
+import { useRoomStore } from '@/stores/roomStore';
+
+const roomStore = useRoomStore();
 
 const props = defineProps({
   id: {
@@ -72,6 +76,13 @@ const props = defineProps({
     default: false
   }
 })
+
+
+const changeEpisode = () => {
+  roomStore.changeEpisode(props.id, props.number)
+
+}
+
 
 </script>
 

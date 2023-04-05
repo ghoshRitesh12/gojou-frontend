@@ -16,6 +16,7 @@
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
             :seasons="animeSeasons"
+            class="my-6"
           />
 
         </div>

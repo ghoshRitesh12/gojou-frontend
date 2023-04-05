@@ -49,6 +49,10 @@
           "
           :src="info.poster" 
           :alt="info.name"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+          
         />
       </RouterLink>
     </div>

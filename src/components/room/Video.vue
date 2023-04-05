@@ -1,63 +1,71 @@
 <template>
+  <Suspense>
 
-  <div 
-    data-video-container
-    class="
-    w-full aspect-[16/9] md:aspect-auto
-    rounded-sm overflow-hidden
-    bg-transparent relative
-    "
-    style="font-family: sans-serif;"
-    ref="videoWrapper"
-  >
+    <template #default>
 
-    <video 
-      v-if="!props.iframe"
-      id="video" controls
-      crossorigin="anonymous"
-      :style="videoInlineStyles"
-      class="
-      rounded-sm
-      max-w-full w-full aspect-[16/9] md:aspect-auto
-      video-js 
-      "
-    >
-    </video>
-
-    <!-- <video-player
-      class="video-player vjs-theme-forest"
-      :src="autoSrc"
-      controls
-      crossorigin="anonymous"
-    /> -->
-
-
-    <iframe
-      v-if="props.iframe"
-      frameborder="0" referrerpolicy="strict-origin" 
-      allow="autoplay; picture-in-picture; fullscreen"
-      allowfullscreen mozallowfullscreen webkitallowfullscreen
-      :src="props.iframeSrc || 'https://www.youtube-nocookie.com/embed/uuZE_IRwLNI'"
-      class="
-      max-w-full w-full rounded-sm
-      plyr__video-embed
-      "
+      <div 
+        data-video-container
+        class="
+        w-full aspect-video
+        rounded-sm overflow-hidden
+        bg-transparent relative
+        "
+        style="font-family: sans-serif;"
+        @keydown="handleVideoKeyBinding"
       >
-    </iframe>
 
-    
-  </div>
+        <video 
+          v-if="!roomStore.iframeSrc"
+          id="video" controls
+          crossorigin="anonymous"
+          :style="videoInlineStyles"
+          class="
+          rounded-sm h-full
+          max-w-full w-full aspect-video
+          video-js 
+          "
+          @load="loadVideoPlayer"
+        >
+        </video>
+
+        <iframe
+          v-if="roomStore.iframeSrc"
+          frameborder="0" referrerpolicy="strict-origin" 
+          allow="autoplay; picture-in-picture; fullscreen"
+          allowfullscreen mozallowfullscreen webkitallowfullscreen
+          :src="roomStore.iframeSrc"
+          class="
+          rounded-sm h-full
+          max-w-full w-full aspect-video
+          "
+          >
+        </iframe>
+        
+      </div>
 
 
+    </template>
+
+    <template #fallback>
+      <p>
+        ...loading video
+      </p>
+    </template>
+
+  </Suspense>
 </template>
 
 
 <script setup>
 import { VideoPlayer } from '@videojs-player/vue'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import AnimeAPI from '@/services/animeAPI';
 import { initVideoPlayer } from '@/helpers/videoPlayerInit.js';
 import 'video.js/dist/video-js.css'
+
+import { useRoomStore } from '@/stores/roomStore';
+
+const roomStore = useRoomStore();
 
 const props = defineProps({
   iframe: {
@@ -76,8 +84,11 @@ const props = defineProps({
   }
 })
 
-const autoSrc = 'https://tc-1.dayimage.net/_v6/1ee9ea68e2568f86e51d18fdc2318e396c722121ef80d08b888715273c529a29069caec322204eb14889cdf9f55f30f3948c0fd0819ff2fa2b358227d5f7a2acf723f45bf3d83e765c9abec9bddea693becd07c8ff053c0491aef7406c3ebd46ce22422c871992349035e28ff75be894827596c0b1cf616499f2bbb8ead062af/master.m3u8';
 
+roomStore.fetchEpSource;
+
+
+const autoSrc = 'https://tc-1.dayimage.net/_v6/1ee9ea68e2568f86e51d18fdc2318e396c722121ef80d08b888715273c529a29069caec322204eb14889cdf9f55f30f3948c0fd0819ff2fa2b358227d5f7a2acf723f45bf3d83e765c9abec9bddea693becd07c8ff053c0491aef7406c3ebd46ce22422c871992349035e28ff75be894827596c0b1cf616499f2bbb8ead062af/master.m3u8';
 const closedCaptions = [
   {
     "url": "https://cc.zorores.com/c8/3f/c83f26f45874839e088c94dfe976aca1/c83f26f45874839e088c94dfe976aca1.vtt",
@@ -125,15 +136,37 @@ const closedCaptions = [
   }
 ]
 
-onMounted(() => {
+const handleVideoKeyBinding = e => {
+  if(e.key === " " && !document.fullscreenElement) {
+    e.preventDefault();
+    // plyr.togglePlay();
+  }
+}
+
+const loadVideoPlayer = () => {
   const videoElement = document.querySelector('#video');
   const videoWrapper = document.querySelector('[data-video]');
+
+  console.log('bruh');
 
   const playerInit = initVideoPlayer({
     autoSrc, closedCaptions, 
     videoElement, videoWrapper
   });
+}
 
+onMounted(() => {
+  // const videoElement = document.querySelector('#video');
+  // const videoWrapper = document.querySelector('[data-video]');
+
+
+  // const playerInit = initVideoPlayer({
+  //   autoSrc, closedCaptions, 
+  //   videoElement, videoWrapper
+  // });
+  
+  // if(!iframeSrc) 
+  //   playerInit.destroy()
 
 })
 
