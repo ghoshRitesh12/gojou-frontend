@@ -12,7 +12,14 @@
       after:w-full after:pointer-events-none
       after:bg-gradient-to-b overflow-hidden
       ">
-      <img class="w-full h-full object-center" :src="props.poster" :alt="props.name" />
+      <img 
+      class="w-full h-full object-center" 
+        :src="props.poster" 
+        :alt="props.name" 
+        decoding="async"
+        fetchpriority="high"
+        role="presentation"
+      />
     </div>
 
     <div

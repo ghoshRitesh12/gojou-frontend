@@ -161,7 +161,8 @@ import OtherChat from './OtherChat.vue';
 
 const chatContent = ref('');
 
-const isChatOpen = ref(true);
+// const isChatOpen = ref(true);
+const isChatOpen = ref(false);
 
 const chatVisibilityText = ref('');
 const chatVisibilityIcon = ref('');

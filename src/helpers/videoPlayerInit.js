@@ -109,4 +109,4 @@ const initVideoPlayer = (initOptions) => {
   return plyr;
 }
 
-export { initVideoPlayer }
+export { initVideoPlayer, getPlyrOptions }

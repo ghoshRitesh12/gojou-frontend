@@ -23,6 +23,11 @@
           </Slide>
         </Carousel>
 
+        <TrendingAnimeDeck
+          class="mt-12 xl:mt-12"
+          :animes="trendingAnimes"
+        />
+
         <section class="xl:flex md:gap-10 flex-grow pt-12 max-w-full w-full">
           
           <div class="w-full flex-[70%] 2xl:flex-[75%]">
@@ -42,10 +47,11 @@
           </div>
 
           <div class="flex-[35%] 2xl:flex-[25%] mb-auto mx-auto mt-3">
-            <TrendingAnimeDeck
+            <!-- trending anime goes here -->
+            <!-- <TrendingAnimeDeck
               class="mt-12 xl:mt-0"
               :animes="trendingAnimes"
-            />
+            /> -->
 
             <FeatAnimeDeck
               class="mt-8 w-full"

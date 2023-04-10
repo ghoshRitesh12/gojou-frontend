@@ -34,6 +34,8 @@
       />
     </div>
 
+    <div>{{ roomStore.iframeSrc }}</div>
+
   </div>
 
 </template>
