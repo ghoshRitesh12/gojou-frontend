@@ -90,7 +90,7 @@ const testObj = {
 
   @media (min-width: 1024px) {
     .card-wrap {
-      --min-size: 11.5rem;
+      --min-size: 11.6rem;
     }
   }
 

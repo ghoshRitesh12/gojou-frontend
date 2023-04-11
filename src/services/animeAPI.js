@@ -10,6 +10,9 @@ export default {
   getAnimeCategory(animeCategory, page) {
     return API().get(`/api/v1/${animeCategory}?page=${page}`)
   },
+  getAnimeExploreCategory(animeCategory) {
+    return API().get(`/api/v1/explore/${animeCategory}`)
+  },
   getGenreAnime(genreName) {
     return API().get(`/api/v1/genre?name=${genreName}`)
   },

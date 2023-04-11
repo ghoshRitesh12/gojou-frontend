@@ -4,24 +4,67 @@
 
     <template #default>
 
-      <div class="p-4 lg:px-6">
+      <div 
+        class="p-4 lg:px-6"
+        style="transition: .2s ease all"
+      >
 
         <p 
-          class="text-accent-200 font-semibold mt-4 mb-8"
+          class="text-accent-200 font-semibold mt-4 mb-5"
           style="font-size: clamp(1.3rem, 3vmin, 1.7rem);"
         >
-          Cards to explore
+          Explore cards
         </p>
 
         <div>
-          <ExploreDeck/>
+          <ExploreDeck
+            class="w-[98%] mx-auto"
+            @card-change="getCardAnimes"
+            @deselect-card="deselectCard"
+          />
         </div>        
 
         <AnimeDeck
-          :name="'Explore'"
-          :animes="[]"
-          class="mt-6"
+          v-if="cardName"
+          :name="cardName"
+          :animes="cardAnimes"
+          class="mt-10"
         />
+
+        <div 
+          v-else
+          class="
+          relative w-fit mx-auto my-[5rem]
+          max-w-[35rem]
+          "
+        >
+          <div 
+            class="
+            opacity-50 select-none
+            pb-[4.5rem] sm:pb-16
+            "
+          >
+            <img 
+              src="../../src/assets/gojo-ok.webp" 
+              alt=""
+              decoding="async"
+              fetchpriority="high"
+              class="text-sm"
+            />
+          </div>
+
+          <div 
+            class="
+            absolute bottom-0 left-[50%]
+            translate-x-[-50%] text-center
+            text-base sm:text-lg text-zinc-400 
+            leading-[1.2] min-w-[25ch]
+            "
+          >
+            No cards selected. Choose any card to explore.
+          </div>
+
+        </div>
 
       </div>
 
@@ -37,13 +80,32 @@
 
 
 <script setup>
+import { ref } from 'vue';
 import AnimeDeck from '@/components/AnimeDeck.vue';
+import Pagination from '@/components/Pagination.vue';
 import ExploreDeck from '@/components/explore/ExploreDeck.vue';
 import AnimeAPI from '@/services/animeAPI';
 
+const cardName = ref('');
+const cardAnimes = ref([]);
 
+const getCardAnimes = async (eventData) => {
+  try {
+    cardName.value = eventData.name;
 
+    const { data } = await AnimeAPI.getAnimeExploreCategory(eventData.href)
+    
+    cardAnimes.value = data.animes;
 
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const deselectCard = () => {
+  cardName.value = '';
+  cardAnimes.value = [];
+}
 
 
 </script>

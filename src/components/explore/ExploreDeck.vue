@@ -4,16 +4,20 @@
     data-explore-deck
     class="
     flex flex-wrap gap-2 sm:gap-3
+    max-h-[12rem] overflow-y-auto md:h-fit
     "
   >
 
     <ExploreCard
       v-for="category in exploreCategories"
+      v-show="activeCard ? (activeCard === category.href ? true : false) : true"
       :key="category.href"
       :name="category.name"
       :href="category.href"
-      :is-active="category.href === 'dubbed-anime'"
+      :is-active="(activeCard === category.href ? true : false)"
       class="flex-shrink-0"
+      @card-click="handleCardChange"
+      @cancel-card="deselectCard"
     />
   
   </div>
@@ -22,6 +26,7 @@
 
 
 <script setup>
+import { ref } from 'vue';
 import ExploreCard from './ExploreCard.vue';
 
 
@@ -85,7 +90,33 @@ const exploreCategories = [
 
 ]
 
+const activeCard = ref('');
+
+
+
+const emits = defineEmits(['card-change', 'deselect-card']);
+
+const handleCardChange = eventData => {
+  emits('card-change', eventData)
+  activeCard.value = eventData.href;
+}
+
+const deselectCard = () => {
+  emits('deselect-card')
+  activeCard.value = '';
+}
 
 </script>
 
+
+<style scoped>
+
+  [data-explore-deck]::-webkit-scrollbar {
+    display: none;
+  }
+  [data-explore-deck] {
+    scrollbar-width: none;
+  }
+
+</style>
 
