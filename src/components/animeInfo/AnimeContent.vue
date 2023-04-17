@@ -7,18 +7,18 @@
     py-5 md:py-12 px-2 md:px-8 relative"
   >
 
-    <div
+    <img 
+      :src="poster" alt=""
       class="
-      absolute inset-0 bg-white/50 isolate
-      bg-cover bg-center bg-no-repeat z-10
+      absolute inset-0 bg-white/50 isolate z-10
       w-full h-full opacity-[.35] scale-[1.2]
+      select-none pointer-events-none
       "
       style="filter: blur(2rem)"
-      :style="`
-        background-image: url('${poster}');
-      `"
+      decoding="async"
+      fetchpriority="high"
+      role="presentation"
     >
-    </div>
     
     <AnimeInfoTab
       class="flex-[70%] 2xl:flex-[75%] relative z-50 mb-12 xl:mb-0"

@@ -23,7 +23,7 @@
 
             <div class="mt-auto">You are watching</div>
             <div class="font-semibold mb-3 text-accent-200">
-              Episode <span> {{ roomStore.animeEpNo }} </span>
+              Episode <span> {{ roomAnimeStore.animeEpNo }} </span>
             </div>
       
             <div class="text-[.9rem] max-w-full md:max-w-[25ch] mt-auto leading-[1.1]">
@@ -80,9 +80,9 @@
 import { ref } from 'vue';
 import VideoServerDeck from './VideoServerDeck.vue';
 import AnimeAPI from '@/services/animeAPI';
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 const allServers = ref({});
 
@@ -92,10 +92,10 @@ defineProps({
 
 const getEpServers = async () => {
   try {
-    const { data } = await AnimeAPI.getEpisodeServers(roomStore.animeEpId);
+    const { data } = await AnimeAPI.getEpisodeServers(roomAnimeStore.animeEpId);
 
     allServers.value = data;
-    roomStore.animeEpNo = data.episodeNo
+    roomAnimeStore.animeEpNo = data.episodeNo
 
   } catch (err) {
     console.log(err);

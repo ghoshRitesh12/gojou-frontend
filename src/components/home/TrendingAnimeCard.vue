@@ -1,65 +1,56 @@
 <template>
 
-  <div 
+  <RouterLink 
     class="
-    max-w-[10rem] w-full
-    rounded-xl overflow-hidden
+    inline-block max-w-[10rem] w-full relative
     "
+    :to="`/anime/info/${props.id}`"
   >
 
     <div
-      class="
-        relative z-10 pb-[150%]
-        bg-cover bg-center bg-no-repeat 
-        bg-primary-900/5 cursor-pointer
-        after:content-[' '] after:absolute 
-        after:h-[50%] after:w-full after:top-auto after:bottom-0
-        after:bg-gradient-to-b from-transparent to-primary-900
-      "
-      :style="`background-image: url('${props.poster}')`"
       :title="props.name"
-      @click="goToAnime(props.id)"
     >
     
       <div 
+        class="rounded-xl overflow-hidden"
+      >
+        <img 
+          :src="props.poster" 
+          :alt="props.name"
+          decoding="async"
+          fetchpriority="high"
+          role="presentation"
+          class="text-sm"
+        >
+      </div>
+
+      <div 
         class="
-        absolute bottom-2 min-w-fit z-50 pb-1
-        pointer-events-none isolate
+        absolute bottom-0 min-w-fit z-50
+        pointer-events-none isolate mb-1
         "
       >
       
         <span 
           class="
-          relative bg-zinc-900/90 text-xl
+          relative bg-zinc-900/90 text-xl pb-2 pt-1
           pl-3 pr-3 shadow-lg text-accent-200
-          rounded-tl-none rounded-bl-none rounded-lg
+          rounded-tl-none rounded-bl-none rounded-xl
           "
         >
           #{{ props.rank }}
         </span>
 
-
-        <p 
-          class="
-          text-[1.05rem] pl-3 w-full pr-4 max-w-[19ch]
-          whitespace-nowrap text-ellipsis overflow-hidden 
-          "
-        >
-          {{ props.name }}
-        </p>
-
       </div>
   
     </div>
 
-  </div>
+  </RouterLink>
 
 </template>
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
-const { goToAnime } = goToRoute()
 
 
 const props = defineProps({

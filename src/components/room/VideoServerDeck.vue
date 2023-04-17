@@ -34,7 +34,7 @@
       />
     </div>
 
-    <div>{{ roomStore.iframeSrc }}</div>
+    <div>{{ roomAnimeStore.iframeSrc }}</div>
 
   </div>
 
@@ -46,9 +46,9 @@ import { ref, computed } from 'vue';
 import { Icon } from '@iconify/vue';
 import VideoServerCard from './VideoServerCard.vue';
 
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 defineProps({
   servers: {
@@ -62,7 +62,7 @@ defineProps({
   }
 })
 
-const activeServerId = computed(() => roomStore.animeEpCategory + roomStore.animeEpServer)
+const activeServerId = computed(() => roomAnimeStore.animeEpCategory + roomAnimeStore.animeEpServer)
 
 
 </script>

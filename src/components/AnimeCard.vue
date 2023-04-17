@@ -39,12 +39,13 @@
 
       <RouterLink 
         :to="`/anime/info/${info.id}`"
-        class="absolute inset-0 w-full h-full"
+        class="absolute inset-0 w-full h-full overflow-hidden"
         :title="info.name"
       >
         <img 
           class="
-          absolute inset-0 pointer-events-none w-full h-full
+          absolute pointer-events-none w-full h-full
+          object-top inset-0
           transition ease-in duration-100
           "
           :src="info.poster" 

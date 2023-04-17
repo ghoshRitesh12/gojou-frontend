@@ -53,9 +53,9 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 const props = defineProps({
   id: {
@@ -79,7 +79,7 @@ const props = defineProps({
 
 
 const changeEpisode = () => {
-  roomStore.changeEpisode(props.id, props.number)
+  roomAnimeStore.changeEpisode(props.id, props.number)
 
 }
 

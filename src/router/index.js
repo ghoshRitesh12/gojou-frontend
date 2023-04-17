@@ -56,6 +56,11 @@ const routes = [
     name: 'room',
     component: RoomView
   },
+  {
+    path: '/auth-redirect',
+    name: 'auth-redirect',
+    component: () => import('../views/AuthRedirect.vue')
+  },
 ]
 
 const router = createRouter({

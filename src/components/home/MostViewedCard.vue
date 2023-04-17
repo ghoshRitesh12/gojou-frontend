@@ -26,6 +26,9 @@
         <img 
           :src="props.poster" 
           :alt="props.name"
+          decoding="async"
+          loading="lazy"
+          class="text-sm"
         />
       </div>
 

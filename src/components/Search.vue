@@ -5,8 +5,8 @@
       @submit.prevent="emitQuery"
     >
       <input class="
-        border-2 border-slate-600 
-        rounded-2xl pl-4 py-2
+        border-[1px] border-slate-600 
+        rounded-2xl pl-4 py-[.5rem]
         text-slate-200 pr-8 max-w-[100%] w-[100%]
         focus:outline-0 bg-primary-900
         focus:border-accent-200

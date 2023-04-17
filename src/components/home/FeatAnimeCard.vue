@@ -16,9 +16,11 @@
       :to="`/anime/info/${props.id}`"
     >
       <img 
-        class="pointer-events-none"
+        class="pointer-events-none text-sm"
         :src="props.poster" 
         :alt="props.name" 
+        decoding="async"
+        loading="lazy"
       />
     </RouterLink>
     

@@ -34,22 +34,21 @@
         <div 
           v-else
           class="
-          relative w-fit mx-auto my-[5rem]
-          max-w-[35rem]
+          relative w-fit mx-auto my-[3rem] md:my-[5rem]
+          max-w-[35rem] select-none pointer-events-none
           "
+          aria-label="No cards selected. Choose any card to explore."
         >
           <div 
             class="
-            opacity-50 select-none
-            pb-[4.5rem] sm:pb-16
+            opacity-50 pb-[4.5rem] sm:pb-16
             "
           >
             <img 
-              src="../../src/assets/gojo-ok.webp" 
-              alt=""
+              src="../../src/assets/gojo-ok.webp" alt=""
               decoding="async"
               fetchpriority="high"
-              class="text-sm"
+              class="text-sm pointer-events-none"
             />
           </div>
 

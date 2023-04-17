@@ -4,7 +4,7 @@
     data-explore-card
     class="
     flex bg-zinc-900 rounded-2xl
-    border-[1px] border-zinc-700
+    border-[1px] border-zinc-700 select-none
     "
     :class="(
       props.isActive ? 
@@ -22,7 +22,7 @@
       :class="(
         props.isActive ? 
         'py-3' : 
-        'py-3 md:py-3'
+        'py-2 md:py-3'
       )"
     >
       <div class="pointer-events-none">

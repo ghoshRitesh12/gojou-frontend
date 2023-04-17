@@ -88,7 +88,7 @@
         <span 
           class="
           hidden xl:inline ml-[.1rem] text-zinc-300/90
-          font-semibold cursor-pointer
+          font-semibold cursor-pointer select-none
           "
           @click="showMoreDescription"
           v-if="info.description?.length > minCharNum"

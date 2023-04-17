@@ -19,9 +19,9 @@
 
 
 <script setup>
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 const props = defineProps({
   name: String,  
@@ -32,7 +32,7 @@ const props = defineProps({
 
 
 const changeServer = () => {
-  roomStore.changeEpisodeServer(props.name, props.serverType);
+  roomAnimeStore.changeEpisodeServer(props.name, props.serverType);
 }
 
 </script>

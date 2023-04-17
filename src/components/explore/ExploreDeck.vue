@@ -4,7 +4,7 @@
     data-explore-deck
     class="
     flex flex-wrap gap-2 sm:gap-3
-    max-h-[12rem] overflow-y-auto md:h-fit
+    max-h-[10.2rem] overflow-y-auto md:h-fit
     "
   >
 

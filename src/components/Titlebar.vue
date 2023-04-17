@@ -5,13 +5,13 @@
     sticky top-0 z-[110]
     flex items-center gap-2
     isolate bg-primary-glass
-    backdrop-blur-[5rem] py-4 px-6
-    rounded-bl-lg rounded-br-lg
+    backdrop-blur-[5rem] py-2 px-6
     "
   >
+    <!-- rounded-bl-lg rounded-br-lg -->
 
     <Search 
-      class="relative ml-4 max-w-[20rem] w-[100%] min-w-[6rem]"
+      class="relative max-w-[20rem] w-[100%] min-w-[6rem]"
       @data-search="searchReq"
       @input-search="getSearchSuggestions"
       placeholder="anime..."
@@ -28,22 +28,7 @@
       </template>
     </Search>
 
-    <Profile class="ml-auto mr-6">
-      <template v-if="isAuth">
-
-        <div 
-          class="
-          flex items-center gap-4
-          rounded-xl cursor-pointer
-          "  
-          @click="router.push('/profile')"
-        >
-          <Dp class="max-w-[2.5rem] max-h-[2.5rem] pointer-events-none"/>
-          <UserName class="pointer-events-none"/>
-        </div>
-
-      </template>
-    </Profile>
+    <Profile class="ml-auto mr-6"/>
 
   </header>
 
@@ -51,16 +36,16 @@
 
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { onClickOutside } from '@vueuse/core';
-import { ref } from 'vue';
+
 import Search from './Search.vue';
 import Profile from './Profile.vue';
-import Dp from './Dp.vue';
-import UserName from './UserName.vue';
 import QuickSearchDeck from './QuickSearchDeck.vue';
 
 const router = useRouter();
+
 
 const quickSearchDeck = ref(null);
 const searchResults = ref([]);
@@ -90,9 +75,7 @@ const getSearchSuggestions = async (inputData) => {
   }
 }
 
-// const 
 
-const isAuth = true;
 
 </script>
 

@@ -95,7 +95,7 @@
             :key="episode.id"
             :id="episode.id" :name="episode.title"
             :number="episode.number" :is-filler="episode.isFiller"
-            :active-ep="episode.number === roomStore.animeEpNo ? true : false"
+            :active-ep="episode.number === roomAnimeStore.animeEpNo ? true : false"
           />
         </div>
 
@@ -119,9 +119,9 @@ import EpisodeCard from './EpisodeCard.vue';
 import EpisodeListOption from './EpisodeListOption.vue';
 
 import AnimeAPI from '@/services/animeAPI';
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 
 const isSelectorVisible = ref(false);
@@ -140,7 +140,7 @@ const endingRange = ref(maxEpsLimit.value);
 
 const getAllEpisodes = async () => {
   try {
-    const { data } = await AnimeAPI.getAnimeEpisodes(roomStore.animeId);
+    const { data } = await AnimeAPI.getAnimeEpisodes(roomAnimeStore.animeId);
 
     episodes.value = data.episodes;
     epLength.value = data.totalEpisodes;

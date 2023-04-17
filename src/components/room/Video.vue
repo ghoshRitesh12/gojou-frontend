@@ -31,8 +31,8 @@
         >
 
           <track
-            v-if="roomStore.videoSubtitles.length > 0"
-            v-for="caption, index in roomStore.videoSubtitles"
+            v-if="roomAnimeStore.videoSubtitles.length > 0"
+            v-for="caption, index in roomAnimeStore.videoSubtitles"
             :key="index"
             :default="caption.lang.toLowerCase().includes('english')"
             kind="captions"
@@ -79,13 +79,13 @@ import { storeToRefs } from 'pinia';
 import Plyr from 'plyr';
 import Hls from 'hls.js';
 import { initVideoPlayer, getPlyrOptions } from '@/helpers/videoPlayerInit.js';
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 
 
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
-const { iframeSrc, videoSources } = storeToRefs(roomStore);
+const { iframeSrc, videoSources } = storeToRefs(roomAnimeStore);
 
 
 // const autoSrc = 'https://tc-1.dayimage.net/_v6/1ee9ea68e2568f86e51d18fdc2318e396c722121ef80d08b888715273c529a29069caec322204eb14889cdf9f55f30f3948c0fd0819ff2fa2b358227d5f7a2acf723f45bf3d83e765c9abec9bddea693becd07c8ff053c0491aef7406c3ebd46ce22422c871992349035e28ff75be894827596c0b1cf616499f2bbb8ead062af/master.m3u8';
@@ -115,11 +115,11 @@ const removeVideoPlayer = () => {
   }
 }
 
-roomStore.fetchEpSource;
+roomAnimeStore.fetchEpSource;
 
 
 
-roomStore.$subscribe((mutation, state) => {
+roomAnimeStore.$subscribe((mutation, state) => {
   console.log('vid: ', state.videoSources);
   console.log('iF: ', iframeSrc.value);
 
@@ -137,7 +137,7 @@ roomStore.$subscribe((mutation, state) => {
 
 const computedSrcLoad = computed(() => {
   hlsInstance.value.loadSource('')
-  hlsInstance.value.loadSource(roomStore.videoSources)
+  hlsInstance.value.loadSource(roomAnimeStore.videoSources)
 })
 
 onMounted(() => {
@@ -152,8 +152,8 @@ onMounted(() => {
 
       const hls = new Hls();
 
-      // if(roomStore.videoSources)
-      //   loadSource(roomStore.videoSources)
+      // if(roomAnimeStore.videoSources)
+      //   loadSource(roomAnimeStore.videoSources)
       hls.attachMedia(videoEl);
       
       hls.on(Hls.Events.MANIFEST_PARSED, function() {
@@ -176,9 +176,9 @@ onMounted(() => {
 
 
   watch(
-    () => roomStore.loading, 
+    () => roomAnimeStore.loading, 
     () => {
-      if(!roomStore.loading && roomStore.videoSources) {
+      if(!roomAnimeStore.loading && roomAnimeStore.videoSources) {
         computedSrcLoad.value
       }
     }

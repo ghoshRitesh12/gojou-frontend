@@ -1,23 +1,21 @@
 <template>
   <p 
     class="
-    text-gray-200
-    whitespace-nowrap
-    overflow-hidden
-    text-ellipsis
+    text-gray-200 whitespace-nowrap
+    overflow-hidden text-ellipsis
+    select-none
     "
   >
-    {{ name }}
+    {{ userStore.userName || name }}
   </p>
 </template>
 
 
 <script setup>
-const props = defineProps({
-  name: {
-    type: String,
-  }
-})
+import { useUserStore } from '@/stores/userStore';
+
+const userStore = useUserStore();
+
 
 const name = 'Ritesh Ghosh'
 

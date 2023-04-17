@@ -1,30 +1,32 @@
 <template>
-  <div 
-    class="
-    overflow-hidden rounded-[50%]
-    grid place-items-center
-    "
-    @click="goToProfile"
-  >
-    <img :src="url" alt="profile-pic" class="object-center pointer-events-none">
 
-  </div>
+  <RouterLink 
+    class="
+    grid place-items-center select-none
+    overflow-hidden rounded-[50%]
+    "
+    to="/profile"
+  >
+    <img 
+      :src="userStore.profilePicture || url" 
+      alt="dp" 
+      decoding="async"
+      fetchpriority="high"
+      class="object-center pointer-events-none text-sm"
+    >
+
+  </RouterLink>
+
 </template>
 
 
 <script setup>
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import { useUserStore } from '@/stores/userStore';
 
-const props = defineProps({
-  url: {
-    type: String,
-  },
-})
+const userStore = useUserStore();
 
 const url = 'https://yt3.ggpht.com/pKWFpweWfKOduyYR1zUosjzpMiudCx_rb8AKJdBLVOtYkQi4xSrtkDoQ6v7aQtkscj7mEV6S=s88-c-k-c0x00ffffff-no-rj-mo';
 
-const goToProfile = () => router.push('/profile')
 
 </script>
 

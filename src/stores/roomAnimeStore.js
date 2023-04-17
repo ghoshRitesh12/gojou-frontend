@@ -73,7 +73,7 @@ const srcs = [
   }
 ]
 
-export const useRoomStore = defineStore('room', () => {
+export const useRoomAnimeStore = defineStore('roomAnime', () => {
 
   // const animeId = ref('naruto-677');
   // const animeEpId = ref('naruto-677?ep=12354');

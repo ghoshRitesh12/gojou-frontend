@@ -128,13 +128,13 @@ import EpisodesWrapper from '@/components/room/EpisodesWrapper.vue';
 import SeasonsDeck from '@/components/animeInfo/SeasonsDeck.vue';
 import RoomAnimeInfo from '@/components/room/RoomAnimeInfo.vue';
 
-import { useRoomStore } from '@/stores/roomStore';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 import AnimeAPI from '@/services/animeAPI';
 
 
 const route = useRoute();
 
-const roomStore = useRoomStore();
+const roomAnimeStore = useRoomAnimeStore();
 
 
 const AnimeInfo = ref({});
@@ -145,7 +145,7 @@ const AnimeSeasons = ref([]);
 
 const getRoomAnimeInfo = async () => {
   try {
-    const { data } = await AnimeAPI.getRoomAnimeInfo(roomStore.animeId);
+    const { data } = await AnimeAPI.getRoomAnimeInfo(roomAnimeStore.animeId);
 
     AnimeInfo.value = data.info;
     AnimeSeasons.value = data.seasons;
