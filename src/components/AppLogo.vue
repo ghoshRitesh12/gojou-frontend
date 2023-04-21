@@ -1,24 +1,29 @@
 <template>
-  <div 
+
+  <RouterLink
     id="app-logo" 
     class="
-    cursor-pointer w-fit select-none
+    flex items-center justify-center 
+    cursor-pointer select-none
+    min-w-[2rem] max-w-[5.3rem] lg:max-w-[7.5rem]
     " 
+    to="/"
     v-once
-    @click="toHome"
   >
 
-    <img v-once class="pointer-events-none" src="../../public/img/icons/gojou-logo2.svg" alt="logo">
+    <img 
+      class="pointer-events-none flex-shrink-0" 
+      src="../../public/img/icons/gojou-logo2.svg" 
+      alt="logo"
+    />
 
-  </div>
+  </RouterLink>
+
 </template>
 
 
 <script setup>
-import { useRouter } from 'vue-router';
-const router = useRouter();
 
-const toHome = () => router.push('/');
 
 </script>
 

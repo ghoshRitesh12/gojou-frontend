@@ -23,6 +23,31 @@
       ref="authModal"
       style="transition: .2s ease all;"
     >
+
+      <div 
+        class="
+        absolute isolate z-[-1]
+        h-[42%] w-full overflow-hidden after:border-0
+        rounded-tl-2xl rounded-tr-2xl select-none after:z-[0]
+        after:content-[' '] after:absolute after:bottom-0
+        after:w-full after:h-[100%] after:isolate opacity-50
+        after:bg-gradient-to-t after:from-primary-900
+        lg:h-[53%] lg:after:h-[190%]
+        "
+      > 
+
+        <img 
+          src="../../assets/specialGrade.webp" 
+          alt="the special grades"
+          decoding="async"
+          fetchpriority="high"
+          role="presentation"
+          class="
+          absolute top-[-1.2rem] isolate
+          "
+        >
+
+      </div>
   
       <div
         class="

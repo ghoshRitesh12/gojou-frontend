@@ -4,7 +4,7 @@
 
     <template #default>
 
-      <div data-anime class="px-4 lg:px-6 py-4">
+      <div data-anime class="px-4 pt-4 pb-16 lg:px-6">
 
         <div class="">
 

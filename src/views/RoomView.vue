@@ -7,7 +7,7 @@
         data-room
         class="
         xl:flex justify-center items-start
-        relative px-0 pb-4 md:px-2 lg:p-6
+        relative px-0 pb-10 md:px-2 lg:p-6
         "
       >
 

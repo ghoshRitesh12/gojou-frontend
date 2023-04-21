@@ -5,7 +5,7 @@
     <template #default>
 
       <div 
-        class="p-4 lg:px-6"
+        class="px-4 pt-4 pb-16 lg:px-6"
         style="transition: .2s ease all"
       >
 
@@ -32,7 +32,7 @@
         />
 
         <div 
-          v-else
+          v-else v-once
           class="
           relative w-fit mx-auto my-[3rem] md:my-[5rem]
           max-w-[35rem] select-none pointer-events-none

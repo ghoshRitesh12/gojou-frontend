@@ -96,5 +96,6 @@ h6, textarea {
   /* color-scheme: dark; */
   scrollbar-color: #aaa #0c0c0c ;
   scrollbar-width: thin;
+  transition: .1s ease all;
 }
 

@@ -9,6 +9,17 @@ import SearchView from '../views/SearchView.vue';
 import AnimeInfoView from '../views/AnimeInfoView.vue';
 import ExploreView from '../views/ExploreView.vue';
 
+import { useUserStore } from '@/stores/userStore';
+import { openAuthModal } from '@/stores/auth';
+
+function checkAuth(to, from) {
+  const userStore = useUserStore();
+  if(!userStore.isAuth) {
+    openAuthModal();
+    return false;
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -18,7 +29,8 @@ const routes = [
   {
     path: '/favorites',
     name: 'favorites',
-    component: FavoritesView
+    component: FavoritesView,
+    // beforeEnter: checkAuth
   },
   {
     path: '/anime/info/:animeId',
@@ -31,7 +43,6 @@ const routes = [
     component: AnimeCategoryView
   },
   {
-    // path: '/explore/:exploreCategory',
     path: '/explore',
     name: 'explore',
     component: ExploreView
@@ -54,12 +65,24 @@ const routes = [
   {
     path: '/room/:roomId',
     name: 'room',
-    component: RoomView
+    component: RoomView,
+    beforeEnter: checkAuth
   },
   {
     path: '/auth-redirect',
     name: 'auth-redirect',
-    component: () => import('../views/AuthRedirect.vue')
+    component: () => import('@/views/AuthRedirect.vue'),
+    beforeEnter: (to, from) => {
+      if(!sessionStorage.getItem('auth-redirect')) {
+        window.history.back();
+        return false;
+      }
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/404.vue')
   },
 ]
 

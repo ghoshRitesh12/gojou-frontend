@@ -1,26 +1,24 @@
 <template>
 
   <aside id="sidebar" 
-  class="
+    class="
     sticky top-0 left-0 bottom-0
-    bg-primary-900 min-w-[15rem] max-w-[17rem]
+    bg-primary-900 min-w-[3.2rem] max-w-[5.2rem]
+    lg:min-w-[15rem] lg:max-w-[17rem]     
     flex-[30%] border-r-0 border-neutral-900 
-    py-6 px-4 min-h-[100vh] max-h-[100vh]
-    overflow-y-auto hidden lg:block
+    pb-6 pt-2 px-2 lg:px-4 min-h-[100vh] max-h-[100vh]
+    overflow-y-auto hidden md:block
     "
   >
 
     <AppLogo 
       class="
-      ml-3 mb-8
-      py-2 px-4"
+      mb-6 py-4 px-1
+      lg:mx-auto lg:px-0
+      "
     />
 
     <Navbar/>
-
-    <!-- <AnimeCategoryNav
-      class="border-t-[1px] border-zinc-800 mt-8"
-    /> -->
 
   </aside>
 
@@ -30,7 +28,6 @@
 <script setup>
 import AppLogo from './AppLogo.vue';
 import Navbar from './Navbar.vue';
-import AnimeCategoryNav from './AnimeCategoryNav.vue';
 
 import { ref } from 'vue';
 

@@ -1,7 +1,7 @@
 <template>
 
-  <div class="px-4 pt-4 pb-16 lg:px-6">
-    this is rooms view
+  <div>
+    PAGE NOT FOUND BRO
   </div>
 
 </template>

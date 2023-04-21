@@ -9,7 +9,7 @@
 
     <div 
       class="
-      text-2xl mb-6 md:mb-10
+      text-2xl mb-6 md:mb-8 mt-4
       text-center w-full font-semibold
       "
     >
@@ -17,7 +17,7 @@
     </div>
 
     <form
-      @submit.prevent=""
+      @submit.prevent="submitLoginForm"
     >
   
       <label for="email" class="block">
@@ -32,6 +32,8 @@
           focus:border-accent-200
           "
           placeholder="name@email.com"
+          v-model.lazy="loginData.email"
+          required
         >
       </label>
   
@@ -47,9 +49,16 @@
           focus:border-accent-200
           "
           placeholder="your password"
+          v-model.lazy="loginData.password"
+          required
         >
       </label>
-  
+      
+      <ErrorMessage  
+        v-if="errorMsg"
+        :message="errorMsg"
+      />
+
       <button
         type="submit"
         class="
@@ -114,18 +123,63 @@
 
 
 <script setup>
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useUserStore } from '@/stores/userStore';
+import { decryptState } from '@/composables/useCipherState';
+import { setAuthRedirect, closeModal } from '@/stores/auth';
+import { setPopupMessage } from '@/stores/popup';
+import UserAPI from '@/services/userAPI';
 import { Icon } from '@iconify/vue';
-import { setAuthRedirect } from '@/stores/auth';
 import Signup from './Signup.vue';
+import ErrorMessage from './ErrorMessage.vue';
 
 const route = useRoute();
+
+const userStore = useUserStore();
 
 const emits = defineEmits(['active-auth-change']);
 
 const changeAuth = () => {
   emits('active-auth-change', Signup);
 }
+
+const loginData = ref({
+  email: '',
+  password: ''
+})
+
+const errorMsg = ref(null);
+
+const submitLoginForm = async () => {
+  if(!loginData.value.email || !loginData.value.password) return;
+
+  try {
+    const { data } = await UserAPI.sendLoginInfo(
+      loginData.value
+    );
+    const userInfo = await decryptState(
+      data.userData, 
+      process.env.VUE_APP_AUTH_DATA_SECRET
+    );
+
+    console.log(userInfo);
+
+    errorMsg.value = null;
+    userStore.login(userInfo.name, userInfo.profilePicture)
+    userStore.setStateExpiry(userInfo.stateExpiry)
+    userStore.setSessionExpiry(userInfo.sessionExpiry)
+
+    closeModal();
+    setPopupMessage(data.message)
+
+  } catch (err) {
+    console.log(err);
+    const { message, status } = err.response.data.error
+    errorMsg.value = message;
+  }
+}
+
 
 </script>
 

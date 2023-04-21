@@ -4,7 +4,7 @@
 
     <template #default>
 
-      <div class="p-4 lg:px-6">
+      <div class="px-4 pt-4 pb-16 lg:px-6">
 
         <AnimeDeck
           :name="'Your favorite animes'"

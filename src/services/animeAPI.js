@@ -8,7 +8,9 @@ export default {
     return API().get(`/api/v1/info?id=${animeId}`)
   },
   getAnimeCategory(animeCategory, page) {
-    return API().get(`/api/v1/${animeCategory}?page=${page}`)
+    return API().get(`/api/v1/${animeCategory}?page=${page}`, {
+      withCredentials: true
+    })
   },
   getAnimeExploreCategory(animeCategory) {
     return API().get(`/api/v1/explore/${animeCategory}`)

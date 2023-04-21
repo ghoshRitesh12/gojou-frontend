@@ -3,7 +3,7 @@
   <Suspense>
     <template #default>
 
-      <div class="px-4 lg:px-6 py-4">
+      <div class="px-4 pt-4 pb-16 lg:px-6">
 
         <Carousel 
           v-if="spotlightAnimes.length > 0"
@@ -47,11 +47,6 @@
           </div>
 
           <div class="flex-[35%] 2xl:flex-[25%] mb-auto mx-auto mt-3">
-            <!-- trending anime goes here -->
-            <!-- <TrendingAnimeDeck
-              class="mt-12 xl:mt-0"
-              :animes="trendingAnimes"
-            /> -->
 
             <FeatAnimeDeck
               class="mt-8 w-full"
@@ -121,7 +116,7 @@ const getData = async () => {
     genres.value = data.genres;
 
   } catch (err) {
-    console.log(err);
+    console.log(err.response.status)
   }
 }
 

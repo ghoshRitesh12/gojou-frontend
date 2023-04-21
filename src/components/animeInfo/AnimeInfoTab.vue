@@ -1,18 +1,24 @@
 <template>
 
   <div 
-    class="flex items-start gap-12 flex-wrap flex-grow-0
-    md:flex-nowrap justify-center
+    class="flex items-start gap-6 flex-wrap flex-grow-0
+    md:flex-nowrap justify-center sm:gap-12
     "
   >
 
     <div 
       class="
-      flex-shrink-0 flex-grow-0 max-w-[12rem] 
+      flex-shrink-0 flex-grow-0 max-w-[9rem] sm:max-w-[12rem] 
       overflow-hidden shadow-xl rounded-xl relative h-fit
       "
     >
-      <img class="w-full rounded-xl" :src="info.poster" :alt="info.name">
+      <img 
+        class="w-full rounded-xl" 
+        :src="info.poster" 
+        :alt="info.name"
+        decoding="async"
+        fetchpriority="high"
+      >
     </div>
 
 
@@ -21,7 +27,7 @@
       <div class="font-semibold">
 
         <div
-          class="text-white leading-[1.2] max-w-[30ch]"
+          class="text-white leading-[1.2] max-w-[30ch] text-center md:text-left"
           style="font-size: clamp(1.7rem, 4vmin, 2.2rem)"
         >
           {{ info.name }}
@@ -50,7 +56,7 @@
         <button 
           class="
           flex items-center gap-1 text-primary-900
-          py-2 px-3 rounded-2xl shadow-lg
+          py-2 px-3 rounded-2xl shadow-lg text-[.98rem]
           bg-zinc-100 hover:bg-zinc-300
           transition ease-in duration-100"
           type="button"
@@ -61,8 +67,8 @@
 
         <button 
           class="
-          flex items-center gap-1
-          py-2 px-4 shadow-lg bg-accent-300
+          flex items-center gap-1 text-[.98rem]
+          py-2 px-4 shadow-lg bg-accent-300 
           hover:bg-accent-200 rounded-2xl text-primary-900
           transition ease-in duration-100"
           type="button"

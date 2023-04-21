@@ -6,11 +6,10 @@
 
 
 <script setup>
-import CryptoJS from 'crypto-js';
-import UserAPI from '@/services/userAPI';
 import { useUserStore } from '@/stores/userStore';
 import { useRoute, useRouter } from 'vue-router';
 import { getAuthRedirect } from '@/stores/auth';
+import { decryptState } from '@/composables/useCipherState';
 
 const route = useRoute();
 const router = useRouter();
@@ -18,23 +17,30 @@ const router = useRouter();
 const userStore = useUserStore();
 
 
-(() => {
+(async () => {
   try {
-    const encryptedString = route.query.data.replaceAll(' ', '+');
+    const { data, status } = route.query;
 
+    if(parseInt(status) > 200 && !data)
+      throw new Error('Authentication failed');
 
-    const decrypt = CryptoJS.AES.decrypt(
-      encryptedString, process.env.VUE_APP_AUTH_REDIRECT_SECRET
-    ).toString(CryptoJS.enc.Utf8);
-    const decryptedData = JSON.parse(decrypt);
-  
-    console.log(decryptedData);
+    const decryptedData = await decryptState(
+      data.replaceAll(' ', '+'), 
+      process.env.VUE_APP_AUTH_DATA_SECRET
+    )
 
-    userStore.login(decryptedData.name, decryptedData.profilePicture)
-    router.push(getAuthRedirect());
+    userStore.login(
+      decryptedData.name, 
+      decryptedData.profilePicture,
+    )
+    userStore.setStateExpiry(decryptedData.stateExpiry)
+    userStore.setSessionExpiry(decryptedData.sessionExpiry)
+    
+    router.push(await getAuthRedirect());
 
   } catch (error) {
-    console.log(error);
+    console.log(error); 
+    router.replace('/401');
   }
 
 })()

@@ -115,10 +115,7 @@
 
 
 <script setup>
-import goToRoute from '@/composables/goToRoute';
 import { Icon } from '@iconify/vue';
-
-const { goToAnime } = goToRoute();
 
 const props = defineProps({
   info: {

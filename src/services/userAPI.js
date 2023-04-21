@@ -1,10 +1,14 @@
 import API from './API.js';
 
 export default {
-  sendAuthCallback(code, scope, authuser, prompt) {
-    return API().get(
-      `/google-auth/callback?code=${code}&scope=${scope}&authuser=${authuser}&prompt=${prompt}`
-    )
+  sendSignupInfo(signupData) {
+    return API().post('/signup', signupData)
+  },
+  sendLoginInfo(loginData) {
+    return API().post('/login', loginData)
+  },
+  getNewTokens() {
+    return API().get('/refresh')
   },
 
 
