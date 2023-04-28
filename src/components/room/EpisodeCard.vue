@@ -25,9 +25,13 @@
 
       <span
         class="
-        ml-3 xl:max-w-[12rem] w-full 2xl:max-w-[16rem]
-        whitespace-nowrap text-ellipsis overflow-hidden
+        ml-3 overflow-hidden
         "
+        :style="`
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+        `"
       >
         {{ props.name }}
       </span>
@@ -41,7 +45,7 @@
       >
         <Icon 
           icon="material-symbols:play-circle-rounded" 
-          class="inline-block text-accent-100"
+          class="inline-block text-zinc-100"
         />
       </span>
     </div>

@@ -127,7 +127,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
 import { decryptState } from '@/composables/useCipherState';
-import { setAuthRedirect, closeModal } from '@/stores/auth';
+import { setAuthRedirect, closeAuthModal } from '@/stores/auth';
 import { setPopupMessage } from '@/stores/popup';
 import UserAPI from '@/services/userAPI';
 import { Icon } from '@iconify/vue';
@@ -170,7 +170,7 @@ const submitLoginForm = async () => {
     userStore.setStateExpiry(userInfo.stateExpiry)
     userStore.setSessionExpiry(userInfo.sessionExpiry)
 
-    closeModal();
+    closeAuthModal();
     setPopupMessage(data.message)
 
   } catch (err) {

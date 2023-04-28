@@ -57,7 +57,7 @@
         "
       >
         <span class="xl:inline hidden">{{ desc }}</span>
-        <span class="xl:hidden inline">{{ desc }}</span>
+        <span class="xl:hidden inline">{{ props.description }}</span>
         <span 
           class="
           hidden xl:inline ml-[.1rem] text-zinc-300/90

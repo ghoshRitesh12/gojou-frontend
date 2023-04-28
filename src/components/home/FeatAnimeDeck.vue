@@ -29,7 +29,7 @@
       :to="`/anime/${props.href}`"
       class="
       flex items-center justify-center bg-zinc-900
-      text-neutral-500 hover:bg-zinc-800
+      text-zinc-400 hover:bg-zinc-800
       w-full mx-auto py-3 cursor-pointer text-base 
       rounded-xl mt-4 gap-1
       transition ease-in duration-200 

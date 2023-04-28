@@ -2,16 +2,15 @@
 
   <nav 
     class="
-    flex items-center gap-1
-    fixed bottom-0 w-full
-    bg-primary-900 p-1
+    flex items-center gap-1 fixed z-[110] bottom-0 
+    w-full bg-primary-900 p-1 md:hidden
+    border-t-[1px] border-zinc-900
     "
-    style="backdrop-filter: blur(20rem);"
   >
   
     <NavLink 
-      v-for="menuRoute, index in menuRoutes" 
-      :key="index"
+      v-for="menuRoute in menuRoutes" 
+      :key="menuRoute.to"
       :to="menuRoute.to"
       :name="menuRoute.name"
       :title="menuRoute.name"

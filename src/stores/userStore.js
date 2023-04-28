@@ -27,32 +27,35 @@ export const useUserStore = defineStore(storeName, () => {
 
   
   const setStateExpiry = (stateExpireDate) => {
-    stateExpiry.value = stateExpireDate;
+    if(stateExpireDate <= 0) return;
     clearTimeout(timeout.value);
-    if(stateExpiry.value <= 0) return;
+    stateExpiry.value = stateExpireDate;
+    
+    timeout.value = setTimeout(async () => {
+      try {
+        await UserAPI.logout();
+        clearInterval(interval.value)
+        localStorage.removeItem(storeName);
+        location.href = '/';
 
-    timeout.value = setTimeout(() => {
-      localStorage.removeItem(storeName);
-      clearInterval(interval.value)
-      location.href = '/';
+      } catch (err) {
+        console.log(err);
+      }
     }, stateExpiry.value)
 
   }
 
   const setSessionExpiry = (sessionExpireDate) => {
-    sessionExpiry.value = sessionExpireDate
+    if(sessionExpireDate <= 0) return;
     clearInterval(interval.value);
-    if(sessionExpiry.value <= 0) return;
-
-    setInterval(async () => {
+    sessionExpiry.value = sessionExpireDate;
+    
+    interval.value = setInterval(async () => {
       try {
-
         const { data } = await UserAPI.getNewTokens();
         if('sessionExpiry' in data) {
-          setStateExpiry(data.stateExpiry);
           setSessionExpiry(data.sessionExpiry);
         }
-        console.log('set interval ran');
 
       } catch (err) {
         console.log(err)

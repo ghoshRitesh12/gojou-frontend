@@ -8,7 +8,7 @@
         class="
         rounded-2xl relative z-20
         border-x-0 border-y-[1px] lg:border-[1px] 
-        border-zinc-600
+        border-zinc-600 overflow-hidden
         "
       >
 
@@ -82,7 +82,7 @@
         <div 
           data-episode-deck 
           class="
-          flex flex-wrap gap-2 py-4 px-2 sm:px-4
+          flex flex-wrap gap-2 py-4 px-4
           relative z-20 isolate bg-primary-900
           min-w-[14rem] max-h-[30rem] w-full
           rounded-br-2xl rounded-bl-2xl overflow-auto

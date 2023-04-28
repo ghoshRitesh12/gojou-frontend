@@ -4,7 +4,7 @@
 
     <template #default>
 
-      <section class="xl:flex gap-8 px-4 pt-4 pb-16 lg:px-6">
+      <section class="xl:flex gap-8 px-4 pt-4 pb-[5rem] lg:px-6">
 
         <AnimeDeck
           :animes="results"
@@ -48,6 +48,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import AnimeAPI from '@/services/animeAPI';
+
 import AnimeDeck from '@/components/AnimeDeck.vue';
 import Pagination from '@/components/Pagination.vue';
 import FeatAnimeDeck from '@/components/home/FeatAnimeDeck.vue';
@@ -62,8 +64,7 @@ const mostPopularAnimes = ref([]);
 
 const getSearchResults = async () => {
   try {
-    const resp = await fetch(`http://localhost:5000/api/v1/search?q=${route.query.q}&page=${currentPage}`);
-    const data = await resp.json();
+    const { data } = await AnimeAPI.getSearchResults(route.query.q, currentPage);
 
     results.value = data.animes;
     hasNextPage.value = data.hasNextPage;

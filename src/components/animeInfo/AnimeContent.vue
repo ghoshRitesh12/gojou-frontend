@@ -4,7 +4,7 @@
     data-anime-content
     class="
     xl:flex gap-8 items-center
-    py-5 md:py-12 px-2 md:px-8 relative"
+    py-5 md:py-12 sm:px-2 md:px-8 relative"
   >
 
     <img 

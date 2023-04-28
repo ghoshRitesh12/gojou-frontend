@@ -7,7 +7,7 @@
         data-room
         class="
         xl:flex justify-center items-start
-        relative px-0 pb-10 md:px-2 lg:p-6
+        relative px-0 pb-[5rem] md:px-2 lg:p-6
         "
       >
 
@@ -19,7 +19,7 @@
         >
 
           <div video-wrapper class="2xl:mt-3 relative isolate">
-            <Video/>
+            <VideoPlayer/>
 
             <div data-cover-poster
               v-if="Object.keys(AnimeInfo).length > 0"
@@ -121,7 +121,7 @@
 import { onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
-import Video from '@/components/room/Video.vue';
+import VideoPlayer from '@/components/room/VideoPlayer.vue';
 import VideoServersWrap from '@/components/room/VideoServersWrap.vue';
 import ChatFrame from '@/components/room/ChatFrame.vue';
 import EpisodesWrapper from '@/components/room/EpisodesWrapper.vue';

@@ -55,7 +55,7 @@
         cursor-pointer bg-zinc-700 hover:bg-zinc-600 
         transition ease-in duration-100 rounded-[50%]
         "
-        @click="closeModal"
+        @click="closeAuthModal"
       >
         <Icon 
           icon="ic:round-close"
@@ -79,7 +79,7 @@
 <script setup>
 import { shallowRef, ref } from 'vue';
 import { useUserStore } from '@/stores/userStore';
-import { modalVisible, closeModal } from '@/stores/auth';
+import { modalVisible, closeAuthModal } from '@/stores/auth';
 import { Icon } from '@iconify/vue';
 import { onClickOutside } from '@vueuse/core';
 
@@ -91,7 +91,7 @@ const userStore = useUserStore();
 const authModal = ref(null)
 const activeAuth = shallowRef(Login);
 
-onClickOutside(authModal, () => closeModal());
+onClickOutside(authModal, () => closeAuthModal());
 
 const handleActiveAuthChange = (authComponent) => {
   activeAuth.value = authComponent;

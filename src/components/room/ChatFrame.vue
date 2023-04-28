@@ -52,7 +52,7 @@
       <div data-chats
         class="
         px-4 md:px-6 pt-6 pb-6 h-full
-        min-h-[10rem] overflow-auto text-[1.05rem]
+        min-h-[10rem] overflow-auto text-[1rem]
         max-h-[20rem] xl:max-h-[24rem] 2xl:max-h-[26rem]
         "
       >
@@ -110,8 +110,8 @@
           class="
           max-w-full w-full resize-none
           rounded-xl py-2 pl-3 pr-11 leading-[1.6]
-          min-h-[2.7rem] max-h-[6rem]
-          focus:outline-none bg-zinc-800
+          min-h-[2.7rem] max-h-[6rem] bg-zinc-800
+          focus:outline-0
           "
           spellcheck="false"
           :maxlength="maxChatChars"
@@ -161,8 +161,8 @@ import OtherChat from './OtherChat.vue';
 
 const chatContent = ref('');
 
-// const isChatOpen = ref(true);
-const isChatOpen = ref(false);
+const isChatOpen = ref(true);
+// const isChatOpen = ref(false);
 
 const chatVisibilityText = ref('');
 const chatVisibilityIcon = ref('');

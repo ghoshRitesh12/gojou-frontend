@@ -5,7 +5,7 @@
     relative lg:sticky top-0 z-[110]
     flex items-center gap-2
     isolate bg-primary-glass
-    backdrop-blur-[5rem] py-3 px-2 md:px-6 md:py-2
+    backdrop-blur-[12rem] py-3 px-2 md:px-6 md:py-2
     "
   >
     <AppLogo 
@@ -27,7 +27,7 @@
       <div 
         class="
         absolute bottom-[-4.5rem] w-full left-0
-        px-6 bg-primary-900 py-3 border-[0px]
+        px-6 bg-primary-900 pt-6 pb-3 border-[0px]
         md:block md:inset-auto md:relative md:p-0
         md:bg-transparent
         "
@@ -48,7 +48,7 @@
               :results="searchResults"
               :href="searchKeyword"
               ref="quickSearchDeck"
-              @open-results="searchResults.length = 0"
+              @open-results="openSearchSuggestion"
               class="absolute w-full"
             />
           </template>
@@ -60,7 +60,7 @@
     </div>
 
 
-    <Profile class="mr-2 ml-4 md:ml-auto lg:mr-6"/>
+    <Profile class="mr-1 ml-4 md:ml-auto lg:mr-6"/>
 
   </header>
 
@@ -71,6 +71,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { onClickOutside } from '@vueuse/core';
+import AnimeAPI from '@/services/animeAPI';
 
 import { Icon } from '@iconify/vue';
 import AppLogo from './AppLogo.vue';
@@ -85,20 +86,22 @@ const quickSearchDeck = ref(null);
 const searchResults = ref([]);
 const searchKeyword = ref(null);
 
-onClickOutside(quickSearchDeck, () => searchResults.value.length = 0)
+onClickOutside(quickSearchDeck, () => {
+  searchResults.value.length = 0
+})
 
 const searchReq = (data) => {
   if(data) {
+    searchResults.value.length = 0;
+    toggleMobileSearch();
     router.push(`/search?q=${data}`)
-    searchResults.value.length = 0
   }
 }
 
 const getSearchSuggestions = async (inputData) => {
   try {
     searchKeyword.value = inputData;
-    const resp = await fetch(`http://localhost:5000/api/v1/quick-search?q=${inputData}`);
-    const data = await resp.json();
+    const { data } = await AnimeAPI.getQuickSearchResults(inputData)
 
     searchResults.value = data.animes;
     if(searchResults.value[0].id === null)
@@ -109,9 +112,14 @@ const getSearchSuggestions = async (inputData) => {
   }
 }
 
+const openSearchSuggestion = () => {
+  searchResults.value.length = 0;
+  toggleMobileSearch()
+}
+
 const isSearchBarOpen = ref(false);
 
-const toggleMobileSearch = () => {
+function toggleMobileSearch () {
   isSearchBarOpen.value = !isSearchBarOpen.value
 }
 

@@ -3,7 +3,7 @@ import { decryptState, encryptState } from "@/composables/useCipherState";
 
 export const modalVisible = ref(false);
 
-export const closeModal = () => {
+export const closeAuthModal = () => {
   modalVisible.value = false;
   document.body.removeAttribute('style');
 }

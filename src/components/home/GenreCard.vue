@@ -3,8 +3,8 @@
   <RouterLink 
     data-genre 
     class="
-    md:w-[31.33%] bg-zinc-800 md:bg-transparent
-    flex-grow-0 md:flex-grow
+    bg-zinc-800 md:bg-transparent
+    flex-grow-0 md:w-[31.33%]
     "
     :title="props.name"
     :to="`/genre/${genreHref}`"

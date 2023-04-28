@@ -1,16 +1,17 @@
 <template>
   <div data-genres-deck
     class="
-    bg-zinc-900 rounded-xl overflow-hidden py-3
+    bg-zinc-900 rounded-xl overflow-hidden py-2
     "
   >
 
     <div 
       class="
-      text-2xl text-accent-200 rounded-xl
-      pl-4 pb-3 shadow-zinc-800 shadow-sm
+      text-accent-200 rounded-xl
+      pl-4 pb-2 shadow-zinc-800 shadow-sm
       font-semibold
       "
+      style="font-size: clamp(1.2rem, 3vmin, 1.4rem);"
     >
       Genres
     </div>

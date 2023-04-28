@@ -15,8 +15,8 @@
 
     <div 
       class="
-      text-black font-semibold leading-[1.15]
-      max-w-[20ch] sm:max-w-[30ch] select-none
+      text-black font-semibold leading-[1.4]
+      max-w-[20ch] sm:max-w-[35ch] select-none
       "
       style="transition: .2s ease max-width"
     >

@@ -27,7 +27,10 @@
       <div class="font-semibold">
 
         <div
-          class="text-white leading-[1.2] max-w-[30ch] text-center md:text-left"
+          class="
+          text-white leading-[1.2] max-w-[30ch] 
+          mx-auto md:ml-0
+          "
           style="font-size: clamp(1.7rem, 4vmin, 2.2rem)"
         >
           {{ info.name }}
@@ -48,18 +51,35 @@
 
       <div 
         class="
-        flex items-center gap-4 my-8 w-fit 
+        flex items-center gap-x-4 my-8 w-fit 
+        flex-col sm:flex-row gap-y-3
         mx-auto md:w-full font-semibold
         " 
         style="font-size: clamp(.85rem, 2.5vmin, 1rem)"
       >
         <button 
+          v-if="isFav"
           class="
           flex items-center gap-1 text-primary-900
-          py-2 px-3 rounded-2xl shadow-lg text-[.98rem]
+          py-[.6rem] px-4 rounded-2xl shadow-lg text-[.98rem]
           bg-zinc-100 hover:bg-zinc-300
           transition ease-in duration-100"
           type="button"
+          @click="removeFromFavorite"
+        >
+          <Icon icon="material-symbols:delete-rounded" class="text-base"/>
+          Remove from Favorites
+        </button>
+
+        <button 
+          v-else
+          class="
+          flex items-center gap-1 text-primary-900
+          py-[.6rem] px-4 rounded-2xl shadow-lg text-[.98rem]
+          bg-zinc-100 hover:bg-zinc-300
+          transition ease-in duration-100"
+          type="button"
+          @click="addToFavorite"
         >
           <Icon icon="ic:round-add" class="text-lg"/>
           Add to Favorites
@@ -67,8 +87,8 @@
 
         <button 
           class="
-          flex items-center gap-1 text-[.98rem]
-          py-2 px-4 shadow-lg bg-accent-300 
+          flex items-center justify-center gap-1 text-[.98rem]
+          py-[.6rem] px-4 shadow-lg bg-accent-300 w-full sm:w-fit
           hover:bg-accent-200 rounded-2xl text-primary-900
           transition ease-in duration-100"
           type="button"
@@ -111,30 +131,15 @@
 
 
 <script setup>
-import { useRouter } from 'vue-router';
-import { Icon } from '@iconify/vue';
 import { inject, computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import UserAPI from '@/services/userAPI';
+import { Icon } from '@iconify/vue';
+import { openAuthModal } from '@/stores/auth';
+import { useUserStore } from '@/stores/userStore';
 
 const router = useRouter();
-
-const props = defineProps({
-  id: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  poster: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-  stats: {
-    type: Array,
-  }
-});
-
+const userStore = useUserStore();
 
 const animeInfo = inject('animeInfo');
 const info = computed(() => animeInfo.value)
@@ -156,6 +161,50 @@ const showMoreDescription = () => {
   showDescText.value = 'Read more'
   maxChar.value = minCharNum;
 }
+
+const isFav = ref(false);
+
+const addToFavorite = async () => {
+  if(!userStore.isAuth)
+    return openAuthModal();
+
+  try {
+    const animeInfo = {
+      id: info.value?.id,
+      name: info.value?.name,
+      poster: info.value?.poster,
+      type: info.value?.stats.at(-2),
+      duration: info.value?.stats.at(-1),
+      episodes: info.value?.stats?.at(-3) || null,
+    };
+
+    await UserAPI.addFavoriteAnime(animeInfo)
+    isFav.value = true;
+
+  } catch (error) {
+    isFav.value = false;
+    console.log(error);
+  }
+}
+
+const removeFromFavorite = async () => {
+  try {
+    await UserAPI.removeFavoriteAnime(info.value.id);
+    isFav.value = false;
+  } catch (error) {
+    isFav.value = true;
+  }
+}
+
+const checkIfFavorite = async () => {
+  try {
+    await UserAPI.isFavoriteAnime(info.value.id);
+    isFav.value = true;
+  } catch (err) {
+    isFav.value = false;
+  }
+}
+checkIfFavorite();
 
 
 </script>

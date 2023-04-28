@@ -2,7 +2,7 @@
 
   <div 
     v-if="props.content"
-    class="my-4 w-fit"
+    class="my-3 w-fit"
   >
           
     <div

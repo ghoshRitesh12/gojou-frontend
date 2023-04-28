@@ -7,7 +7,7 @@
         data-video-container
         class="
         w-full aspect-video bg-primary-900
-        rounded-sm overflow-hidden
+        rounded-lg overflow-hidden
         bg-transparent relative
         "
         :style="`
@@ -22,7 +22,7 @@
           crossorigin="anonymous"
           :style="videoInlineStyles"
           class="
-          rounded-sm h-full
+          rounded-lg h-full
           max-w-full w-full aspect-video
           video-js
           "
@@ -51,7 +51,7 @@
           mozallowfullscreen webkitallowfullscreen
           :src="iframeSrc"
           class="
-          rounded-sm h-full
+          rounded-lg h-full
           max-w-full w-full aspect-video
           "
           ref="iframe"
@@ -74,7 +74,7 @@
 
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, watchEffect, watch } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import Plyr from 'plyr';
 import Hls from 'hls.js';

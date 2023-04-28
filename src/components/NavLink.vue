@@ -32,7 +32,8 @@ const props = defineProps({
 <style scoped>
   
   .active-nav {
-    @apply text-gray-200 bg-neutral-800
+    @apply 
+    bg-neutral-800 text-gray-200 
     before:absolute lg:font-semibold
     before:left-0 before:h-7
     before:bg-accent-400 before:w-2

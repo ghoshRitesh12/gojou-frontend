@@ -7,13 +7,25 @@ export default {
   sendLoginInfo(loginData) {
     return API().post('/login', loginData)
   },
+  logout() {
+    return API().get('/logout')
+  },
   getNewTokens() {
     return API().get('/refresh')
   },
 
 
-  getFavoriteAnimes() {
-    return API().get(`/favorites`)
+  getAllFavoriteAnimes() {
+    return API().get('/favorites')
+  },
+  isFavoriteAnime(animeId) {
+    return API().get(`/favorites/${animeId}`)
+  },
+  addFavoriteAnime(animeInfo) {
+    return API().post('/favorites', animeInfo)
+  },
+  removeFavoriteAnime(animeId) {
+    return API().delete(`/favorites/${animeId}`)
   },
   
 }

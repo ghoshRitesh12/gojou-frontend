@@ -18,6 +18,12 @@ export default {
   getGenreAnime(genreName) {
     return API().get(`/api/v1/genre?name=${genreName}`)
   },
+  getSearchResults(query, page) {
+    return API().get(`/api/v1/search?q=${query}&page=${page}`)
+  },
+  getQuickSearchResults(query) {
+    return API().get(`/api/v1/quick-search?q=${query}`)
+  },
 
   
   getRoomAnimeInfo(animeId) {
