@@ -25,7 +25,7 @@
     />
 
     <AnimeMoreInfoTab
-      class="flex-[35%] 2xl:flex-[25%] z-50"
+      class="flex-[35%] 2xl:flex-[25%] z-20"
     />
 
   </section>

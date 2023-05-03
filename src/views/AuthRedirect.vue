@@ -36,10 +36,11 @@ const userStore = useUserStore();
     userStore.setStateExpiry(decryptedData.stateExpiry)
     userStore.setSessionExpiry(decryptedData.sessionExpiry)
     
-    router.push(await getAuthRedirect());
+    const redirectPath = getAuthRedirect();
+    if(redirectPath) router.push(redirectPath);
 
-  } catch (error) {
-    console.log(error); 
+  } catch (err) {
+    console.log(err); 
     router.replace('/401');
   }
 

@@ -14,8 +14,8 @@
 
       <Dp 
         class="
-        max-w-[2rem] max-h-[2rem] 
-        md:max-w-[2.3rem] md:max-h-[2.3rem] 
+        max-w-[2rem] min-h-[2rem] w-full
+        md:max-w-[2rem] 
         pointer-events-none flex-shrink-0
         outline-1 outline-accent-300 outline-offset-1
         group-hover:outline

@@ -9,10 +9,11 @@
 
     <div
       :title="props.name"
+      class="pb-[150%]"
     >
     
       <div 
-        class="rounded-xl overflow-hidden"
+        class="absolute h-full rounded-xl overflow-hidden"
       >
         <img 
           :src="props.poster" 
@@ -20,7 +21,7 @@
           decoding="async"
           fetchpriority="high"
           role="presentation"
-          class="text-sm"
+          class="text-sm h-full"
         >
       </div>
 

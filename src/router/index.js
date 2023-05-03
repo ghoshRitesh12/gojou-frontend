@@ -1,20 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue';
-import FavoritesView from '../views/FavoritesView.vue';
-import RoomsView from '../views/RoomsView.vue';
-import RoomView from '../views/RoomView.vue';
-import AnimeCategoryView from '../views/AnimeCategoryView.vue';
-import GenreView from '../views/GenreView.vue';
-import SearchView from '../views/SearchView.vue';
-import AnimeInfoView from '../views/AnimeInfoView.vue';
-import ExploreView from '../views/ExploreView.vue';
-
+import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
-import { openAuthModal } from '@/stores/auth';
+import { openAuthModal, setAuthRedirect } from '@/stores/auth';
+import { resetPageError } from '@/stores/error';
 
 function checkAuth(to, from) {
   const userStore = useUserStore();
+
   if(!userStore.isAuth) {
+    console.log(to.href);
+    setAuthRedirect(to.href)
     openAuthModal();
     return false;
   }
@@ -24,56 +18,68 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: () => import('../views/HomeView.vue')
   },
   {
     path: '/favorites',
     name: 'favorites',
-    component: FavoritesView,
-    // beforeEnter: checkAuth
+    component: () => import('../views/FavoritesView.vue'),
+    beforeEnter: checkAuth
   },
   {
     path: '/anime/info/:animeId',
     name: 'anime-info',
-    component: AnimeInfoView
+    component: () => import('../views/AnimeInfoView.vue')
   },
   {
     path: '/anime/:animeCategory',
     name: 'anime-category',
-    component: AnimeCategoryView
+    component: () => import('../views/AnimeCategoryView.vue')
   },
   {
     path: '/explore',
     name: 'explore',
-    component: ExploreView
+    component: () => import('../views/ExploreView.vue')
   },
   {
     path: '/genre/:genreName',
     name: 'genre',
-    component: GenreView
+    component: () => import('../views/GenreView.vue')
   },
   {
     path: '/search',
     name: 'search',
-    component: SearchView
+    component: () => import('../views/SearchView.vue')
   },
   {
     path: '/rooms',
     name: 'rooms',
-    component: RoomsView
+    component: () => import('../views/RoomsView.vue')
+  },
+  {
+    path: '/room/invite/:roomToken',
+    name: 'room-invite',
+    component: () => import('../views/RoomInviteView.vue'),
+    beforeEnter: checkAuth
   },
   {
     path: '/room/:roomId',
     name: 'room',
-    component: RoomView,
+    component: () => import('../views/RoomView.vue'),
+    beforeEnter: checkAuth
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: () => import('../views/ProfileView.vue'),
     beforeEnter: checkAuth
   },
   {
     path: '/auth-redirect',
     name: 'auth-redirect',
-    component: () => import('@/views/AuthRedirect.vue'),
+    component: () => import('../views/AuthRedirect.vue'),
     beforeEnter: (to, from) => {
-      if(!sessionStorage.getItem('auth-redirect')) {
+      if(!sessionStorage.getItem('auth-redirect') && !sessionStorage.getItem('gauth-redirect')) {
         window.history.back();
         return false;
       }
@@ -82,7 +88,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('@/views/404.vue')
+    component: () => import('../views/404.vue')
   },
 ]
 
@@ -90,5 +96,12 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
+router.beforeEach((to, from, next) => {
+  resetPageError();
+  next();
+})
+
 
 export default router

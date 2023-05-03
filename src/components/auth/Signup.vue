@@ -182,14 +182,14 @@
       OR
     </div>
 
-    <a 
-      href="http://localhost:5000/google-auth"
+    <button
       class="
       inline-block w-full py-[0.65rem]
       border-[1px] border-zinc-600 rounded-2xl
       hover:bg-zinc-800
       "
-      @click="setAuthRedirect(route.path)"
+      type="button"
+      @click="googleSignup"
     >
       <div
         class="
@@ -210,7 +210,7 @@
         </div>
   
       </div>
-    </a>
+    </button>
   
     <div class="mt-8 text-[1.05rem] md:mx-[5.4rem] whitespace-nowrap text-center">
       Already an user? 
@@ -231,17 +231,16 @@
 <script setup>
 import { ref } from 'vue';
 import { useUserStore } from '@/stores/userStore';
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { decryptState } from '@/composables/useCipherState';
-import { setAuthRedirect, closeAuthModal } from '@/stores/auth';
+import { setAuthRedirect, getAuthRedirect, closeAuthModal } from '@/stores/auth';
 import { setPopupMessage } from '@/stores/popup';
 import UserAPI from '@/services/userAPI';
 import { Icon } from '@iconify/vue';
 import Login from './Login.vue';
 import ErrorMessage from './ErrorMessage.vue';
 
-const route = useRoute();
-
+const router = useRouter();
 const userStore = useUserStore();
 
 const passwordVisible = ref(false);
@@ -260,6 +259,11 @@ const changeActiveStep = () => {
     return;
   }
   activeStep.value = 2;
+}
+
+const googleSignup = () => {
+  setAuthRedirect(null, router.currentRoute.value.href)
+  location.href = `${process.env.VUE_APP_API_BASE_URL}/google-auth`;
 }
 
 const signupData = ref({
@@ -287,6 +291,9 @@ const submitSignupForm = async () => {
 
     closeAuthModal();
     setPopupMessage(data.message)
+
+    const redirectPath = getAuthRedirect();
+    if(redirectPath) router.push(redirectPath);
 
   } catch (err) {
     console.log(err);

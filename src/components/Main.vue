@@ -1,4 +1,5 @@
 <template>
+
   <main class="
     min-h-full
     flex-[75%] pb-8 xl:pb-12
@@ -6,16 +7,30 @@
   ">
     <Titlebar/>
 
-    <div id="main" class="w-full overflow-hidden">
-      <RouterView :key="$route.fullPath"/>
+    <div 
+      id="main" 
+      class="w-full overflow-hidden"
+    >
+      <ErrorView 
+        v-if="pageErrorMessage || pageErrorStatus"
+      />
+
+      <RouterView 
+        v-if="!pageErrorMessage || !pageErrorStatus"
+        :key="$route.fullPath"
+      />
+
     </div>
     
   </main>
+
 </template>
 
 
 <script setup>
+import { pageErrorMessage, pageErrorStatus } from '@/stores/error';
 import Titlebar from './Titlebar.vue';
+import ErrorView from '@/views/ErrorView.vue';
 
 </script>
 

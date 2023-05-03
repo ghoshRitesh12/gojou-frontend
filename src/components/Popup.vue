@@ -4,11 +4,11 @@
     v-if="isPopupOpen"
     data-popup
     class="
-    fixed isolate z-[350] bottom-[3rem] right-[2rem]
-    sm:bottom-[4rem] sm:right-[4rem]
-    flex items-center gap-1 md:gap-3 py-[.35rem] pl-4 pr-1
+    fixed isolate z-[350] bottom-[4rem] left-[1.5rem]
+    sm:bottom-[4rem] sm:left-[3rem]
+    flex items-center gap-1 md:gap-3
     bg-white rounded-2xl overflow-hidden
-    shadow-lg shadow-black/40
+    shadow-lg shadow-black/40 px-4 py-3 sm:px-6
     "
     style="transition: .2s ease all"
   >
@@ -16,14 +16,18 @@
     <div 
       class="
       text-black font-semibold leading-[1.4]
-      max-w-[20ch] sm:max-w-[35ch] select-none
+      sm:max-w-[35ch] select-none
       "
-      style="transition: .2s ease max-width"
+      :style="`
+        transition: .2s ease max-width;
+        word-spacing: .1rem;
+      `"
     >
       {{ popupMessage }}
     </div>
 
-    <div 
+    <div
+      v-if="false"
       class="
       py-2 px-2 cursor-pointer
       rounded-[50%] hover:bg-zinc-400/70
@@ -51,10 +55,10 @@ watch(
   () => isPopupOpen.value,
   () => {
     if(isPopupOpen.value) {
-      const t = setTimeout(() => {
+      const timeout = setTimeout(() => {
         closePopup()
-        clearTimeout(t);
-      }, 3000)
+        clearTimeout(timeout);
+      }, 2500)
     }
   }
 )

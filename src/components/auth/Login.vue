@@ -76,14 +76,14 @@
       OR
     </div>
 
-    <a 
-      href="http://localhost:5000/google-auth"
+    <button 
       class="
       inline-block w-full py-[0.65rem]
       border-[1px] border-zinc-600 rounded-2xl
       hover:bg-zinc-800
       "
-      @click="setAuthRedirect(route.path)"
+      type="button"
+      @click="googleLogin"
     >
       <div
         class="
@@ -104,7 +104,7 @@
         </div>
 
       </div>
-    </a>
+    </button>
 
     <div class="mt-8 text-[1.05rem] text-center mx-8">
       Don't have an account yet?
@@ -124,24 +124,29 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
 import { decryptState } from '@/composables/useCipherState';
-import { setAuthRedirect, closeAuthModal } from '@/stores/auth';
+import { setAuthRedirect, getAuthRedirect, closeAuthModal } from '@/stores/auth';
 import { setPopupMessage } from '@/stores/popup';
 import UserAPI from '@/services/userAPI';
 import { Icon } from '@iconify/vue';
 import Signup from './Signup.vue';
 import ErrorMessage from './ErrorMessage.vue';
 
-const route = useRoute();
-
+const router = useRouter();
 const userStore = useUserStore();
 
 const emits = defineEmits(['active-auth-change']);
 
 const changeAuth = () => {
   emits('active-auth-change', Signup);
+}
+
+
+const googleLogin = () => {
+  setAuthRedirect(null, router.currentRoute.value.href)
+  location.href = `${process.env.VUE_APP_API_BASE_URL}/google-auth`;
 }
 
 const loginData = ref({
@@ -163,8 +168,6 @@ const submitLoginForm = async () => {
       process.env.VUE_APP_AUTH_DATA_SECRET
     );
 
-    console.log(userInfo);
-
     errorMsg.value = null;
     userStore.login(userInfo.name, userInfo.profilePicture)
     userStore.setStateExpiry(userInfo.stateExpiry)
@@ -172,6 +175,9 @@ const submitLoginForm = async () => {
 
     closeAuthModal();
     setPopupMessage(data.message)
+    
+    const redirectPath = getAuthRedirect();
+    if(redirectPath) router.push(redirectPath);
 
   } catch (err) {
     console.log(err);

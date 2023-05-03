@@ -90,7 +90,7 @@
       >
         <span 
           v-if="info.type" 
-          class="inline-block whitespace-nowrap"
+          class="inline"
         >
           {{ info.type }}
         </span>
@@ -101,7 +101,7 @@
 
         <span 
           v-if="info.duration" 
-          class="inline-block whitespace-nowrap"
+          class="inline"
         >
           {{ info.duration }}
         </span>

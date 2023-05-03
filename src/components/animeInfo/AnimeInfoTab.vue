@@ -21,7 +21,6 @@
       >
     </div>
 
-
     <div data-info class="text-center md:text-left">
 
       <div class="font-semibold">
@@ -38,7 +37,9 @@
 
         <div class="text-neutral-300 text-[.88rem] md:text-base mt-2">
           <template v-for="stat, index in info.stats">
-            <span class="whitespace-nowrap inline-block"> {{ stat }} </span>
+            <span class="whitespace-nowrap inline-block"> 
+              {{  index !== 1 ? stat : `Ep ${stat}` }} 
+            </span>
             <Icon
               v-if="index !== info.stats.length - 1"
               :icon="'bi:dot'" 
@@ -58,31 +59,30 @@
         style="font-size: clamp(.85rem, 2.5vmin, 1rem)"
       >
         <button 
-          v-if="isFav"
           class="
-          flex items-center gap-1 text-primary-900
+          text-primary-900
           py-[.6rem] px-4 rounded-2xl shadow-lg text-[.98rem]
           bg-zinc-100 hover:bg-zinc-300
           transition ease-in duration-100"
           type="button"
-          @click="removeFromFavorite"
+          @click="alterFavorite"
         >
-          <Icon icon="material-symbols:delete-rounded" class="text-base"/>
-          Remove from Favorites
-        </button>
+          <div 
+            v-if="isFav"
+            class="flex items-center gap-1"
+          >
+            <Icon icon="material-symbols:delete-rounded" class="text-base"/>
+            Remove from Favorites
+          </div>
 
-        <button 
-          v-else
-          class="
-          flex items-center gap-1 text-primary-900
-          py-[.6rem] px-4 rounded-2xl shadow-lg text-[.98rem]
-          bg-zinc-100 hover:bg-zinc-300
-          transition ease-in duration-100"
-          type="button"
-          @click="addToFavorite"
-        >
-          <Icon icon="ic:round-add" class="text-lg"/>
-          Add to Favorites
+          <div 
+            v-else
+            class="flex items-center gap-1"
+          >
+            <Icon icon="ic:round-add" class="text-lg"/>
+            Add to Favorites
+          </div>
+
         </button>
 
         <button 
@@ -92,7 +92,7 @@
           hover:bg-accent-200 rounded-2xl text-primary-900
           transition ease-in duration-100"
           type="button"
-          @click="router.push('/room/6234181754377342')"
+          @click="toggleRoomModal"
         >
           <Icon icon="material-symbols:play-arrow-rounded" class="text-lg" />
           Watch
@@ -125,6 +125,11 @@
 
     </div>
 
+    <RoomModal
+      :avatar="info.poster"
+      :anime-id="info.id"
+    />
+
   </div>
 
 </template>
@@ -132,13 +137,15 @@
 
 <script setup>
 import { inject, computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import UserAPI from '@/services/userAPI';
-import { Icon } from '@iconify/vue';
 import { openAuthModal } from '@/stores/auth';
+import { openRoomModal } from '@/stores/roomStore';
 import { useUserStore } from '@/stores/userStore';
+import { setPopupMessage } from '@/stores/popup';
+import { Icon } from '@iconify/vue';
+import RoomModal from '../rooms/RoomModal.vue';
 
-const router = useRouter();
+
 const userStore = useUserStore();
 
 const animeInfo = inject('animeInfo');
@@ -162,38 +169,56 @@ const showMoreDescription = () => {
   maxChar.value = minCharNum;
 }
 
+
+// watch logic goes below
+const toggleRoomModal = () => {
+  if(!userStore.isAuth) return openAuthModal();
+  openRoomModal();
+}
+
+
+
+// favorite logic goes below
 const isFav = ref(false);
 
 const addToFavorite = async () => {
-  if(!userStore.isAuth)
-    return openAuthModal();
-
   try {
     const animeInfo = {
       id: info.value?.id,
       name: info.value?.name,
       poster: info.value?.poster,
-      type: info.value?.stats.at(-2),
-      duration: info.value?.stats.at(-1),
-      episodes: info.value?.stats?.at(-3) || null,
+      type: info.value?.stats?.at(-3),
+      duration: info.value?.stats?.at(-1),
+      episodes: info.value?.stats?.at(-2),
     };
 
-    await UserAPI.addFavoriteAnime(animeInfo)
+    const { data } = await UserAPI.addFavoriteAnime(animeInfo)
     isFav.value = true;
+    setPopupMessage(data.message)
 
   } catch (error) {
     isFav.value = false;
     console.log(error);
   }
 }
-
 const removeFromFavorite = async () => {
   try {
-    await UserAPI.removeFavoriteAnime(info.value.id);
+    const { data } = await UserAPI.removeFavoriteAnime(info.value.id);
     isFav.value = false;
+    setPopupMessage(data.message)
   } catch (error) {
     isFav.value = true;
   }
+}
+
+const alterFavorite = async () => {
+  if(!userStore.isAuth) 
+    return openAuthModal();
+
+  if(isFav.value) 
+    return removeFromFavorite();
+
+  addToFavorite()
 }
 
 const checkIfFavorite = async () => {

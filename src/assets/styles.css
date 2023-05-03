@@ -39,6 +39,16 @@ body {
   background-color: #0c0c0c;
 }
 
+body.media-scroll {
+  overflow: hidden
+}
+
+@media (min-width: 768px) {
+  body.media-scroll {
+    overflow: auto;
+  }
+}
+
 a {
   text-decoration: none;
 }
@@ -96,6 +106,15 @@ h6, textarea {
   /* color-scheme: dark; */
   scrollbar-color: #aaa #0c0c0c ;
   scrollbar-width: thin;
-  transition: .1s ease all;
+  transition: 
+    .1s ease padding,
+    .1s ease margin,
+    .1s ease width,
+    .1s ease height,
+    .1s ease gap,
+    .1s ease max-width,
+    .1s ease max-height,
+    .1s ease min-width,
+    .1s ease min-height;
 }
 

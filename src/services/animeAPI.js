@@ -29,6 +29,9 @@ export default {
   getRoomAnimeInfo(animeId) {
     return API().get(`/api/v1/info-room?id=${animeId}`)
   },
+  getAnime1stEpisodeId(animeId) {
+    return API().get(`/api/v1/episode1?id=${animeId}`)
+  },
   getAnimeEpisodes(animeId) {
     return API().get(`/api/v1/episodes?id=${animeId}`)
   },

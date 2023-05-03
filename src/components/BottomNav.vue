@@ -1,6 +1,7 @@
 <template>
 
   <nav 
+    id="bottombar"
     class="
     flex items-center gap-1 fixed z-[110] bottom-0 
     w-full bg-primary-900 p-1 md:hidden

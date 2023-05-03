@@ -3,7 +3,7 @@
   <Suspense>
 
     <template #default>
-      <div class="xl:flex gap-10 mt-4 px-4 pt-4 pb-[5rem] lg:px-6">
+      <div class="xl:flex gap-10 mt-4 px-4 pt-4 pb-[5rem] md:pb-14 lg:px-6">
 
         <AnimeDeck
           :animes="categoryAnimes"

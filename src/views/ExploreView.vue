@@ -5,7 +5,7 @@
     <template #default>
 
       <div 
-        class="px-4 pt-4 pb-[5rem] lg:px-6"
+        class="px-4 pt-4 pb-[5rem] md:pb-14 lg:px-6"
         style="transition: .2s ease all"
       >
 
@@ -41,7 +41,7 @@
         >
           <div 
             class="
-            opacity-50 pb-[4.5rem] sm:pb-[5rem]
+            opacity-50 pb-[4.5rem] sm:pb-[5rem] md:pb-16
             "
           >
             <img 

@@ -15,6 +15,32 @@ export default {
   },
 
 
+  createRoom(roomData) {
+    return API().post('/rooms', roomData)
+  },
+  getRoomInfo(roomId) {
+    return API().get(`/room/${roomId}`)
+  },
+  updateRoomAnime(roomId, roomData) {
+    return API().put(`/room/${roomId}/anime`, roomData)
+  },
+  updateRoomConfig(roomId, queryParam, roomData = {}) {
+    return API().put(`/room/${roomId}/config${queryParam}`, roomData)
+  },
+  getUserRooms() {
+    return API().get('/rooms')
+  },
+  browseRooms() {
+    return API().get('/rooms/browse')
+  },
+  roomInvite(roomToken) {
+    return API().get(`/room/invite/${roomToken}`)
+  },
+  getRoomInviteToken(roomId) {
+    return API().get(`/room/${roomId}/invite-token`)
+  },
+
+
   getAllFavoriteAnimes() {
     return API().get('/favorites')
   },

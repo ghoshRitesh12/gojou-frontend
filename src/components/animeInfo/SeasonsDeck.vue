@@ -3,7 +3,7 @@
   <section 
     data-seasons
     class="
-    relative z-50 isolate inline-block w-full
+    relative z-40 isolate inline-block w-full
     after:content-[' '] after:absolute after:isolate after:z-[-1]
     after:top-[-1rem] after:right-[-2rem] 
     after:left-[-2rem] after:bottom-[-2rem]

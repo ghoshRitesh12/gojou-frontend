@@ -4,7 +4,7 @@
 
     <template #default>
 
-      <div data-anime class="px-4 pt-4 pb-[5rem] lg:px-6">
+      <div data-anime class="px-4 pt-4 pb-[5rem] md:pb-14 lg:px-6">
 
         <div class="">
 
@@ -21,7 +21,7 @@
 
         </div>
 
-        <section class="xl:flex gap-10 mt-8 relative isolate z-50">
+        <section class="xl:flex gap-10 mt-8 relative isolate z-40">
 
           <AnimeDeck
             :name="'Animes you may like'"

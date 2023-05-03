@@ -4,7 +4,7 @@
 
     <template #default>
 
-      <section class="xl:flex gap-8 px-4 pt-4 pb-[5rem] lg:px-6">
+      <section class="xl:flex gap-8 px-4 pt-4 pb-[5rem] md:pb-14 lg:px-6">
 
         <AnimeDeck
           :animes="results"

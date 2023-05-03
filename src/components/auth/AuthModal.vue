@@ -101,7 +101,3 @@ const handleActiveAuthChange = (authComponent) => {
 
 </script>
 
-
-<style>
-
-</style>
