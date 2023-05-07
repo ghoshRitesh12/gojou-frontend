@@ -83,8 +83,8 @@ const props = defineProps({
 
 
 const changeEpisode = () => {
-  roomAnimeStore.changeEpisode(props.id, props.number)
-
+  roomAnimeStore.setRoomAnimeConfig('epId', props.id)
+  roomAnimeStore.setRoomAnimeConfig('epNo', props.number)
 }
 
 

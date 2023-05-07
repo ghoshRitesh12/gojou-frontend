@@ -2,7 +2,7 @@
   <Suspense>
 
     <template #default>
-      
+       
       <div
         data-room
         class="
@@ -22,7 +22,7 @@
             <VideoPlayer/>
 
             <div data-cover-poster
-              v-if="Object.keys(AnimeInfo).length > 0"
+              v-if="Object.keys(roomAnimeData).length > 0"
               class="
               absolute top-0 bg-white/50 isolate
               bg-cover bg-center bg-no-repeat z-[-1]
@@ -30,7 +30,7 @@
               "
               style="filter: blur(4rem)"
               :style="`
-                background-image: url('${AnimeInfo.poster}');
+                background-image: url('${roomAnimeData?.info?.poster}');
               `"
             >
             </div>
@@ -57,18 +57,18 @@
           </Teleport>
 
           <SeasonsDeck
-            v-if="AnimeSeasons"
-            :seasons="AnimeSeasons"
+            v-if="roomAnimeData.seasons"
+            :seasons="roomAnimeData.seasons"
             class="px-4 lg:px-0 my-2 overflow-hidden"
           />
 
           <RoomAnimeInfo
-            v-if="Object.keys(AnimeInfo).length > 0"
-            :id="AnimeInfo.id"
-            :name="AnimeInfo.name"
-            :poster="AnimeInfo.poster"
-            :description="AnimeInfo.description"
-            :stats="AnimeInfo.stats"
+            v-if="Object.keys(roomAnimeData).length > 0"
+            :id="roomAnimeData.info.id"
+            :name="roomAnimeData.info.name"
+            :poster="roomAnimeData.info.poster"
+            :description="roomAnimeData.info.description"
+            :stats="roomAnimeData.info.stats"
             class="z-50 mt-12 px-4 lg:px-0"
           />
 
@@ -120,6 +120,8 @@
 <script setup>
 import { onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
+import { storeToRefs } from 'pinia';
 
 import VideoPlayer from '@/components/room/VideoPlayer.vue';
 import VideoServersWrap from '@/components/room/VideoServersWrap.vue';
@@ -128,7 +130,6 @@ import EpisodesWrapper from '@/components/room/EpisodesWrapper.vue';
 import SeasonsDeck from '@/components/animeInfo/SeasonsDeck.vue';
 import RoomAnimeInfo from '@/components/room/RoomAnimeInfo.vue';
 
-import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 import AnimeAPI from '@/services/animeAPI';
 
 
@@ -136,26 +137,12 @@ const route = useRoute();
 
 const roomAnimeStore = useRoomAnimeStore();
 
+const { roomAnimeData } = storeToRefs(roomAnimeStore);
 
-const AnimeInfo = ref({});
-const AnimeSeasons = ref([]);
+// roomAnimeStore.getRoomAnimeInfo()
 
-
-
-
-const getRoomAnimeInfo = async () => {
-  try {
-    const { data } = await AnimeAPI.getRoomAnimeInfo(roomAnimeStore.animeId);
-
-    AnimeInfo.value = data.info;
-    AnimeSeasons.value = data.seasons;
-
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-getRoomAnimeInfo();
+// initing room & sse
+roomAnimeStore.roomInit(route.params.roomId)
 
 
 const portalChatToMobile = ref(null);

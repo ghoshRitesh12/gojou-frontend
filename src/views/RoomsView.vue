@@ -17,7 +17,7 @@
           )"
         >
 
-          <template v-for="roomDeck in roomDecks">
+          <template v-for="roomDeck in roomStore.roomDecks">
             <RoomDeck
               v-if="roomDeck.rooms.length > 0"
               :key="roomDeck.name"
@@ -54,43 +54,7 @@ import useRoomStore from '@/stores/roomStore';
 
 const roomStore = useRoomStore();
 
-
-const roomDecks = ref([
-  {
-    name: 'Your rooms',
-    rooms: [],
-    style: 'mb-16'
-  },
-  {
-    name: 'Rooms you are associated with',
-    rooms: [],
-    style: 'mb-16'
-  },
-  {
-    name: 'Browse other rooms',
-    rooms: [],
-  },
-])
-
-
-const getBrowseRooms = async () => {
-  try {
-    const { data } = await UserAPI.browseRooms();
-
-    roomDecks.value[0].rooms = data.createdRooms;
-    roomDecks.value[1].rooms = data.relatedRooms;
-    roomDecks.value[2].rooms = data.publicRooms;
-
-  } catch (err) {
-    console.log(err);
-  }
-}
-getBrowseRooms();
-
-
-
-
-const roomInfoVisible = ref(true);
+roomStore.getBrowseRooms();
 
 
 

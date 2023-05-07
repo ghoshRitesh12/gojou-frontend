@@ -27,6 +27,15 @@ export default {
   updateRoomConfig(roomId, queryParam, roomData = {}) {
     return API().put(`/room/${roomId}/config${queryParam}`, roomData)
   },
+  joinRoom(roomId) {
+    return API().get(`/room/${roomId}/join`)
+  },
+  leaveRoom(roomId) {
+    return API().put(`/room/${roomId}`)
+  },
+  deleteRoom(roomId) {
+    return API().delete(`/room/${roomId}`)
+  },
   getUserRooms() {
     return API().get('/rooms')
   },

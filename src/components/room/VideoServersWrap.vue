@@ -4,7 +4,7 @@
     <template #default>
 
       <div 
-        v-if="Object.keys(allServers).length > 1"
+        v-if="Object.keys(roomAnimeStore.allServers).length > 1"
         class="
         flex flex-wrap select-none
         relative z-20 overflow-hidden rounded-2xl my-6
@@ -23,11 +23,11 @@
 
             <div class="mt-auto">You are watching</div>
             <div class="font-semibold mb-3 text-accent-200">
-              Episode <span> {{ roomAnimeStore.animeEpNo }} </span>
+              Episode <span> {{ roomAnimeStore.anime.epNo }} </span>
             </div>
       
             <div class="text-[.9rem] max-w-full md:max-w-[25ch] mt-auto leading-[1.1]">
-              In case current server doesn't work, please try other servers.
+              In case current server doesn't work, switch to other servers.
             </div>
 
           </div>
@@ -42,23 +42,22 @@
         >
           
           <VideoServerDeck
-            v-if="allServers.sub"
-            :servers="allServers.sub"
+            v-if="roomAnimeStore.allServers.sub"
+            :servers="roomAnimeStore.allServers.sub"
             :server-type="'sub'"
             :server-type-icon="'fluent:closed-caption-32-regular'"
           />
           
           <VideoServerDeck
-            v-if="allServers.dub"
-            :servers="allServers.dub"
+            v-if="roomAnimeStore.allServers.dub"
+            :servers="roomAnimeStore.allServers.dub"
             :server-type="'dub'"
             :server-type-icon="'tabler:microphone'"
             class="
-            border-accent-100/50
-              border-t-[1px] border-dashed
+            border-accent-100/50 border-t-[1px] border-dashed
             "
             :style="`
-              border-top-width: ${!allServers.sub ? '0px' : '' };
+              border-top-width: ${!roomAnimeStore.allServers.sub ? '0px' : '' };
             `"
           />
         </div>
@@ -84,24 +83,6 @@ import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 
 const roomAnimeStore = useRoomAnimeStore();
 
-const allServers = ref({});
-
-defineProps({
-  serversInfo: Object
-})
-
-const getEpServers = async () => {
-  try {
-    const { data } = await AnimeAPI.getEpisodeServers(roomAnimeStore.animeEpId);
-
-    allServers.value = data;
-    roomAnimeStore.animeEpNo = data.episodeNo
-
-  } catch (err) {
-    console.log(err);
-  }
-}
-getEpServers();
 
 </script>
 

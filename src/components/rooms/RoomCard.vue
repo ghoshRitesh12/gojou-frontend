@@ -125,7 +125,7 @@
       @click="roomStore.getRoomInfo(roomId)"
     >
       <Icon 
-        icon="solar:info-square-bold"
+        icon="majesticons:external-link-line"
         class="text-xl pointer-events-none text-zinc-100"
       />
     </button>
@@ -138,6 +138,7 @@
 <script setup>
 import { Icon } from '@iconify/vue';
 import useRoomStore from '@/stores/roomStore';
+
 
 const roomStore = useRoomStore();
 

@@ -3,13 +3,12 @@
   <div 
     id="room-info"
     class="
-    fixed right-0 left-0 bottom-[2.8rem] 
+    fixed right-0 left-0 bottom-[2.8rem] z-[70]
     md:bottom-0 md:right-[1rem] md:left-auto
     min-h-[60vh] max-h-[60vh] md:min-h-[85.5vh] md:max-h-[80vh]
     md:max-w-[18rem] xl:max-w-[20rem] 2xl:max-w-[25rem] w-full
-    flex-[35%] 2xl:flex-[25%] mt-14 z-[70]
-    border-[0px] border-zinc-600 isolate bg-zinc-900
-    overflow-x-hidden overflow-y-auto
+    flex-[35%] 2xl:flex-[25%] mt-14 bg-zinc-900
+    isolate overflow-x-hidden overflow-y-auto
     rounded-tl-2xl rounded-tr-2xl
     "
   >
@@ -21,7 +20,12 @@
     </div>
 
   
-    <div data-room-info-wrap class="relative isolate z-[100] bg-zinc-900 pb-16">
+    <div data-room-info-wrap 
+      class="
+      relative isolate z-[100] bg-zinc-900 pb-16 overflow-auto 
+
+      "
+    >
 
       <div data-room-info>
 
@@ -68,6 +72,14 @@
 
         </div>
 
+        <div data-created-at
+          class="
+          ml-auto w-fit bg-zinc-800 px-2 py-1
+          rounded-3xl text-sm text-zinc-300 mr-4
+          "
+        >
+          Created on {{ getDate(eachRoomInfo.room.createdAt) }}
+        </div>
 
         <div class="py-4 px-4 xl:px-4">
 
@@ -75,7 +87,7 @@
 
             <div data-room-name
               class="
-              text-2xl mb-8 font-semibold 
+              text-2xl mb-6 font-semibold 
               leading-[1.4] overflow-hidden
               "
               :style="`
@@ -171,6 +183,22 @@
 
             </div>
 
+            <div v-else class="ml-auto w-fit">
+
+              <button
+                class="
+                bg-accent-200 text-black font-semibold
+                px-4 py-[.65rem] rounded-2xl hover:bg-accent-300
+                transition ease-in duration-100
+                "
+                type="button"
+                @click="roomStore.joinRoom"
+              >
+                Join room
+              </button>
+
+            </div>
+
             <div data-room-anime class="mt-4 overflow-hidden">
               <div class="text-lg">
                 Current anime
@@ -178,7 +206,7 @@
 
               <div 
                 class="
-                py-3 px-4 bg-zinc-800/80 leading-[1.2]
+                py-[.9rem] px-4 bg-zinc-800/80 leading-[1.2]
                 mt-2 rounded-2xl overflow-hidden
                 "
               > 
@@ -196,14 +224,19 @@
 
             <div class="text-lg">
               Members
+
+              <span class="inline-block text-[.9rem] ml-4 text-zinc-400">
+                ( {{ eachRoomInfo?.room?.members?.length + eachRoomInfo?.room?.mods?.length + 1 }} )
+              </span>
             </div>
+
   
             <div class="mt-2">
-  
               <Member
                 :name="eachRoomInfo.room.admin.name"
                 :pfp="eachRoomInfo.room.admin.profilePicture"
                 :role="'admin'"
+                :id="eachRoomInfo.room.admin._id"
                 class="mt-2"
               />
 
@@ -211,6 +244,7 @@
                 v-for="mod in eachRoomInfo.room.mods"
                 :name="mod.name"
                 :pfp="mod.profilePicture"
+                :role="'mod'"
                 :id="mod._id"
                 class="mt-2"
               />
@@ -222,7 +256,6 @@
                 :id="member._id"
                 class="mt-2"
               />
-  
             </div>
 
           </div>
@@ -244,7 +277,7 @@
             transition ease-in duration-100
             "
             type="button"
-            @click="dangerPopupVisible = !dangerPopupVisible"
+            @click="toggleDangerPopup"
           >
             Delete room
           </button>
@@ -273,7 +306,7 @@
                 transition ease-in duration-100
                 "
                 type="button"
-                @click="dangerPopupVisible = !dangerPopupVisible"
+                @click="toggleDangerPopup"
               >
                 Cancel
               </button>
@@ -284,6 +317,10 @@
                 transition ease-in duration-100
                 "
                 type="button"
+                @click="async () => {
+                  await roomStore.deleteRoom();
+                  roomStore.closeRoomInfo();
+                }"
               >
                 Delete
               </button>
@@ -302,7 +339,7 @@
             transition ease-in duration-100 ml-auto
             "
             type="button"
-            @click="dangerPopupVisible = !dangerPopupVisible"
+            @click="toggleDangerPopup"
           >
             Leave room
           </button>
@@ -331,7 +368,7 @@
                 transition ease-in duration-100
                 "
                 type="button"
-                @click="dangerPopupVisible = !dangerPopupVisible"
+                @click="toggleDangerPopup"
               >
                 Cancel
               </button>
@@ -342,6 +379,10 @@
                 transition ease-in duration-100
                 "
                 type="button"
+                @click="async () => {
+                  await roomStore.leaveRoom();
+                  roomStore.closeRoomInfo();
+                }"
               >
                 Leave
               </button>
@@ -382,6 +423,7 @@ import useRoomStore from '@/stores/roomStore';
 import UserAPI from '@/services/userAPI';
 import { Icon } from '@iconify/vue';
 import Member from './Member.vue';
+import { getDate } from '@/composables/useDate';
 
 const roomStore = useRoomStore();
 
@@ -391,6 +433,7 @@ defineProps({
   role: String,
   roomData: Object
 })
+
 
 
 const toPascalCase = (str) => {
@@ -409,12 +452,28 @@ const copyLink = () => {
       const t = setTimeout(() => {
         copyLinkIcon.value = 'basil:copy-outline';
         clearTimeout(t);
-      }, 1500)
+      }, 1000)
     })
 }
 
 
 const dangerPopupVisible = ref(false);
+
+const toggleDangerPopup = () => {
+  dangerPopupVisible.value = !dangerPopupVisible.value;
+
+  const roomInfoEl = document.querySelector('#room-info');
+  // console.dir(roomInfoEl);
+  // if(roomInfoEl.scrollHeight === roomInfoEl.)
+  // roomInfoEl.scrollBy({
+  //   behavior: 'smooth',
+  //   top: roomInfoEl.scrollHeight
+  // })
+  
+  // console.log(-roomInfoEl.scrollHeight);
+  // roomInfoEl.scrollTop = 100000
+
+}
 
 
 
@@ -422,6 +481,10 @@ const dangerPopupVisible = ref(false);
 
 
 <style scoped>
+
+  #room-info::-webkit-scrollbar-track {
+    border-radius: 1rem;
+  }
 
   [data-room-info] [data-room-invite-link] {
     scrollbar-width: none;

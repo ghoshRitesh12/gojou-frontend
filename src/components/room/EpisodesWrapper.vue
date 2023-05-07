@@ -95,7 +95,7 @@
             :key="episode.id"
             :id="episode.id" :name="episode.title"
             :number="episode.number" :is-filler="episode.isFiller"
-            :active-ep="episode.number === roomAnimeStore.animeEpNo ? true : false"
+            :active-ep="episode.number === roomAnimeStore.anime.epNo ? true : false"
           />
         </div>
 
@@ -112,82 +112,66 @@
 
 
 <script setup>
-import { ref, computed } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { ref, computed, watch } from 'vue';
 import { Icon } from '@iconify/vue';
+import { storeToRefs } from 'pinia';
+import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 import EpisodeCard from './EpisodeCard.vue';
 import EpisodeListOption from './EpisodeListOption.vue';
 
-import AnimeAPI from '@/services/animeAPI';
-import { useRoomAnimeStore } from '@/stores/roomAnimeStore';
 
 const roomAnimeStore = useRoomAnimeStore();
-
+const { episodes, epLength } = storeToRefs(roomAnimeStore);
 
 const isSelectorVisible = ref(false);
-
 const rangeSelector = ref(null);
 
-// onClickOutside(rangeSelector, () => isSelectorVisible.value = false)
-
-const episodes = ref([]);
-const epLength = ref(0)
 const ranges = ref([]);
 
 const maxEpsLimit = ref(50);
 const startingRange = ref(1);
 const endingRange = ref(maxEpsLimit.value);
 
-const getAllEpisodes = async () => {
-  try {
-    const { data } = await AnimeAPI.getAnimeEpisodes(roomAnimeStore.animeId);
+watch(
+  () => episodes.value,
+  () => {
+    if(episodes.value.length < 1) return;
 
-    episodes.value = data.episodes;
-    epLength.value = data.totalEpisodes;
+    ranges.value = (() => { 
+      const segments = Math.ceil(epLength?.value / maxEpsLimit.value)
 
+      const ranges = [];
 
-  } catch (err) {
-    console.log(err);
-  }
-}
+      let start = startingRange.value
+      let end = endingRange.value;
 
-getAllEpisodes().then(() => {
+      if(segments <= 1) {
+        ranges.push({
+          starting: start,
+          ending: end > epLength?.value ? epLength?.value : end,
+        })
+        return ranges;
+      }
 
-  ranges.value = (() => {
-    const segments = Math.ceil(epLength?.value / maxEpsLimit.value)
+      for(let i=0; i<segments; i++) {
+        ranges.push({
+          starting: start,
+          ending: end,
+        })
 
-    const ranges = [];
+        start = end + 1;
+        const e = (start + maxEpsLimit.value) - 1;
+        end = (e > epLength?.value) ? epLength?.value : e;
+      }
 
-    let start = startingRange.value
-    let end = endingRange.value;
-
-    if(segments <= 1) {
-      ranges.push({
-        starting: start,
-        ending: end > epLength?.value ? epLength?.value : end,
-      })
       return ranges;
-    }
-
-    for(let i=0; i<segments; i++) {
-      ranges.push({
-        starting: start,
-        ending: end,
-      })
-
-      start = end + 1;
-      const e = (start + maxEpsLimit.value) - 1;
-      end = (e > epLength?.value) ? epLength?.value : e;
-    }
-
-    return ranges;
+      
+    })();
     
-  })();
+  }
+)
 
-})
-
-
-const getRangedEps = (start, end) => episodes?.value.slice(start-1, end);
+const getRangedEps = (start, end) => episodes.value?.slice(start-1, end);
 
 const defaultStartLimit = ref(startingRange.value);
 const defaultEndLimit = ref(endingRange.value);
@@ -200,7 +184,6 @@ const handleRangeChange = (data) => {
   defaultEndLimit.value = data.end;
   isSelectorVisible.value = false;
 }
-
 
 
 </script>

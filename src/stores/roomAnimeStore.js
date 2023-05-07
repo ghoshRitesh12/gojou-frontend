@@ -1,7 +1,9 @@
 import { ref, computed, watch } from 'vue';
 import { computedEager } from '@vueuse/core'
 import { defineStore } from "pinia";
+import { useEventSource } from '@/composables/useEventSource';
 import AnimeAPI from '@/services/animeAPI';
+
 
 const closedCaptions = [
   {
@@ -74,34 +76,42 @@ const srcs = [
 ]
 
 export const useRoomAnimeStore = defineStore('roomAnime', () => {
-
   // const animeId = ref('naruto-677');
   // const animeEpId = ref('naruto-677?ep=12354');
+  const sseInstance = ref(null);
+  const setSSEInstance = (instance) => {
+    sseInstance.value = instance;
+  }
+
   const loading = ref(false);
   
-  const animeId = ref('naruto-shippuden-355');
-  const animeEpId = ref('naruto-shippuden-355?ep=7882');
-  const animeEpCategory = ref('sub');
-  const animeEpServer = ref('vidstreaming')
-  const animeEpNo = ref(0);
+  const anime = ref({
+    id: 'naruto-shippuden-355',
+    epId: 'naruto-shippuden-355?ep=7882',
+    epNo: 0,
+    epCategory: 'sub',
+    epServer: 'vidstreaming'
+  })
 
+  // const animeId = ref('naruto-shippuden-355');
+  // const animeEpId = ref('naruto-shippuden-355?ep=7882');
+  // const animeEpNo = ref(0);
+  // const animeEpCategory = ref('sub');
+  // const animeEpServer = ref('vidstreaming')
+
+  const allServers = ref({});
+  const roomAnimeData = ref({})
+  const episodes = ref([]); //array
+  const epLength = ref(0);
   
   const iframeSrc = ref(null);
   const videoSources = ref(null);
   const videoSubtitles = ref([]);
 
-
   const getAnimeEp = async (epId, epServer, epCategory) => {
     try {
       console.log('getAnimeEp() fired')
       loading.value = true;
-
-      // if(epServer.startsWith('vid')) {
-      //   iframeSrc.value = null;
-      //   videoSources.value = srcs;
-      //   videoSubtitles.value = closedCaptions;
-      //   return;
-      // }
 
       const { data } = await AnimeAPI.getEpisodeSource(
         epId, epServer, epCategory
@@ -117,7 +127,6 @@ export const useRoomAnimeStore = defineStore('roomAnime', () => {
         return;
       }
 
-
       iframeSrc.value = null;
       videoSubtitles.value = data?.episode?.subtitles;
       videoSources.value = data?.episode?.sources.find(i => i.quality === 'auto')?.url;
@@ -126,37 +135,100 @@ export const useRoomAnimeStore = defineStore('roomAnime', () => {
       throw new Error(err.message);
     }
   }
-
   const fetchEpSource = computedEager(() => {
     console.log('room anime computed running');    
     getAnimeEp(
-      animeEpId.value,
-      animeEpServer.value,
-      animeEpCategory.value
+      anime.value.epId,
+      anime.value.epServer,
+      anime.value.epCategory
     )
     return true
   })
-
+  
   watch(fetchEpSource.value, () => {
     fetchEpSource.value
   })
 
-
-  const changeEpisodeServer = (name, category) => {
-    console.log('change episode fired');
-    animeEpServer.value = name;
-    animeEpCategory.value = category
+  const setRoomAnimeConfig = (key, val) => {
+    anime.value[key] = val;
   }
 
-  const changeEpisode = (epId, epNo) => {
-    animeEpId.value = epId;
-    animeEpNo.value = epNo
+  // const changeEpisodeServer = (name, category) => {
+  //   console.log('change episode fired');
+  //   anime.value.epServer = name;
+  //   anime.value.epCategory = category
+  // }
+  // const changeEpisode = (epId, epNo) => {
+  //   animeEpId.value = epId;
+  //   animeEpNo.value = epNo
+  // }
+
+
+  
+  const getRoomAnimeInfo = async () => {
+    try {
+      const { data } = await AnimeAPI.getRoomAnimeInfo(anime.value.id);
+      roomAnimeData.value = data;
+  
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  const getEpServers = async () => {
+    try {
+      const { data } = await AnimeAPI.getEpisodeServers(anime.value.epId);
+  
+      allServers.value = data;
+      anime.value.epNo = data.episodeNo
+  
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const getAllEpisodes = async () => {
+    try {
+      const { data } = await AnimeAPI.getAnimeEpisodes(anime.value.id);
+  
+      episodes.value = data.episodes;
+      epLength.value = data.totalEpisodes;
+  
+  
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
+
+
+  const roomInit = async (roomId) => {
+    try {
+      const es = await useEventSource(
+        `${process.env.VUE_APP_API_BASE_URL}/room/${roomId}/sse`,
+      )
+
+      // await Promise.all(
+      //   getEpServers(),
+      //   getRoomAnimeInfo(),
+      //   getAllEpisodes()
+      // )
+
+      
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
   return {
-    animeId, animeEpId, animeEpNo, animeEpCategory, animeEpServer,
-    fetchEpSource, iframeSrc, videoSources, videoSubtitles, loading,
-    changeEpisode, changeEpisodeServer
+    anime, fetchEpSource, iframeSrc, videoSources, 
+    videoSubtitles, loading, setRoomAnimeConfig,
+    
+    episodes, epLength, getAllEpisodes,
+    getRoomAnimeInfo, roomAnimeData, getEpServers, allServers,
+    roomInit, sseInstance, setSSEInstance
   }
 
 });

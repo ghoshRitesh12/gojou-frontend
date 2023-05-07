@@ -25,7 +25,7 @@
         :key="room.roomId"
         :name="room.name" :room-id="room.roomId"
         :avatar="room.avatar" :members="room.members"
-        :creator="room.admin.name" :time="getTimeDifference(room.createdAt)"
+        :creator="room.admin.name" :time="useTimeAgo(room.createdAt).value"
         :creator-dp="room.admin.profilePicture"
       />
 
@@ -37,7 +37,7 @@
 
 
 <script setup>
-import { getTimeDifference } from '@/composables/useTimeDifference';
+import { useTimeAgo } from '@vueuse/core';
 import RoomCard from './RoomCard.vue';
 
 defineProps({

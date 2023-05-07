@@ -14,6 +14,7 @@ function checkAuth(to, from) {
   }
 }
 
+
 const routes = [
   {
     path: '/',
@@ -56,12 +57,14 @@ const routes = [
     name: 'rooms',
     component: () => import('../views/RoomsView.vue')
   },
+  { path: '/room/invite', redirectTo: '/explore' },
   {
     path: '/room/invite/:roomToken',
     name: 'room-invite',
     component: () => import('../views/RoomInviteView.vue'),
     beforeEnter: checkAuth
   },
+  { path: '/room', redirectTo: '/explore' },
   {
     path: '/room/:roomId',
     name: 'room',

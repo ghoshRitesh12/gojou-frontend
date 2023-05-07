@@ -2,7 +2,7 @@
 
   <div 
     class="
-    py-2 px-3 rounded-xl
+    py-2 px-3 rounded-2xl text-[.95rem]
     transition ease-in duration-100 font-semibold
     cursor-pointer md:px-4 select-none server
     "
@@ -32,7 +32,8 @@ const props = defineProps({
 
 
 const changeServer = () => {
-  roomAnimeStore.changeEpisodeServer(props.name, props.serverType);
+  roomAnimeStore.setRoomAnimeConfig('epServer', props.name);
+  roomAnimeStore.setRoomAnimeConfig('epCategory', props.serverType);
 }
 
 </script>

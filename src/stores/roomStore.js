@@ -1,7 +1,8 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import UserAPI from "@/services/userAPI";
-import AnimeAPI from "@/services/animeAPI";
+import { useUserStore } from "./userStore";
+import { openAuthModal } from "./auth";
 import { setPopupMessage } from "./popup";
 import { useRouter } from "vue-router";
 
@@ -22,6 +23,9 @@ export const closeRoomModal = () => {
 
 
 const useRoomStore = defineStore('room', () => {
+  const router = useRouter();
+  const userStore = useUserStore();
+
   const errorMsg = ref(null);
   const setErrorMsg = (errMsg) => {
     errorMsg.value = errMsg
@@ -31,15 +35,47 @@ const useRoomStore = defineStore('room', () => {
   const removeInviteLink = () => {
     inviteLink.value = null
   }
-
   const roomData = ref({
     name: '',
     private: true,
   })
-
   const setRoomData = (key, val) => {
     roomData.value[key] = val
   }
+
+
+  // <RoomsView> 
+  const roomDecks = ref([
+    {
+      name: 'Your rooms',
+      rooms: [],
+      style: 'mb-16'
+    },
+    {
+      name: 'Rooms you are associated with',
+      rooms: [],
+      style: 'mb-16'
+    },
+    {
+      name: 'Browse other rooms',
+      rooms: [],
+    },
+  ])
+  const getBrowseRooms = async () => {
+    try {
+      const { data } = await UserAPI.browseRooms();
+  
+      roomDecks.value[0].rooms = data.createdRooms;
+      roomDecks.value[1].rooms = data.relatedRooms;
+      roomDecks.value[2].rooms = data.publicRooms;
+  
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // </RoomsView> 
+  
+
 
 
   const createdRooms = ref(null);
@@ -57,12 +93,15 @@ const useRoomStore = defineStore('room', () => {
   const eachRoomInfo = ref({});
   const newRoomInviteLink = ref(null);
   const getRoomInfo = async (roomId) => {
+    if(!userStore.isAuth) return openAuthModal();
+
     try {
       const { data } = await UserAPI.getRoomInfo(roomId);
 
       eachRoomInfo.value.role = data.role;
       eachRoomInfo.value.room = data.room;
       
+      document.body.removeAttribute('class');
       document.body.classList.add('media-scroll');
 
     } catch (err) {
@@ -95,9 +134,49 @@ const useRoomStore = defineStore('room', () => {
         roomId, qParam, roomData
       );
 
+      await getRoomInfo(roomId)
       setPopupMessage(data.message);
-      // location.reload();
+      getBrowseRooms()
 
+    } catch (err) {
+      console.log(err);      
+    }
+  }
+  const joinRoom = async () => {
+    try {
+      const { data } = await UserAPI.joinRoom(
+        eachRoomInfo.value.room.roomId
+      );
+      setPopupMessage(data.message);
+      closeRoomInfo()
+      router.push(data.redirectTo)
+
+    } catch (err) {
+      console.log(err);
+      router.push('/explore') 
+    }
+  }
+  const leaveRoom = async () => {
+    try {
+      const { data } = await UserAPI.leaveRoom(
+        eachRoomInfo.value.room.roomId
+      );
+
+      await getBrowseRooms();
+      setPopupMessage(data.message);
+
+    } catch (err) {
+      console.log(err);      
+    }
+  }
+  const deleteRoom = async () => {
+    try {
+      const { data } = await UserAPI.deleteRoom(
+        eachRoomInfo.value.room.roomId
+      );
+
+      await getBrowseRooms();
+      setPopupMessage(data.message);
 
     } catch (err) {
       console.log(err);      
@@ -134,11 +213,13 @@ const useRoomStore = defineStore('room', () => {
 
 
   return {
+    getBrowseRooms, roomDecks,
     errorMsg, inviteLink, roomData, createdRooms,
     setErrorMsg, removeInviteLink, getRooms,
     createNewRoom, setRoomData, updateAnimeConfig,
     getRoomInfo, closeRoomInfo, getRoomInviteLink, eachRoomInfo,
-    newRoomInviteLink, getRoomInviteLink, updateRoomConfig
+    newRoomInviteLink, getRoomInviteLink, updateRoomConfig,
+    joinRoom, leaveRoom, deleteRoom,
   }
 
 });

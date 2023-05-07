@@ -14,17 +14,16 @@ const router = useRouter();
 
 
 const processRoomInvite = async () => {
-  const route = useRoute();
-  console.log(route.params);
-
   try {
+    const route = useRoute();
+    if(!route.params.roomToken) 
+      throw new Error('no room token present');
+
     const { data } = await UserAPI.roomInvite(route.params.roomToken);
     router.push(data.redirectTo);
     setPopupMessage(data.message)
-    // router.
 
   } catch (err) {
-    console.log(err);    
     router.push('/explore');
   }
 }

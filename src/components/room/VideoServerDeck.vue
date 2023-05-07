@@ -62,7 +62,9 @@ defineProps({
   }
 })
 
-const activeServerId = computed(() => roomAnimeStore.animeEpCategory + roomAnimeStore.animeEpServer)
+const activeServerId = computed(() => (
+  roomAnimeStore.anime.epCategory + roomAnimeStore.anime.epServer
+))
 
 
 </script>
