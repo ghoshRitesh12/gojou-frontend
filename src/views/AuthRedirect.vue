@@ -25,13 +25,15 @@ const userStore = useUserStore();
       throw new Error('Authentication failed');
 
     const decryptedData = await decryptState(
-      data.replaceAll(' ', '+'), 
+      decodeURIComponent(data), 
       process.env.VUE_APP_AUTH_DATA_SECRET
     )
 
     userStore.login(
+      decryptedData._id,
       decryptedData.name, 
       decryptedData.profilePicture,
+      decryptedData.email,
     )
     userStore.setStateExpiry(decryptedData.stateExpiry)
     userStore.setSessionExpiry(decryptedData.sessionExpiry)
