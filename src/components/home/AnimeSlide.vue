@@ -99,6 +99,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
 const props = defineProps({

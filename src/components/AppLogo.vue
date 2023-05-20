@@ -13,7 +13,7 @@
 
     <img 
       class="pointer-events-none flex-shrink-0" 
-      src="../../public/img/icons/gojou-logo2.svg" 
+      src="/img/icons/gojou-logo2.svg" 
       alt="logo"
     />
 
@@ -23,7 +23,7 @@
 
 
 <script setup>
-
+import { RouterLink } from 'vue-router';
 
 </script>
 

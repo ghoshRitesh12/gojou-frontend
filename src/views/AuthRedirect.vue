@@ -26,7 +26,7 @@ const userStore = useUserStore();
 
     const decryptedData = await decryptState(
       decodeURIComponent(data), 
-      process.env.VUE_APP_AUTH_DATA_SECRET
+      import.meta.env.VITE_AUTH_DATA_SECRET
     )
 
     userStore.login(

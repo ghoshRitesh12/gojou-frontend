@@ -29,14 +29,14 @@
 
 
     <div 
-      class="grid gap-3 md:gap-4 transition ease-in duration-100 card-wrap" 
+      class="grid gap-3 md:gap-4 transition ease-in duration-100 card-wrap"
       style="grid-template-columns: repeat(auto-fit, minmax(var(--min-size, 9rem), 1fr));"
       :style="'transition: .5s ease-in all'"
       >
       <AnimeCard 
         v-for="anime in props.animes"
         :info="anime"
-        :class="props.animes.length >= 4 ? 'max-auto' : ''"
+        :class="props.animes.length <= 4 ? 'max-w-[10rem]' : 'max-w-[17rem]'"
       />
     </div>
     
@@ -49,6 +49,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import AnimeCard from './AnimeCard.vue';
 

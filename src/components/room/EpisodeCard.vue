@@ -57,9 +57,13 @@
 
 <script setup>
 import { Icon } from '@iconify/vue';
+import { encryptState } from '@/composables/useCipherState';
 import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
+import useRoomStore from '@/stores/roomStore';
+
 
 const roomAnimeStore = useRoomAnimeStore();
+const roomStore = useRoomStore();
 
 const props = defineProps({
   id: {
@@ -82,9 +86,32 @@ const props = defineProps({
 })
 
 
-const changeEpisode = () => {
-  roomAnimeStore.setRoomAnimeConfig('epId', props.id)
-  roomAnimeStore.setRoomAnimeConfig('epNo', props.number)
+const changeEpisode = async () => {
+  try {
+    roomAnimeStore.setRoomAnimeConfig('epNo', props.number)
+    roomAnimeStore.setRoomAnimeConfig('epId', props.id)
+
+    const animeSrcData = await roomAnimeStore.getAnimeEp();
+    roomAnimeStore.setAnimeSrc(animeSrcData);
+
+
+    const encSrc = await encryptState(
+      animeSrcData,
+      import.meta.env.VITE_AUTH_DATA_SECRET
+    )
+
+    await roomStore.updateAnimeConfig(
+      encodeURIComponent(encSrc),
+      roomAnimeStore.initData.room.roomId,
+      { 
+        animeEpisodeId: roomAnimeStore.anime.epId,
+        animeEpisodeNo: roomAnimeStore.anime.epNo
+      }
+    )
+
+  } catch (err) {
+    console.log(err);    
+  }
 }
 
 

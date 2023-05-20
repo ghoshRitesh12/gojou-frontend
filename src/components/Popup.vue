@@ -4,9 +4,9 @@
     v-if="isPopupOpen"
     data-popup
     class="
-    fixed isolate z-[350] bottom-[4rem] left-[1.5rem]
-    sm:bottom-[4rem] sm:left-[3rem]
-    flex items-center gap-1 md:gap-3
+    fixed isolate z-[350] bottom-[4.5rem] ml-1
+    sm:bottom-[4rem] sm:right-[2rem] w-[98%] sm:w-fit
+    flex items-center gap-1 md:gap-3 sm:mx-0
     bg-white rounded-2xl overflow-hidden
     shadow-lg shadow-black/40 px-4 py-3 sm:px-6
     "
@@ -16,7 +16,7 @@
     <div 
       class="
       text-black font-semibold leading-[1.4]
-      sm:max-w-[35ch] select-none
+      max-w-full w-full sm:max-w-[35ch] select-none
       "
       :style="`
         transition: .2s ease max-width;

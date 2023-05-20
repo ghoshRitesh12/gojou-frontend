@@ -50,7 +50,9 @@
       >
 
         <template v-for="info, index in props.otherInfo">
-          <span class="whitespace-nowrap inline-block"> {{ info }} </span>
+          <span class="whitespace-nowrap inline-block"> 
+            {{ index === 0 ? `Eps: ${info}` : info }} 
+          </span>
           <Icon
             v-if="index !== props.otherInfo.length - 1"
             :icon="'bi:dot'" 
@@ -67,6 +69,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
 

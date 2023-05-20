@@ -35,7 +35,9 @@
           md:text-base mt-2 mb-4"
         >
           <template v-for="stat, index in props.stats">
-            <span class="whitespace-nowrap inline-block"> {{ stat }} </span>
+            <span class="whitespace-nowrap inline-block"> 
+              {{ index !== 1 ? stat : `Ep ${stat}` }} 
+            </span>
             <Icon
               v-if="index !== props.stats.length - 1"
               :icon="'bi:dot'" 

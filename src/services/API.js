@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setPageError } from '@/stores/error';
 
-const baseUrl = process.env.VUE_APP_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 // const baseUrl = 'http://192.168.0.106:5000'
 
 

@@ -48,6 +48,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
 import { openAuthModal } from '@/stores/auth';
 import Dp from './Dp.vue';

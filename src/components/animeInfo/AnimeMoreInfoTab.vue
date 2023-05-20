@@ -93,6 +93,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { inject, computed } from 'vue';
 import AnimeMoreInfo from './AnimeMoreInfo.vue';
 

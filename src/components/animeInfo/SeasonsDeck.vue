@@ -1,13 +1,10 @@
 <template>
 
   <section 
+    v-if="props?.seasons?.length > 0"
     data-seasons
     class="
     relative z-40 isolate inline-block w-full
-    after:content-[' '] after:absolute after:isolate after:z-[-1]
-    after:top-[-1rem] after:right-[-2rem] 
-    after:left-[-2rem] after:bottom-[-2rem]
-    after:bg-gradient-to-b from-primary-900/50 to-transparent
     transition ease-in duration-100
     "
     >
@@ -44,7 +41,6 @@ import SeasonsCard from './SeasonsCard.vue';
 const props = defineProps({
   seasons: {
     type: Array,
-    required: true
   }
 });
 

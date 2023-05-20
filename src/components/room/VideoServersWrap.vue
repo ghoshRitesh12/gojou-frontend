@@ -42,14 +42,14 @@
         >
           
           <VideoServerDeck
-            v-if="roomAnimeStore.allServers.sub"
+            v-if="roomAnimeStore.allServers.sub.length > 0"
             :servers="roomAnimeStore.allServers.sub"
             :server-type="'sub'"
             :server-type-icon="'fluent:closed-caption-32-regular'"
           />
           
           <VideoServerDeck
-            v-if="roomAnimeStore.allServers.dub"
+            v-if="roomAnimeStore.allServers.dub.length > 0"
             :servers="roomAnimeStore.allServers.dub"
             :server-type="'dub'"
             :server-type-icon="'tabler:microphone'"
@@ -57,7 +57,7 @@
             border-accent-100/50 border-t-[1px] border-dashed
             "
             :style="`
-              border-top-width: ${!roomAnimeStore.allServers.sub ? '0px' : '' };
+              border-top-width: ${roomAnimeStore.allServers.sub.length < 1 ? '0px' : '' };
             `"
           />
         </div>

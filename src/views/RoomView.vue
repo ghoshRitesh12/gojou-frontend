@@ -7,7 +7,7 @@
         data-room
         class="
         xl:flex justify-center items-start
-        relative px-0 pb-[5rem] md:pb-14 md:px-2 lg:p-6
+        relative px-0 pb-[5rem] md:pb-14 md:px-2 md:pt-2 lg:p-6
         "
       >
 
@@ -57,7 +57,6 @@
           </Teleport>
 
           <SeasonsDeck
-            v-if="roomAnimeData.seasons"
             :seasons="roomAnimeData.seasons"
             class="px-4 lg:px-0 my-2 overflow-hidden"
           />
@@ -122,6 +121,7 @@ import { onUnmounted, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 import { storeToRefs } from 'pinia';
+import { disconnectSocket } from '@/composables/useSocketIO';
 
 import VideoPlayer from '@/components/room/VideoPlayer.vue';
 import VideoServersWrap from '@/components/room/VideoServersWrap.vue';
@@ -167,7 +167,10 @@ const handleResize = e => viewInnerWidth.value = window.innerWidth
 
 window.addEventListener('resize', handleResize)
 
-onUnmounted(() => window.removeEventListener('resize', handleResize))
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+  disconnectSocket(roomAnimeStore.initData.room.roomId);
+})
 
 </script>
 

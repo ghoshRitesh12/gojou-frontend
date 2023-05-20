@@ -3,9 +3,10 @@
   <div 
     v-if="props.content"
     class="
-    bg-[#9441fa] w-fit text-white
-    px-3 py-2 rounded-2xl ml-auto leading-[1.1] mb-1
-    max-w-[30ch] sm:max-w-[40ch]
+    bg-zinc-800 w-fit text-white 
+    px-4 py-[.65rem] break-words
+    rounded-3xl ml-auto leading-[1.4] mb-2
+    max-w-[27ch] sm:max-w-[40ch]
     "
   >
     {{ props.content }}

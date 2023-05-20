@@ -1,10 +1,10 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import UserAPI from "@/services/userAPI";
 import { useUserStore } from "./userStore";
 import { openAuthModal } from "./auth";
 import { setPopupMessage } from "./popup";
 import { useRouter } from "vue-router";
+import UserAPI from "@/services/userAPI";
 
 
 export const roomModalVisible = ref(false);
@@ -198,13 +198,11 @@ const useRoomStore = defineStore('room', () => {
     }
   }
 
-  const updateAnimeConfig = async (roomId, animeData) => {
+  const updateAnimeConfig = async (src, roomId, animeData) => {
     try {
       const { data } = await UserAPI.updateRoomAnime(
-        roomId, animeData
+        src, roomId, animeData
       );
-
-      console.log(data);
 
     } catch (err) {
       console.log(err);

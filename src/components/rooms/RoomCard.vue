@@ -5,7 +5,7 @@
     <RouterLink 
       class="
       relative isolate rounded-2xl overflow-hidden 
-      grid place-items-center h-[13rem] z-10
+      grid place-items-center h-[12rem] z-10
       "
       :to="`/room/${roomId}`"
     >
@@ -29,7 +29,7 @@
           decoding="async"  
           fetchpriority="high"
           class="
-          isolate z-20 max-w-[8rem] max-h-[11rem]
+          isolate z-20 max-w-[8rem] max-h-[10.25rem]
           "
         />
       </div>
@@ -136,6 +136,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import useRoomStore from '@/stores/roomStore';
 

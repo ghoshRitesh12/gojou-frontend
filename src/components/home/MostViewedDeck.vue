@@ -48,7 +48,7 @@
         :key="index"
         :id="anime.id" :rank="anime.rank"
         :name="anime.name" :poster="anime.poster"
-        :hearts="anime.hearts" :views="anime.views"
+        :eps="anime.eps" :views="anime.views"
       />
 
     </div>

@@ -12,6 +12,7 @@
       alt="dp" 
       decoding="async"
       fetchpriority="high"
+      crossorigin="anonymous"
       class="object-center pointer-events-none text-sm"
     >
 
@@ -21,6 +22,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
 
 const userStore = useUserStore();

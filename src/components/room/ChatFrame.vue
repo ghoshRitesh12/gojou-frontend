@@ -12,7 +12,7 @@
     <div
       class="
       flex items-center
-      text-[1.15rem] bg-zinc-900 align-middle
+      text-[1rem] bg-zinc-900 align-middle
       px-6 2xl:px-7 py-2 rounded-none
       border-zinc-600 border-b-[1px]
       "
@@ -20,11 +20,21 @@
         border-bottom-width: ${!isChatOpen ? '0px' : ''};
       `"
     >
-      <div>
+      <div 
+        class="
+        flex items-center gap-x-4 flex-wrap 
+        pr-16 md:pr-10 room-text-wrap
+        "
+      >
         Room Chat
+
+        <div class="text-[.9rem] text-green-300 leading-[1]">
+          {{ roomChatStore.activeMembers }} active
+        </div>
+
       </div>
 
-      <div class="chat-visibility ml-auto select-none">
+      <div class="chat-visibility ml-auto select-none flex-shrink-0">
 
         <button
           @click="toggleChat"
@@ -51,12 +61,47 @@
     >
       <div data-chats
         class="
-        px-4 md:px-6 pt-6 pb-6 h-full
-        min-h-[10rem] overflow-auto text-[1rem]
+        flex flex-col justify-end
+        px-4 md:px-6 pt-6 pb-6
+        min-h-[18rem] overflow-y-auto text-[1rem]
         max-h-[20rem] xl:max-h-[24rem] 2xl:max-h-[26rem]
+        first:mt-auto
         "
+        ref="chatsContainer"
       >
 
+        <template
+          v-if="roomChatStore.chats.length > 0"
+          v-for="chat in roomChatStore.chats"
+        >
+
+          <template v-if="chat?.sender?._id === userStore.userId">
+            <SelfChat
+              :content="chat.text"
+              :key="chat.timestamp"
+            />
+          </template>
+
+          <template v-else>
+            <OtherChat
+              :name="chat.sender.name"
+              :content="chat.text"
+              :pfp="chat.sender.profilePicture"
+              :key="chat.timestamp"
+            />
+          </template>
+
+        </template>
+
+        <div v-else>
+
+          <div>
+            Your conversations start here
+          </div>
+
+        </div>
+
+        <!-- 
         <OtherChat
           :name="'Debopriyo'"
           :content="'bhai ki koris bol?'"
@@ -64,53 +109,20 @@
 
         <SelfChat
           content="henlo 😅"
-        />
+        /> -->
 
-        <OtherChat
-          :name="'Debopriyo'"
-          :content="'cha khete jabo cho'"
-        />
-
-        <SelfChat
-          content="ha cho"
-        />
-
-        <SelfChat
-          content="btw kothai"
-        />
-
-        <OtherChat
-          :name="'Krish Dewan'"
-          :content="'abar sei garia naki?'"
-        />
-        <OtherChat
-          :name="'Debopriyo'"
-          :content="'Haa'"
-        />
-        <OtherChat
-          :name="'Krish Dewan'"
-          :content="'Dhor'"
-        />
-        <SelfChat
-          content="Yo bro this is insane love it truly"
-        />
-        <OtherChat
-          :name="'Krish Dewan'"
-          :content="'Bhai son na akta khub e joruri kotha chilo re. Bolchi je ki akta bolte jachilam, bhule gelam '"
-        />
 
       </div>
 
-      <form 
-        class="relative w-full px-4 pt-4 pb-2 md:px-6"
-        @submit.prevent="handleChatSubmit"
-      >
 
+      <form @submit.prevent="handleChatSubmit"
+        class="relative w-full px-4 pt-4 pb-2 md:px-6"
+      >
         <textarea
           class="
           max-w-full w-full resize-none
-          rounded-xl py-2 pl-3 pr-11 leading-[1.6]
-          min-h-[2.7rem] max-h-[6rem] bg-zinc-800
+          rounded-2xl py-3 pl-4 pr-14 leading-[1.4]
+          min-h-[2.7rem] bg-zinc-800
           focus:outline-0
           "
           spellcheck="false"
@@ -118,7 +130,7 @@
           placeholder="Type something..."
           style="word-spacing: .08rem;"
           @input="updateChatLimit"
-          v-model.lazy="chatContent"
+          v-model.lazy.trim="chatContent"
         ></textarea>
 
         <button 
@@ -126,7 +138,7 @@
           absolute top-[50%] right-[1.5rem]
           translate-y-[-80%] rounded-lg 
           text-2xl bg-zinc-800 p-2 
-          pr-[.5rem] md:pr-[.7rem] text-zinc-300
+          pr-[.5rem] md:pr-[.7rem] text-accent-200
           "
           type="submit"
         >
@@ -142,8 +154,6 @@
         >
           {{ enteredChars }}/{{ maxChatChars }}
         </div>
-
-
       </form>
 
     </div>
@@ -154,15 +164,25 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import { useUserStore } from '@/stores/userStore';
+import { useRoomChatStore } from '@/stores/roomChatStore';
 import { Icon } from '@iconify/vue';
 import SelfChat from './SelfChat.vue';
 import OtherChat from './OtherChat.vue';
 
+
+const roomChatStore = useRoomChatStore();
+const userStore = useUserStore();
+
+const chatsContainer = ref(null);
+// roomChatStore.setChatContainer(chatsContainer.value);
+
+
+// v-model
 const chatContent = ref('');
 
-const isChatOpen = ref(true);
-// const isChatOpen = ref(false);
+const isChatOpen = ref(false);
 
 const chatVisibilityText = ref('');
 const chatVisibilityIcon = ref('');
@@ -187,7 +207,7 @@ const enteredChars = ref(0);
 const chatCharsColor = ref('rgb(161, 161, 170)');
 
 const updateChatLimit = e => {
-  enteredChars.value = e.target.value.length;
+  enteredChars.value = e.target.value.trim().length;
 
   if(enteredChars.value > maxChatChars.value - 50) {
     chatCharsColor.value = '#c79500';
@@ -200,10 +220,25 @@ const updateChatLimit = e => {
 }
 
 
-const handleChatSubmit = e => {
-  console.log(chatContent.value);
-  chatContent.value = '';
-  enteredChars.value = 0;
+// onBeforeMount(() => {
+  // roomChatStore.getChats();
+  // roomChatStore.getChats();
+// })
+
+
+// send chat
+const handleChatSubmit = async () => {
+  try {
+    if (chatContent.value === '') return;
+    
+    await roomChatStore.sendChat(chatContent.value);
+  
+    chatContent.value = '';
+    enteredChars.value = 0;
+    
+  } catch (err) {
+    console.log(err);    
+  }
 }
 
 
@@ -212,7 +247,7 @@ const handleChatSubmit = e => {
 
 <style scoped>
   [data-chat-chars] {
-    color: v-bind('chatCharsColor');
+    color: v-bind(chatCharsColor);
   }
 
   [data-chat-space] [data-chats] {
@@ -248,3 +283,4 @@ const handleChatSubmit = e => {
   }
 
 </style>
+

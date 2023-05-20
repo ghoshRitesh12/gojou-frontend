@@ -248,8 +248,26 @@
           class="text-2xl pointer-events-none"
         />
       </div>
+
+
+      <div 
+        v-if="isLoading"
+        class="
+        absolute top-0 left-0 grid place-items-center
+        bg-black/50 w-full h-full rounded-2xl
+        "
+      >
+  
+        <div class="lds-roller">
+          <div></div> <div></div> <div></div> 
+          <div></div> <div></div> <div></div>
+          <div></div> <div></div>
+        </div>
+  
+      </div>
   
     </div>
+
 
   </div>
 
@@ -259,6 +277,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/userStore';
 import { useRouter } from "vue-router";
 import useRoomStore, { closeRoomModal, roomModalVisible } from '@/stores/roomStore';
@@ -277,6 +296,7 @@ const props = defineProps({
   animeId: String,
 })
 
+const isLoading = ref(false);
 const createRoomVisible = ref(false);  
 // const createRoomVisible = ref(true);  
 
@@ -305,16 +325,20 @@ function closeRoomModalComponent() {
 
 const gotoExistingRoom = async (roomID) => {
   try {
+    isLoading.value = true;
+
     const { data: ep1Id } = await AnimeAPI.getAnime1stEpisodeId(props.animeId);
       
-    const animeConfig = {
+    const animeData = {
       animeId: props.animeId,
       avatar: props.avatar,
       animeEpisodeId: ep1Id,
       animeEpisodeNo: 1
     }
 
-    await roomStore.updateAnimeConfig(roomID, animeConfig);
+    await roomStore.updateAnimeConfig('absent', roomID, animeData);
+    
+    isLoading.value = false;
     closeRoomModalComponent()
 
     router.push(`/room/${roomID}`)
@@ -366,6 +390,92 @@ watch(
   }
   #invite-link::-webkit-scrollbar {
     display: none;
+  }
+
+
+  .lds-roller {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+  }
+  .lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    margin: -4px 0 0 -4px;
+  }
+  .lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+  }
+  .lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+  }
+  .lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+  }
+  .lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+  }
+  .lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+  }
+  .lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+  }
+  .lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+  }
+  .lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+  }
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
 </style>

@@ -7,8 +7,8 @@
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
-  src: url('../../public/fonts/source-sans-pro-v21-latin-regular.woff2') format('woff2'),
-    url('../../public/fonts/source-sans-pro-v21-latin-regular.woff') format('woff');
+  src: url('/fonts/source-sans-pro-v21-latin-regular.woff2') format('woff2'),
+    url('/fonts/source-sans-pro-v21-latin-regular.woff') format('woff');
 }
 
 @font-face {
@@ -16,8 +16,8 @@
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
-  src: url('../../public/fonts/source-sans-pro-v21-latin-600.woff2') format('woff2'),
-    url('../../public/fonts/source-sans-pro-v21-latin-600.woff') format('woff');
+  src: url('/fonts/source-sans-pro-v21-latin-600.woff2') format('woff2'),
+    url('/fonts/source-sans-pro-v21-latin-600.woff') format('woff');
 }
 
 html {

@@ -146,7 +146,7 @@ const changeAuth = () => {
 
 const googleLogin = () => {
   setAuthRedirect(null, router.currentRoute.value.href)
-  location.href = `${process.env.VUE_APP_API_BASE_URL}/google-auth`;
+  location.href = `${import.meta.env.VITE_API_BASE_URL}/google-auth`;
 }
 
 const loginData = ref({
@@ -165,11 +165,16 @@ const submitLoginForm = async () => {
     );
     const userInfo = await decryptState(
       data.userData, 
-      process.env.VUE_APP_AUTH_DATA_SECRET
+      import.meta.env.VITE_AUTH_DATA_SECRET
     );
 
     errorMsg.value = null;
-    userStore.login(userInfo.name, userInfo.profilePicture)
+    userStore.login(
+      userInfo._id,
+      userInfo.name, 
+      userInfo.profilePicture,
+      userInfo.email
+    )
     userStore.setStateExpiry(userInfo.stateExpiry)
     userStore.setSessionExpiry(userInfo.sessionExpiry)
 

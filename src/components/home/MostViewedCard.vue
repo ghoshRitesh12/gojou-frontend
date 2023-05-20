@@ -35,7 +35,7 @@
       <div data-text class="pl-4">
         <RouterLink
           class="
-          text-[1.05rem] hover:text-accent-200
+          text-base hover:text-accent-200
           cursor-pointer leading-[1.1] mb-1
           transition ease-in duration-100
           "
@@ -59,18 +59,21 @@
             overflow: hidden;
           "
         >
-          <span class="inline-block whitespace-nowrap">
-            <span class="flex items-center gap-[.35rem]">
-              <Icon icon="ic:round-favorite"/>
-              {{ props.hearts }}
+
+          <div class="flex items-center">
+            
+            <span class="whitespace-nowrap">
+              <span class="flex items-center gap-[.35rem]">
+                <Icon icon="ic:baseline-remove-red-eye"/>
+                {{ props.views }}
+              </span>
             </span>
-          </span>
-          <span class="inline-block whitespace-nowrap ml-4">
-            <span class="flex items-center gap-[.35rem]">
-              <Icon icon="ic:baseline-remove-red-eye"/>
-              {{ props.views }}
+  
+            <span class="whitespace-nowrap  ml-3">
+              Eps: {{ props.eps }}
             </span>
-          </span>
+
+          </div>
         </div>
 
       </div>
@@ -83,6 +86,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 
 const props = defineProps({
@@ -102,7 +106,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  hearts: {
+  eps: {
     type: String,
     required: true
   },

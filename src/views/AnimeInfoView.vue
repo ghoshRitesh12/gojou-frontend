@@ -16,7 +16,12 @@
           <SeasonsDeck
             v-if="animeSeasons.length > 0"
             :seasons="animeSeasons"
-            class="my-6"
+            class="
+            after:content-[] after:absolute after:isolate 
+            after:z-[-1] after:top-[-1rem] after:right-[-2rem] 
+            after:left-[-2rem] after:bottom-[-2rem] my-6
+            after:bg-gradient-to-b from-primary-900/50 to-transparent
+            "
           />
 
         </div>

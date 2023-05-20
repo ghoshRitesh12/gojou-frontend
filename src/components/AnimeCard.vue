@@ -1,10 +1,11 @@
 <template>
   
   <div data-card
-    class="shadow-lg max-w-[17rem] min-w-[9rem] w-full
+    class=" 
+    min-w-[9rem] w-full
     relative rounded-xl overflow-hidden
-    bg-zinc-900 break-words
-    transition ease-in duration-100
+    bg-zinc-900 break-words shadow-lg
+    transition ease-in duration-100 anime_card
     "
   >
 
@@ -108,7 +109,6 @@
       </div>
     </div>
 
-
   </div>
 
 </template>
@@ -128,15 +128,13 @@ const props = defineProps({
 </script>
 
 
-<style></style>
+<style scoped>
 
-<!-- {
-  "id": "fullmetal-alchemist-brotherhood-1",
-  "name": "Fullmetal Alchemist: Brotherhood",
-  "poster": "https://img.zorores.com/_r/300x400/100/0d/2d/0d2d0a1d4276e7e2595702dc4cebbda9/0d2d0a1d4276e7e2595702dc4cebbda9.jpeg",
-  "duration": "24m",
-  "type": "TV",
-  "aboutPage": "https://zoro.to/fullmetal-alchemist-brotherhood-1",
-  "rating": "18+",
-  "episodes": "64/64"
-} -->
+  @media (min-width: 382px) {
+    .anime_card[data-card] {
+      max-width: 13.5rem;
+    }
+  }
+
+</style>
+

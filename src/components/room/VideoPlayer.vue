@@ -16,33 +16,14 @@
         `"
       >
 
-
-        <video 
-          controls
-          crossorigin="anonymous"
-          :style="videoInlineStyles"
+        <ArtPlayer
+          v-if="roomAnimeStore.videoSources"
+          :option="artPlayerOptions"
           class="
           h-full max-w-full w-full aspect-video
-          video-js md:rounded-lg
+          md:rounded-lg focus-visible:outline
           "
-          ref="videoElement"
-
-        >
-
-          <track
-            v-if="roomAnimeStore.videoSubtitles.length > 0"
-            v-for="caption, index in roomAnimeStore.videoSubtitles"
-            :key="index"
-            :default="caption.lang.toLowerCase().includes('english')"
-            kind="captions"
-            :label="caption.lang"
-            :src="caption.url"
-            :srclang="caption.lang.substring(0, 3).toLowerCase()"
-          />
-
-        </video>
-
-
+        />
 
         <iframe
           frameborder="0" referrerpolicy="strict-origin" 
@@ -53,6 +34,7 @@
           md:rounded-lg h-full max-w-full w-full 
           aspect-video
           "
+          style="display: none"
           ref="iframe"
           >
         </iframe>
@@ -73,11 +55,12 @@
 
 
 <script setup>
+import ArtPlayer from './ArtPlayer.vue';
 import Plyr from 'plyr';
 import Hls from 'hls.js';
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import { getPlyrOptions } from '@/composables/useVideoPlayerInit';
+import { getPlyrOptions, artPlayerOptions } from '@/composables/useVideoPlayerInit';
 import { useRoomAnimeStore } from '@/stores/roomAnimeStore.js';
 
 
@@ -114,8 +97,6 @@ const removeVideoPlayer = () => {
   }
 }
 
-roomAnimeStore.fetchEpSource;
-
 
 
 roomAnimeStore.$subscribe((mutation, state) => {
@@ -151,14 +132,17 @@ onMounted(() => {
 
       const hls = new Hls();
 
+      hls.subtitleDisplay = true
+      hls.recoverMediaError()
+
       // if(roomAnimeStore.videoSources)
       //   loadSource(roomAnimeStore.videoSources)
       hls.attachMedia(videoEl);
       
       hls.on(Hls.Events.MANIFEST_PARSED, function() {
         const plyrOptions = getPlyrOptions(hls);
-        const player = new Plyr(videoEl, plyrOptions);
-        plyrElement.value = videoElement.value.closest('.plyr.plyr--video');
+        // const player = new Plyr(videoEl, plyrOptions);
+        // plyrElement.value = videoElement.value.closest('.plyr.plyr--video');
 
         videoElement.value = player;
       })
@@ -171,14 +155,14 @@ onMounted(() => {
   
   }
 
-  initHls()
+  // initHls()
 
 
   watch(
     () => roomAnimeStore.loading, 
     () => {
       if(!roomAnimeStore.loading && roomAnimeStore.videoSources) {
-        computedSrcLoad.value
+        // computedSrcLoad.value
       }
     }
   )
@@ -228,10 +212,5 @@ const videoInlineStyles = `
 
 
 <style scoped>
-.video-js .plyr__menu__container {
-  max-height: 7rem !important;
-  overflow-y: auto !important;
-
-}
 
 </style>

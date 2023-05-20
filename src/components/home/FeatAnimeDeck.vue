@@ -47,6 +47,7 @@
 
 
 <script setup>
+import { RouterLink } from 'vue-router';
 import { Icon } from '@iconify/vue';
 import { computed } from 'vue';
 import FeatAnimeCard from './FeatAnimeCard.vue';

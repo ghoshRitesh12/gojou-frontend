@@ -3,15 +3,15 @@ import { defineStore } from "pinia";
 import UserAPI from '@/services/userAPI';
 import CryptoJS from 'crypto-js';
 
-function cryptoSerialize (data) {
+export function cryptoSerialize (data) {
   return CryptoJS.AES.encrypt(
     JSON.stringify(data), 
-    process.env.VUE_APP_STATE_SECRET
+    import.meta.env.VITE_STATE_SECRET
   ).toString();
 }
-function cryptoDeserialize (encString) {
+export function cryptoDeserialize (encString) {
   const bytes = CryptoJS.AES.decrypt(
-    encString, process.env.VUE_APP_STATE_SECRET 
+    encString, import.meta.env.VITE_STATE_SECRET 
   ).toString(CryptoJS.enc.Utf8);
   return JSON.parse(bytes)
 }
@@ -65,17 +65,22 @@ export const useUserStore = defineStore(storeName, () => {
 
 
   const profilePicture = ref(null);
+  const userId = ref(null);
   const userName = ref(null);
+  const emailId = ref(null);
   const isAuth = ref(false);
 
   const authModalVisible = computed(() => (
     isAuth.value ? false : true
   ));
 
-  const login = (name, dp) => {
+  const login = (_id, name, dp, email) => {
     isAuth.value = true;
+    
+    userId.value = _id;
     userName.value = name;
     profilePicture.value = dp;
+    emailId.value = email;
   }
 
   const logout = () => {
@@ -92,8 +97,9 @@ export const useUserStore = defineStore(storeName, () => {
   }
 
   return {
-    profilePicture, userName, isAuth, authModalVisible, 
-    setStateExpiry, setSessionExpiry, login, logout
+    userId, profilePicture, userName, emailId, isAuth, 
+    authModalVisible, setStateExpiry, setSessionExpiry, 
+    login, logout
   }
 
 },
